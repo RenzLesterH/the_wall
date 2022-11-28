@@ -1,0 +1,311 @@
+header{
+    background: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    nav{
+        color: #152c61;
+        padding: 38px 48px 40px 83px;
+        ul{
+            display: flex;
+            li{
+                align-self: center;
+                list-style: none;
+                text-align: right;
+            }
+            h1{
+                font: normal 500 26px/39px Poppins_medium;
+            }
+            a{
+                color: #2c6bff;
+                font: normal 600 16px/24px Poppins_semiBold;
+                text-decoration: none;
+            }
+            li:nth-child(1){
+                margin-right: auto;
+            }
+            li:nth-child(2){
+                font: normal 300 16px/24px Poppins_light;
+                margin-right: 20px;
+            }
+        }
+    }
+}
+section{
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+    margin: 50px 79px;
+    padding: 70px;
+    h4{
+        color: #707070;
+        display: inline-block;
+        font: normal 400 16px/24px Poppins;
+        span{
+            color: #2c6bff;
+            font: normal 600 16px/24px Poppins;
+        }
+    }
+    button{
+        background-color: #2c6bff;
+        border-radius: 6px;
+        border: none;
+        color: #ffffff;
+        cursor: pointer;
+        float: right;
+        font: normal 500 16px/24px Poppins_medium;
+        padding: 11px 26px;
+        text-align: center;
+    }
+    textarea{
+        background-color: #f5f8ff;
+        border-radius: 6px;
+        border: 1px solid #dce6ff;
+        box-sizing: border-box;
+        color: #152c61;
+        padding: 6px 11px;
+        resize: none;
+        width: 100%;
+    }
+    div.modal{
+        background-color: rgba(0, 0, 0, 0.411);
+        display: none;
+        height: 100%;
+        left: 0;
+        overflow: auto;
+        padding-top: 100px;
+        position: fixed;
+        top:0;
+        width: 100%;
+        z-index: 1;
+        div.modal_content{
+            background-color: #ffffff;
+            border-radius: 6px;
+            border: 1px solid #888;
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+            padding: 8px 19px 8px 19px;
+            width: 897px;
+            div.modal_header{
+                .close{
+                    color: #152c61;
+                    float: right;
+                    font-size: 28px;
+                    font-weight: bold;
+                    
+                    &:hover,
+                    &:focus{
+                        color: #000;
+                        cursor: pointer;
+                        text-decoration: none;
+                    }
+                }
+            }
+            div.modal_body{
+                padding: 0px 30px 40px 30px;
+                h5{
+                    color: #152c61;
+                    font: normal 500 26px/39px Poppins_medium;
+                    margin: 0px 0px 40px 0px;
+                    text-align: center;
+                }
+                form{
+                    textarea{
+                        font: normal 300 16px/24px Poppins_light;
+                        height: 185px;
+                        margin-bottom: 24px;
+                    }
+                    button#post_message_btn{
+                        margin: 1px;
+                        padding: 12px 40px;
+                    }
+                    button#cancel_post_message_btn{
+                        background-color: transparent;
+                        color: rgba(0, 0, 0, 0.6);
+                        font: normal 400 16px/24px Poppins;
+                        padding: 12px 20px; 
+                    }
+                }
+            }
+        }
+    }
+    div#empty_post{
+        margin: 52px 0px 709px 0px;
+        text-align: center;
+        img{
+            margin: 94px 0px 17px 0px; 
+        }
+        p{
+            color: #707070;
+            font: normal 400 16px/24px Poppins;  
+            text-align: center;
+        }
+    }
+    div#message_container{
+        margin: 52px 0px 0px 0px;
+        div#created_message{
+            display: none;
+        }
+        div.message_list{
+            display: none;
+            background-color: #ffffff;
+            border-radius: 6px;
+            border: 1px solid #dce6ff;
+            margin-bottom: 18px; 
+            padding: 23px 27px;
+            p{
+                color: #152c61;
+                font: normal 300 16px/24px Poppins_light;
+            }
+            ul{
+                align-items: center;
+                display: flex;
+                list-style: none;
+                margin-top: 18px;
+                li{
+                    margin-right: 28px;
+                    button{
+                        align-items: center;
+                        background-color: transparent;
+                        display: flex;
+                        font: normal 400 16px/24px Poppins;
+                        padding: 0px;
+                        span{
+                            margin-right: 10px;
+                        }
+                    }
+                    button#comments_list{
+                        color: #2c6bff;
+                        span{
+                            background: url('../images/Group 2020.png') no-repeat -3px -36px;
+                            height: 18px;
+                            width: 18px;
+                        }
+                    }
+                    button.comment_button{
+                        color: #707070;
+                        span{
+                            background: url('../images/Group 2020.png') no-repeat -3px -6px;
+                            height: 18px;
+                            width: 18px;
+                        }
+                    }
+                    button.edit_button{
+                        color: #2c6bff;
+                        span{
+                            background: url('../images/Group 2020.png') no-repeat -31px -4px;
+                            height: 22px;
+                            width: 22px;
+                        }
+                    }
+                    button.delete_button{
+                        color: #707070;
+                        span{
+                            background: url('../images/Group 2020.png') no-repeat -64px -5px;
+                            height: 19px;
+                            width: 16px;
+                        }
+                    }
+                }
+                li.user_profile{
+                    color: #707070;
+                    font: normal 400 16px/24px Poppins;
+                    div{
+                        background: url('../images/User Placeholder.png') no-repeat;
+                        display: inline-block;
+                        height: 24px;
+                        vertical-align: top;
+                        width: 24px;
+                    }
+                    span{
+                        font: normal 500 16px/24px Poppins_medium; 
+                        color: rgba(0, 0, 0, 0.6);
+                    }
+                }
+            }
+            form#edit_message_form{
+                display: none;
+                overflow: auto; 
+                textarea{
+                    font: normal 300 16px/24px Poppins_light;
+                    height: 84px;
+                    margin-bottom: 15px;
+                }
+                button#cancel_updating_message_btn{
+                    background-color: transparent;
+                    color: rgba(0, 0, 0, 0.6);
+                    font: normal 400 16px/24px Poppins;
+                    padding: 12px 28px; 
+                }
+            }
+
+            div.post_comment{
+                background-color: #ffffff;
+                border-radius: 6px;
+                border: 1px solid #dce6ff;
+                display: none;
+                margin: 25px 0px 20px 0px;
+                overflow: auto;
+                padding: 30px;
+                form{
+                    textarea{
+                        font: normal 300 16px/24px Poppins_light;
+                        height: 84px;
+                        margin-bottom: 15px;
+                    }
+                }
+            }
+            div.comment_list{
+                background-color: #ffffff;
+                border-radius: 6px;
+                border: 1px solid #dce6ff;
+                display: none;
+                margin-bottom: 18px; 
+                overflow: auto;
+                padding: 30px;
+                form#edit_comment_form{
+                    display: none;
+                    textarea{
+                        font: normal 300 16px/24px Poppins_light;
+                        height: 84px;
+                        margin-bottom: 15px;
+                    }
+                    button#cancel_updating_comment_btn{
+                        background-color: transparent;
+                        color: rgba(0, 0, 0, 0.6);
+                        font: normal 400 16px/24px Poppins;
+                        padding: 12px 28px; 
+                    }
+                }
+            }
+        }
+        div.modal{
+            div.modal_content{
+                width: 500px;
+                div.modal_body{
+                    padding: 0px 30px 50px 30px;
+                    h5{
+                        color: #152c61;
+                        font: normal 500 26px/39px Poppins_medium;
+                        text-align: center;
+                        margin: 2px 0px 0px 0px;
+                    }
+                    p{
+                        font: normal 400 16px/24px Poppins;
+                        margin: 30px 0px 30px 0px;
+                    }
+                    form{
+                        display: flex;
+                        justify-content: center;
+                        button#cancel_remove_btn{
+                            background-color: transparent;
+                            color: rgba(0, 0, 0, 0.6);
+                            font: normal 400 16px/24px Poppins;
+                            padding: 12px 75px; 
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

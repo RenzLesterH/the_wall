@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico"/>
+    <meta name="description" content="Login or Register form of the wall assignment">
+    <meta name="author" content="Jerwin A. Fernandez">
+    <title>The Wall</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/wall.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <h1>The Wall Assingment</h1>
+                </li>
+                <li>Welcome, Jerwin Fernandez</li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <h4><span id="total_messages">0</span> messages arranged by latest posted</h4>
+        <button id="create_message_modal_button">Create Message</button>
+        <div id="create_post_modal" class="modal">
+            <div class="modal_content">
+                <div class="modal_header">
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal_body">
+                    <h5>Create a Message</h5>
+                    <form method="post" id="create_message_form">
+                        <textarea id="create_post_textarea" placeholder="Type your message here."></textarea>
+                        <button type="submit" id="post_message_btn">Post Messages</button>
+                        <button type="button" id="cancel_post_message_btn">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="empty_post">
+            <img src="../assets/images/empty_post.png" alt="empty_post">  
+            <p>No Posted Messages Yet.</p>
+        </div>
+        <div id="message_container">
+            <div id="action_modal" class="modal">
+                <div class="modal_content">
+                    <div class="modal_header">
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="modal_body">
+                        <h5 id="modal_body_title">Confirm Delete Message</h5>
+                        <p id="modal_body_description">Are you sure you want to remove this message? This action cannot be undone.</p>
+                        <form method="post" id="action_form">
+                            <input type="hidden" id="action_form_input">
+                            <button type="button" id="cancel_remove_btn">Cancel</button>
+                            <button type="submit" id="remove_btn">Yes, Remove it.</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="message_list" id="created_message">
+                <p id="created_message_content"></p>
+                <ul>
+                    <li>
+                        <button class="comment_button"><span></span> 0 comment</button>
+                    </li>
+                    <li>
+                        <button class="edit_button"><span></span> Edit</button>
+                    </li>
+                    <li>
+                        <button class="delete_button"><span></span> Delete</button>
+                    </li>
+                    <li class="user_profile">
+                        <div></div>
+                        <span>You</span> - Few seconds ago
+                    </li>
+                </ul>
+            </div>
+            <div class="message_list">
+                <p>The lorem ipsum is a placeholder text used in publishing and graphic design. This filler text is a short paragraph that contains all the letters of the alphabet.</p>
+                <ul>
+                    <li>
+                        <button class="comment_button" id="comments_list"><span></span> 1 comment</button>
+                    </li>
+                    <li>
+                        <button class="edit_button edit_message"><span></span> Edit</button>
+                    </li>
+                    <li>
+                        <button class="delete_button"><span></span> Delete</button>
+                    </li>
+                    <li class="user_profile">
+                        <div></div>
+                        <span>You</span> - Few seconds ago
+                    </li>
+                </ul>
+                <form method="post" id="edit_message_form">
+                    <textarea placeholder="Type your message here.">The lorem ipsum is a placeholder text used in publishing and graphic design. This filler text is a short paragraph that contains all the letters of the alphabet.</textarea>
+                    <button type="submit" id="post_updated_message_btn">Update Message</button>
+                    <button type="button" id="cancel_updating_message_btn">Cancel</button>
+                </form>
+                <div class="post_comment">
+                    <form method="post" id="post_comment_form">
+                        <textarea placeholder="Type your comment here."></textarea>
+                        <button type="submit" id="post_comment_btn">Post Comment</button>
+                    </form>
+                </div>
+                <div class="comment_list">
+                    <p>The lorem ipsum is a placeholder text used in publishing and graphic design. This filler text is a short paragraph that contains all the letters of the alphabet.</p>
+                    <ul>
+                        <li>
+                            <button class="edit_button edit_comment"><span></span> Edit</button>
+                        </li>
+                        <li>
+                            <button class="delete_button delete_comment"><span></span> Delete</button>
+                        </li>
+                        <li class="user_profile">
+                            <div></div>
+                            <span>You</span> - Few seconds ago
+                        </li>
+                    </ul>
+                    <form method="post" id="edit_comment_form">
+                        <textarea id="create_comment_textarea" placeholder="Type your message here.">The lorem ipsum is a placeholder text used in publishing and graphic design. This filler text is a short paragraph that contains all the letters of the alphabet.</textarea>
+                        <button type="submit" id="post_updated_comment_btn">Update Comment</button>
+                        <button type="button" id="cancel_updating_comment_btn">Cancel</button>
+                    </form>
+                </div>
+            </div>
+            <div class="message_list">
+                <p>The lorem ipsum is a placeholder text used in publishing and graphic design. This filler text is a short paragraph that contains all the letters of the alphabet.</p>
+                <ul>
+                    <li>
+                        <button class="comment_button"><span></span> 0 comment</button>
+                    </li>
+                    <li>
+                        <button class="edit_button"><span></span> Edit</button>
+                    </li>
+                    <li>
+                        <button class="delete_button"><span></span> Delete</button>
+                    </li>
+                    <li class="user_profile">
+                        <div></div>
+                        <span>You</span> - Few seconds ago
+                    </li>
+                </ul>
+            </div>
+            <div class="message_list">
+                <p>The lorem ipsum is a placeholder text used in publishing and graphic design. This filler text is a short paragraph that contains all the letters of the alphabet.</p>
+                <ul>
+                    <li>
+                        <button class="comment_button"><span></span> 0 comment</button>
+                    </li>
+                    <li>
+                        <button class="edit_button"><span></span> Edit</button>
+                    </li>
+                    <li>
+                        <button class="delete_button"><span></span> Delete</button>
+                    </li>
+                    <li class="user_profile">
+                        <div></div>
+                        <span>You</span> - Few seconds ago
+                    </li>
+                </ul>
+            </div>
+            <div class="message_list">
+                <p>The lorem ipsum is a placeholder text used in publishing and graphic design. This filler text is a short paragraph that contains all the letters of the alphabet.</p>
+                <ul>
+                    <li>
+                        <button class="comment_button"><span></span> 0 comment</button>
+                    </li>
+                    <li>
+                        <button class="edit_button"><span></span> Edit</button>
+                    </li>
+                    <li>
+                        <button class="delete_button"><span></span> Delete</button>
+                    </li>
+                    <li class="user_profile">
+                        <div></div>
+                        <span>You</span> - Few seconds ago
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <script src="../assets/js/wall.js"></script>
+</body>
+</html>

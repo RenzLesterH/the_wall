@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico"/>
+    <meta name="description" content="Login or Register form of the wall assignment">
+    <meta name="author" content="Jerwin A. Fernandez">
+    <title>The Wall | Sign In/Up Page</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/index.css">
+</head>
+<body>
+    <div class="form" id="sign_in_form">
+        <h2>The Wall</h2>
+        <h3>Login</h3>
+        <form method="post" id="form_sign_in">
+            <label>Email</label>
+            <input type="text" id="email" name="email">
+            <span class="error_email">Error Email</span>
+            <label>Password <a href="#">Forgot Password ?</a></label>
+            <input type="password" id="password" name="password">
+            <span class="error_password">Error Password</span>
+            <button type="submit">SIGN IN</button>
+            <span>I don’t have an account ? <a href="#" id="sign_up_link">Sign up</a></span>
+        </form>
+    </div>
+    <div class="form" id="sign_up_form">
+        <h2>The Wall</h2>
+        <h3>Register</h3>
+        <form method="post" id="form_sign_up">
+            <label>Email</label>
+            <input type="text" id="sign_up_email" name="email">
+            <span class="error_email">Error Email</span>
+            <label>Password</label>
+            <input type="password" id="sign_up_password" name="password">
+            <span class="error_password">Error Password</span>
+            <label>Confrim Password</label>
+            <input type="password" id="sign_up_confirm_password" name="confirm_password">
+            <span class="error_current_password">Error Current Password</span>
+            <span id="agreement_infor">By creating an account, you agree with The Wall's <a href="#">Privacy Policy</a> and <a href="#">Terms of Use.</a></span>
+            <button type="submit">SIGN UP</button>
+            <span>Already have an account ? <a href="#" id="sign_in_link">Sign In</a></span> 
+        </form>
+    </div>
+    <div id="design_container">
+        <img src="../assets/images/Group_2018.png" alt="group_2018">    
+    </div>
+    <script src="../assets/js/index.js"></script>
+</body>
+</html>
