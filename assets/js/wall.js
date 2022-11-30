@@ -43,7 +43,7 @@ function showDeleteModal(post_type) {
     action_modal.style.display = "block"; 
 }
 
-//edit message.
+//show edit form message.
 function toggleForm(id_message) {
     document.getElementById("edit_message_form").style.display = "block";
     let message_list = document.getElementById(id_message);
@@ -51,8 +51,18 @@ function toggleForm(id_message) {
     message_list.children[1].style.display = "none";
     let message = document.getElementById("edit_message_form");
     let clone_message_list = message.cloneNode(true);
+    clone_message_list.className = "edit_message_form";
+    clone_message_list.id = "update_"+id_message; 
     message_list.prepend(clone_message_list);
     document.getElementById("edit_message_form").style.display = "none";
+}
+
+//hide edit form message.
+function closeEditForm(id_message,update_form_id){
+    let message_list = document.getElementById(id_message);
+    message_list.children[1].style.display = "block";
+    message_list.children[2].style.display = "flex"; 
+    document.getElementById(update_form_id).remove();
 }
 
 //triggers create message modal
@@ -113,6 +123,9 @@ document.addEventListener("click", function(event) {
     }else if (clicked_by.className == "delete_button") {
         showDeleteModal("Message");
         message_id = event.target.closest('div[id]').id;
+    }else if (clicked_by.id == "cancel_updating_message_btn") {
+        message_id = event.target.closest('div[id]').id;
+        closeEditForm(message_id,event.target.closest('form[id]').id);
     }
 });
 

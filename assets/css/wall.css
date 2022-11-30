@@ -221,15 +221,18 @@ section div#message_container div.message_list ul li.user_profile span {
   font: normal 500 16px/24px Poppins_medium;
   color: rgba(0, 0, 0, 0.6);
 }
+section div#message_container div.message_list form.edit_message_form,
 section div#message_container div.message_list form#edit_message_form {
   display: none;
   overflow: auto;
 }
+section div#message_container div.message_list form.edit_message_form textarea,
 section div#message_container div.message_list form#edit_message_form textarea {
   font: normal 300 16px/24px Poppins_light;
   height: 84px;
   margin-bottom: 15px;
 }
+section div#message_container div.message_list form.edit_message_form button#cancel_updating_message_btn,
 section div#message_container div.message_list form#edit_message_form button#cancel_updating_message_btn {
   background-color: transparent;
   color: rgba(0, 0, 0, 0.6);
