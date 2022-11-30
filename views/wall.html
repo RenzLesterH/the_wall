@@ -46,45 +46,11 @@
             <p>No Posted Messages Yet.</p>
         </div>
         <div id="message_container">
-            <div id="action_modal" class="modal">
-                <div class="modal_content">
-                    <div class="modal_header">
-                        <span class="close">&times;</span>
-                    </div>
-                    <div class="modal_body">
-                        <h5 id="modal_body_title">Confirm Delete Message</h5>
-                        <p id="modal_body_description">Are you sure you want to remove this message? This action cannot be undone.</p>
-                        <form method="post" id="action_form">
-                            <input type="hidden" id="action_form_input">
-                            <button type="button" id="cancel_remove_btn">Cancel</button>
-                            <button type="submit" id="remove_btn">Yes, Remove it.</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
             <div class="message_list" id="created_message">
-                <p id="created_message_content"></p>
-                <ul>
-                    <li>
-                        <button class="comment_button"><span></span> 0 comment</button>
-                    </li>
-                    <li>
-                        <button class="edit_button"><span></span> Edit</button>
-                    </li>
-                    <li>
-                        <button class="delete_button"><span></span> Delete</button>
-                    </li>
-                    <li class="user_profile">
-                        <div></div>
-                        <span>You</span> - Few seconds ago
-                    </li>
-                </ul>
-            </div>
-            <div class="message_list">
                 <p>The lorem ipsum is a placeholder text used in publishing and graphic design. This filler text is a short paragraph that contains all the letters of the alphabet.</p>
                 <ul>
                     <li>
-                        <button class="comment_button" id="comments_list"><span></span> 1 comment</button>
+                        <button class="comment_button" id="comments_list"><span></span> 0 comment</button>
                     </li>
                     <li>
                         <button class="edit_button edit_message"><span></span> Edit</button>
@@ -98,7 +64,7 @@
                     </li>
                 </ul>
                 <form method="post" id="edit_message_form">
-                    <textarea placeholder="Type your message here.">The lorem ipsum is a placeholder text used in publishing and graphic design. This filler text is a short paragraph that contains all the letters of the alphabet.</textarea>
+                    <textarea placeholder="Type your message here."></textarea>
                     <button type="submit" id="post_updated_message_btn">Update Message</button>
                     <button type="button" id="cancel_updating_message_btn">Cancel</button>
                 </form>
@@ -129,60 +95,24 @@
                     </form>
                 </div>
             </div>
-            <div class="message_list">
-                <p>The lorem ipsum is a placeholder text used in publishing and graphic design. This filler text is a short paragraph that contains all the letters of the alphabet.</p>
-                <ul>
-                    <li>
-                        <button class="comment_button"><span></span> 0 comment</button>
-                    </li>
-                    <li>
-                        <button class="edit_button"><span></span> Edit</button>
-                    </li>
-                    <li>
-                        <button class="delete_button"><span></span> Delete</button>
-                    </li>
-                    <li class="user_profile">
-                        <div></div>
-                        <span>You</span> - Few seconds ago
-                    </li>
-                </ul>
+
+            <div id="action_modal" class="modal">
+                <div class="modal_content">
+                    <div class="modal_header">
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="modal_body">
+                        <h5 id="modal_body_title">Confirm Delete Message</h5>
+                        <p id="modal_body_description">Are you sure you want to remove this message? This action cannot be undone.</p>
+                        <form method="post" id="action_form">
+                            <input type="hidden" id="action_form_input">
+                            <button type="button" id="cancel_remove_btn">Cancel</button>
+                            <button type="submit" id="remove_btn">Yes, Remove it.</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="message_list">
-                <p>The lorem ipsum is a placeholder text used in publishing and graphic design. This filler text is a short paragraph that contains all the letters of the alphabet.</p>
-                <ul>
-                    <li>
-                        <button class="comment_button"><span></span> 0 comment</button>
-                    </li>
-                    <li>
-                        <button class="edit_button"><span></span> Edit</button>
-                    </li>
-                    <li>
-                        <button class="delete_button"><span></span> Delete</button>
-                    </li>
-                    <li class="user_profile">
-                        <div></div>
-                        <span>You</span> - Few seconds ago
-                    </li>
-                </ul>
-            </div>
-            <div class="message_list">
-                <p>The lorem ipsum is a placeholder text used in publishing and graphic design. This filler text is a short paragraph that contains all the letters of the alphabet.</p>
-                <ul>
-                    <li>
-                        <button class="comment_button"><span></span> 0 comment</button>
-                    </li>
-                    <li>
-                        <button class="edit_button"><span></span> Edit</button>
-                    </li>
-                    <li>
-                        <button class="delete_button"><span></span> Delete</button>
-                    </li>
-                    <li class="user_profile">
-                        <div></div>
-                        <span>You</span> - Few seconds ago
-                    </li>
-                </ul>
-            </div>
+
         </div>
     </section>
     <script src="../assets/js/wall.js"></script>
