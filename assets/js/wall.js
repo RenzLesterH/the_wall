@@ -65,6 +65,18 @@ function closeEditForm(id_message,update_form_id){
     document.getElementById(update_form_id).remove();
 }
 
+//show comment form
+function toggleCommentForm(id_message) {
+    document.getElementById("post_comment_container").style.display = "block";
+    let comments = document.getElementById(id_message);
+    let comment_form = document.getElementById("post_comment_container");
+    let clone_comment_form = comment_form.cloneNode(true);
+    // clone_comment_form.className = "post_comment";
+    // clone_comment_form.id = "update_"+id_message; 
+    comments.appendChild(clone_comment_form);
+    document.getElementById("post_comment_container").style.display = "none";
+}
+
 //triggers create message modal
 document.getElementById("create_message_modal_button").addEventListener('click', function () {
     document.getElementById("create_post_modal").style.display = "block";
@@ -116,7 +128,8 @@ form_message.addEventListener("submit", function (event) {
 document.addEventListener("click", function(event) {
     let clicked_by = event.target;
     if (clicked_by.className == "comment_button") {
-   
+        message_id = event.target.closest('div[id]').id;
+        toggleCommentForm(message_id);
     } else if (clicked_by.className == "edit_button edit_message") {
         message_id = event.target.closest('div[id]').id;
         toggleForm(message_id);
