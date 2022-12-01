@@ -1,5 +1,5 @@
+//Generate comments id
 let create_post_textarea = document.getElementById("create_post_textarea");
-
 let total_messages_list = document.getElementById("total_messages").textContent;
 let total_messages_list_int = parseInt(total_messages_list);
 let message_id = 0;
@@ -158,6 +158,11 @@ function toggleEditForm(id_message) {
     message_list.prepend(edit_form);
 }
 
+function updateContent(id_message, form_id, updated_content) {
+    closeEditForm(id_message, form_id);
+    document.getElementById(id_message).children[0].textContent = updated_content;  
+}
+
 //triggers create message modal
 document.getElementById("create_message_modal_button").addEventListener('click', function () {
     document.getElementById("create_post_modal").style.display = "block";
@@ -217,6 +222,11 @@ document.addEventListener("submit", function (event) {
     else if(form_id === "post_comment_form"){
         let message = event.target.closest('div[id]').id;
         createComment(message);
+    }
+    else if(form_id === "edit_message_form"){
+        let message = event.target.closest('div[id]').id;
+        let updated_content = document.getElementById(form_id).firstChild.value;
+        updateContent(message, form_id, updated_content);
     }
     event.preventDefault();
 });
