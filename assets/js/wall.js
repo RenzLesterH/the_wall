@@ -1,9 +1,4 @@
-
 let create_post_textarea = document.getElementById("create_post_textarea");
-let post_comment = document.getElementsByClassName("post_comment")[0];
-let comment_list = document.getElementsByClassName("comment_list")[0];
-let edit_message = document.getElementsByClassName("edit_message")[0];
-let edit_comment = document.getElementsByClassName("edit_comment")[0];
 
 let total_messages_list = document.getElementById("total_messages").textContent;
 let total_messages_list_int = parseInt(total_messages_list);
@@ -21,6 +16,50 @@ function checkTextareaEmpty() {
     }
 }
 
+function containerTemplate(container_type, container_list, content){
+    let container = document.getElementById(container_type);
+    /* Create div for message container. */
+    let container_list_div = document.createElement("div");
+    container_list_div.className = container_list;
+    container_list_div.id = container_list+total_messages_list_int;
+    /* Create p for message content. */
+    let container_list_p = document.createElement("p");
+    container_list_div.appendChild(container_list_p);
+    container_list_p.textContent = content;
+    /* Create div for action message. */
+    let action_div = document.createElement("div");
+    action_div.className = "action_message";
+    container_list_div.appendChild(action_div);
+    /* This functions create action buttons inside the the action_message div. */
+    if (container_list === "message_list") 
+    {
+        createActionButtons(action_div,"button", "comment_button", "0 comment","span");
+    }
+    createActionButtons(action_div,"button", "edit_button", "Edit","span");
+    createActionButtons(action_div,"button", "delete_button", "Delete","span");
+    createActionButtons(action_div,"span", "user_profile", "You - Few seconds ago","div");
+    /* Prepend or append new message or comment. */
+    (container_list === "message_list") ? container.prepend(container_list_div) :  container.appendChild(container_list_div);
+}
+
+//add the new message in the lists
+function createMessage(){
+    document.getElementById("create_post_modal").style.display = "none";
+    document.getElementById("empty_post").style.display = "none";
+    /* Create template for message list. */
+    containerTemplate("message_container", "message_list", create_post_textarea.value);
+    create_post_textarea.value = "";
+    total_messages_list_int++;
+    document.getElementById("total_messages").innerHTML = total_messages_list_int;
+};
+
+//add the new message in the lists
+function createComment(message_id){
+    let comment_textarea = document.getElementById("comment_textarea").value;
+    containerTemplate(message_id, "comment_list", comment_textarea);
+    document.getElementById("comment_textarea").value = ""; 
+};
+
 //shows edit form.
 // function toggleEditForm(edit_form, element_child, child_number) {
 //     if (window.getComputedStyle(edit_form).display === "none") {
@@ -35,12 +74,29 @@ function checkTextareaEmpty() {
 // }
 
 //deletes message.
-function showDeleteModal(post_type) {
+function showDeleteModal(message_id) {
+    let post_type = document.getElementById(message_id).className;
+    let modal_for = "";
+    if (post_type === "message_list") {
+        modal_for = "Message";
+    }
+    else{
+        modal_for = "Comment";
+    }
     let action_modal = document.getElementById("action_modal");
-    document.getElementById("action_form_input").value = post_type;
-    document.getElementById("modal_body_title").innerHTML = "Confirm Delete "+post_type;
-    document.getElementById("modal_body_description").innerHTML = "Are you sure you want to remove this "+post_type.toLowerCase()+" ? This action cannot be undone.";
+    document.getElementById("action_form_input").value = modal_for;
+    document.getElementById("modal_body_title").innerHTML = "Confirm Delete "+modal_for;
+    document.getElementById("modal_body_description").innerHTML = "Are you sure you want to remove this "+modal_for.toLowerCase()+" ? This action cannot be undone.";
     action_modal.style.display = "block"; 
+}
+
+function createActionButtons(action_message, element, element_class, element_text, element_icon){
+    let buttons = document.createElement(element);
+    buttons.className = element_class;
+    buttons.textContent = element_text;
+    let icon = document.createElement(element_icon);
+    buttons.prepend(icon);
+    action_message.appendChild(buttons);
 }
 
 //show edit form message.
@@ -58,7 +114,7 @@ function toggleForm(id_message) {
 }
 
 //hide edit form message.
-function closeEditForm(id_message,update_form_id){
+function closeEditForm(id_message, update_form_id){
     let message_list = document.getElementById(id_message);
     message_list.children[1].style.display = "block";
     message_list.children[2].style.display = "flex"; 
@@ -67,14 +123,39 @@ function closeEditForm(id_message,update_form_id){
 
 //show comment form
 function toggleCommentForm(id_message) {
-    document.getElementById("post_comment_container").style.display = "block";
-    let comments = document.getElementById(id_message);
-    let comment_form = document.getElementById("post_comment_container");
-    let clone_comment_form = comment_form.cloneNode(true);
-    // clone_comment_form.className = "post_comment";
-    // clone_comment_form.id = "update_"+id_message; 
-    comments.appendChild(clone_comment_form);
-    document.getElementById("post_comment_container").style.display = "none";
+    let message_list = document.getElementById(id_message);
+    let comment = document.createElement("form");
+    comment.id = "post_comment_form";
+    let textarea = document.createElement("textarea");
+    textarea.id = "comment_textarea";
+    comment.appendChild(textarea);
+    let button = document.createElement("button");
+    button.type = "submit";
+    button.id = "post_comment_btn";
+    button.textContent = "Post Comment"; 
+    comment.appendChild(button);
+    message_list.appendChild(comment);
+}
+
+function createEditFormButtons(edit_form, button_type, button_id, button_text) {
+    let update_button = document.createElement("button");
+    update_button.type = button_type;
+    update_button.id = button_id;
+    update_button.textContent = button_text;
+    edit_form.appendChild(update_button);
+}
+
+function toggleEditForm(id_message) {
+    let message_list = document.getElementById(id_message);
+    message_list.children[0].style.display = "none";
+    message_list.children[1].style.display = "none";    
+    let edit_form = document.createElement("form");
+    edit_form.id = "edit_message_form";
+    let textarea = document.createElement("textarea");
+    edit_form.appendChild(textarea);
+    createEditFormButtons(edit_form, "submit", "post_updated_message_btn", "Update Message");
+    createEditFormButtons(edit_form, "button", "cancel_updating_message_btn", "Cancel");
+    message_list.prepend(edit_form);
 }
 
 //triggers create message modal
@@ -89,11 +170,6 @@ document.getElementById("cancel_post_message_btn").addEventListener('click', fun
     document.getElementById("create_post_modal").style.display = "none";
 });
 
-//triggers close in create message modal
-document.getElementsByClassName("close")[0].addEventListener('click', function () {
-    document.getElementById("create_post_modal").style.display = "none";
-});
-
 window.addEventListener('click', function (event) {
     let create_post_modal = document.getElementById("create_post_modal");
     if (event.target === create_post_modal) {
@@ -102,60 +178,58 @@ window.addEventListener('click', function (event) {
 });
 
 //detect if textarea if empty in keyup
-document.addEventListener('keyup', function () {
+document.getElementById("create_post_textarea").addEventListener('keyup', function () {
     checkTextareaEmpty();
-});
-
-//add the new message in the lists
-const form_message = document.getElementById("create_message_form");
-form_message.addEventListener("submit", function (event) {
-    document.getElementById("create_post_modal").style.display = "none";
-    document.getElementById("empty_post").style.display = "none"; 
-    document.getElementById("created_message").style.display = "block";
-    let message_container = document.getElementById("message_container");
-    let message = document.getElementById("created_message");
-    let clone_message_container = message.cloneNode(true);
-    clone_message_container.id = "message_"+total_messages_list_int;
-    message_container.prepend(clone_message_container);
-    document.getElementById("message_"+total_messages_list_int).firstElementChild.textContent = create_post_textarea.value;
-    document.getElementById("created_message").style.display = "none";
-    create_post_textarea.value = "";
-    total_messages_list_int++;
-    document.getElementById("total_messages").innerHTML = total_messages_list_int;
-    event.preventDefault();
+    console.log();
 });
 
 document.addEventListener("click", function(event) {
     let clicked_by = event.target;
-    if (clicked_by.className == "comment_button") {
+    if (clicked_by.className === "comment_button") {
         message_id = event.target.closest('div[id]').id;
         toggleCommentForm(message_id);
-    } else if (clicked_by.className == "edit_button edit_message") {
+    }
+    else if (clicked_by.className === "edit_button") {
         message_id = event.target.closest('div[id]').id;
-        toggleForm(message_id);
-    }else if (clicked_by.className == "delete_button") {
-        showDeleteModal("Message");
+        toggleEditForm(message_id);
+    }
+    else if (clicked_by.className === "delete_button") {
         message_id = event.target.closest('div[id]').id;
-    }else if (clicked_by.id == "cancel_updating_message_btn") {
+        showDeleteModal(message_id);
+    }
+    else if (clicked_by.id === "cancel_updating_message_btn") {
         message_id = event.target.closest('div[id]').id;
-        closeEditForm(message_id,event.target.closest('form[id]').id);
+        let form_id = event.target.closest('form[id]').id;
+        closeEditForm(message_id, form_id); 
+    }
+    else if (clicked_by.className === "close_modal") {
+        let modal_id = event.target.closest('div[id]').id;
+        document.getElementById(modal_id).style.display = "none";
     }
 });
 
-
-document.getElementsByClassName("delete_comment")[0].addEventListener('click', function () {
-    let action_modal = document.getElementById("action_modal");
-    action_modal.style.display = "block";
-    document.getElementById("action_form_input").value = "comment";
-    document.getElementById("modal_body_title").innerHTML = "Confirm Delete Comment";
-    document.getElementById("modal_body_description").innerHTML = "Are you sure you want to remove this comment? This action cannot be undone.";
+document.addEventListener("submit", function (event) {
+    let form_id = event.target.id;
+    console.log(form_id);
+    if(form_id === "create_message_form"){
+        createMessage();
+    }
+    else if(form_id === "post_comment_form"){
+        let message = event.target.closest('div[id]').id;
+        createComment(message);
+    }
+    event.preventDefault();
 });
+
+// document.getElementsByClassName("delete_comment")[0].addEventListener('click', function () {
+//     let action_modal = document.getElementById("action_modal");
+//     action_modal.style.display = "block";
+//     document.getElementById("action_form_input").value = "comment";
+//     document.getElementById("modal_body_title").innerHTML = "Confirm Delete Comment";
+//     document.getElementById("modal_body_description").innerHTML = "Are you sure you want to remove this comment? This action cannot be undone.";
+// });
 
 document.getElementById("cancel_remove_btn").addEventListener('click', function () {
-    document.getElementById("action_modal").style.display = "none";
-});
-
-document.getElementsByClassName("close")[1].addEventListener('click', function () {
     document.getElementById("action_modal").style.display = "none";
 });
 
@@ -172,39 +246,11 @@ action_form.addEventListener("submit", function (event) {
     let action_form_input = document.getElementById("action_form_input").value;
     document.getElementById("action_modal").style.display = "none";
     if (action_form_input === "Message") {
-        document.getElementById(message_id).style.display = "none";
-        console.log(message_id);
+        document.getElementById(message_id).remove();
         total_messages_list_int--;
         document.getElementById("total_messages").innerHTML = total_messages_list_int;
     } else {
-        document.getElementsByClassName("comment_list")[0].style.display = "none";
+        document.getElementsByClassName("comment_list")[0].remove();
     }
     event.preventDefault();
-});
-
-//show comment list
-document.getElementsByClassName("comment_button")[1].addEventListener('click', function () {
-    if (window.getComputedStyle(post_comment).display === "none") {
-        post_comment.style.display = "block";
-        comment_list.style.display = "block";
-    } else {
-        post_comment.style.display = "none";
-        comment_list.style.display = "none";
-    }
-});
-
-edit_message.addEventListener('click', function () {
-    toggleEditForm(edit_message_form, "message_list", 1);
-});
-
-document.getElementById("cancel_updating_message_btn").addEventListener('click', function () {
-    toggleEditForm(edit_message_form, "message_list", 1);
-});
-
-edit_comment.addEventListener('click', function () {
-    toggleEditForm(edit_comment_form, "comment_list", 0);
-});
-
-document.getElementById("cancel_updating_comment_btn").addEventListener('click', function () {
-    toggleEditForm(edit_comment_form, "comment_list", 0);
 });
