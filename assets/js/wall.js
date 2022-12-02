@@ -263,7 +263,7 @@ document.getElementById("cancel_remove_btn").addEventListener('click', function 
     document.getElementById("action_modal").style.display = "none";
 });
 
-/* hides modal when clicked outside */
+/* hide modal when clicked outside */
 window.addEventListener('click', function (event) {
     let action_modal = document.getElementById("action_modal");
     if (event.target === action_modal) {

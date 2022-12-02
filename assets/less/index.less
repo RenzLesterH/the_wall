@@ -6,9 +6,9 @@ body{
     }
     div.form{
         background: #ffffff;
-        border-radius: 6px;
+        border-radius: 6px; 
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
-        margin: 117px 204px 292px 504px;
+        margin: 117px 204px 291px 203px;
         padding: 40px;
         width: 925px;
         h2{
@@ -50,9 +50,11 @@ body{
                 outline: none;
                 padding: 14px 9px;
             }
-            span.error_email,
-            span.error_password,
-            span.error_current_password{
+            input.input_error{
+                background: rgba(225, 85, 76, 0.08) !important;
+            }
+            span.sign_in_error,
+            span.sign_up_error{
                 color: #e1554c;
                 display: none;
                 font: normal 300 14px/21px Poppins_light;

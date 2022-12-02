@@ -92,17 +92,12 @@ section div.modal div.modal_content {
   padding: 8px 19px 8px 19px;
   width: 897px;
 }
-section div.modal div.modal_content div.modal_header .close_modal {
-  color: #152c61;
+section div.modal div.modal_content div.modal_header span.close_modal {
+  background: url('../images/Group 2020.png') no-repeat -93px -6px;
+  width: 18px;
+  height: 18px;
   float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-section div.modal div.modal_content div.modal_header .close_modal:hover,
-section div.modal div.modal_content div.modal_header .close_modal:focus {
-  color: #000;
-  cursor: pointer;
-  text-decoration: none;
+  margin: 10px 0px 3px 0px;
 }
 section div.modal div.modal_content div.modal_body {
   padding: 0px 30px 40px 30px;
