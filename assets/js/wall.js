@@ -5,7 +5,6 @@ let comment_id_list_int = 0;
 let message_id = 0;
 let content = "";
 
-
 /* detects if textarea if empty */
 function checkTextareaEmpty() {
     let post_message_btn = document.getElementById("post_message_btn");
@@ -65,8 +64,8 @@ function createComment(message_id){
 };
 
 /* show modal for deleting message or comment. */
-function showDeleteModal(message_id) {
-    let post_type = document.getElementById(message_id);
+function showDeleteModal(content_id) {
+    let post_type = document.getElementById(content_id); 
     content = post_type.id;
     let modal_for = "Message";
     if (post_type.className === "comment_list") {
@@ -111,20 +110,50 @@ function closeEditForm(id_message, update_form_id){
     document.getElementById(update_form_id).remove();
 }
 
+/* this will hide and show comments form the message */
+function toggleAllComments(id_message, toggle_visibility, toggle_display){
+    if (toggle_visibility === "hidden" && toggle_display === "none") {
+        let comments = document.getElementsByClassName("comment_list"); 
+        for(var i = 0; i < comments.length; i++){
+            comments[i].style.visibility = toggle_visibility;
+            comments[i].style.display = toggle_display;
+        }
+    }else{
+        let comments = document.getElementById(id_message); 
+        for (let i = 0; i < comments.childNodes.length; i++) {
+            if (comments.childNodes[i].className === "comment_list") {
+                comments.childNodes[i].style.visibility = toggle_visibility;
+                comments.childNodes[i].style.display = toggle_display;
+            }        
+        }
+    }
+}
+
 /*show comment form */
 function toggleCommentForm(id_message) {
-    let message_list = document.getElementById(id_message);
-    let comment = document.createElement("form");
-    comment.id = "post_comment_form";
-    let textarea = document.createElement("textarea");
-    textarea.id = "comment_textarea";
-    comment.appendChild(textarea);
-    let button = document.createElement("button");
-    button.type = "submit";
-    button.id = "post_comment_btn";
-    button.textContent = "Post Comment"; 
-    comment.appendChild(button);
-    message_list.appendChild(comment);
+    let form_comment_is_visible = document.getElementById("post_comment_form");
+    if (form_comment_is_visible === null) {
+        let message_list = document.getElementById(id_message);
+        let comment = document.createElement("form");
+        comment.id = "post_comment_form";
+        let textarea = document.createElement("textarea");
+        textarea.id = "comment_textarea";
+        comment.appendChild(textarea);
+        let button = document.createElement("button");
+        button.type = "submit";
+        button.id = "post_comment_btn";
+        button.textContent = "Post Comment"; 
+        comment.appendChild(button);
+        /* Insert before the message content. */
+        message_list.insertBefore(comment, message_list.children[2]);
+        /* this will show comments */
+        toggleAllComments(id_message, "visible", "block");
+    }else{
+        form_comment_is_visible.remove();
+        /* this will hide comments */
+        toggleAllComments(id_message, "hidden", "none");  
+    }
+    
 }
 
 /* create edit form buttons for updating content*/
@@ -136,6 +165,7 @@ function createEditFormButtons(edit_form, button_type, button_id, button_text) {
     edit_form.appendChild(update_button);
 }
 
+/* toggle show update form*/
 function toggleEditForm(content_id) {
     let content = document.getElementById(content_id);
     let button_text = "Update Message"
@@ -148,16 +178,18 @@ function toggleEditForm(content_id) {
     if (content.className === "comment_list") {
         button_text = "Update Comment";  
     }
-    createEditFormButtons(edit_form, "submit", "post_updated_message_btn", button_text);
-    createEditFormButtons(edit_form, "button", "cancel_updating_message_btn", "Cancel");
+    createEditFormButtons(edit_form, "submit", "post_updated_button", button_text);
+    createEditFormButtons(edit_form, "button", "cancel_updating_button", "Cancel");
     content.prepend(edit_form); 
 }
 
+/* updates the content*/
 function updateContent(id_message, form_id, updated_content) {
     closeEditForm(id_message, form_id);
     document.getElementById(id_message).children[0].textContent = updated_content;  
 }
 
+/* deletes the content*/
 function deleteContent(content){
     let action_form_input = document.getElementById("action_form_input").value;
     document.getElementById("action_modal").style.display = "none";
@@ -188,6 +220,7 @@ document.getElementById("cancel_post_message_btn").addEventListener('click', fun
     document.getElementById("create_post_modal").style.display = "none";
 });
 
+/* toggles modal */
 window.addEventListener('click', function (event) {
     let create_post_modal = document.getElementById("create_post_modal");
     if (event.target === create_post_modal) {
@@ -195,10 +228,12 @@ window.addEventListener('click', function (event) {
     }
 });
 
+/* hide delete modal when cancel is clicked */
 document.getElementById("cancel_remove_btn").addEventListener('click', function () {
     document.getElementById("action_modal").style.display = "none";
 });
 
+/* hides modal when clicked outside */
 window.addEventListener('click', function (event) {
     let action_modal = document.getElementById("action_modal");
     if (event.target === action_modal) {
@@ -206,10 +241,12 @@ window.addEventListener('click', function (event) {
     }
 });
 
+/* handles click for actions. */
 document.addEventListener("click", function(event) {
     let clicked_by = event.target;
     if (clicked_by.className === "comment_button") {
         message_id = event.target.closest('div[id]').id;
+        console.log(message_id);
         toggleCommentForm(message_id);
     }
     else if (clicked_by.className === "edit_button") {
@@ -217,10 +254,10 @@ document.addEventListener("click", function(event) {
         toggleEditForm(content_id);
     }
     else if (clicked_by.className === "delete_button") {
-        message_id = event.target.closest('div[id]').id;
-        showDeleteModal(message_id);
+        let content_id = event.target.closest('div[id]').id;
+        showDeleteModal(content_id);
     }
-    else if (clicked_by.id === "cancel_updating_message_btn") {
+    else if (clicked_by.id === "cancel_updating_button") {
         message_id = event.target.closest('div[id]').id;
         let form_id = event.target.closest('form[id]').id;
         closeEditForm(message_id, form_id); 
@@ -231,6 +268,7 @@ document.addEventListener("click", function(event) {
     }
 });
 
+/* handles form submission. */ 
 document.addEventListener("submit", function (event) {
     let form_id = event.target.id;
     console.log(form_id);

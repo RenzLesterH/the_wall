@@ -67,6 +67,9 @@ section textarea {
   resize: none;
   width: 100%;
 }
+section textarea:focus {
+  outline: none;
+}
 section div.modal {
   background-color: rgba(0, 0, 0, 0.411);
   display: none;
@@ -222,8 +225,8 @@ section div#message_container div.message_list form#edit_message_form textarea {
   height: 84px;
   margin-bottom: 15px;
 }
-section div#message_container div.message_list form.edit_message_form button#cancel_updating_message_btn,
-section div#message_container div.message_list form#edit_message_form button#cancel_updating_message_btn {
+section div#message_container div.message_list form.edit_message_form button#cancel_updating_button,
+section div#message_container div.message_list form#edit_message_form button#cancel_updating_button {
   background-color: transparent;
   color: rgba(0, 0, 0, 0.6);
   font: normal 400 16px/24px Poppins;
@@ -249,20 +252,6 @@ section div#message_container div.message_list div.comment_list {
   margin-bottom: 18px;
   overflow: auto;
   padding: 30px;
-}
-section div#message_container div.message_list div.comment_list form#edit_comment_form {
-  display: none;
-}
-section div#message_container div.message_list div.comment_list form#edit_comment_form textarea {
-  font: normal 300 16px/24px Poppins_light;
-  height: 84px;
-  margin-bottom: 15px;
-}
-section div#message_container div.message_list div.comment_list form#edit_comment_form button#cancel_updating_comment_btn {
-  background-color: transparent;
-  color: rgba(0, 0, 0, 0.6);
-  font: normal 400 16px/24px Poppins;
-  padding: 12px 28px;
 }
 section div#message_container div.modal div.modal_content {
   width: 500px;
