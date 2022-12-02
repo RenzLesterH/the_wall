@@ -170,13 +170,13 @@ section div#message_container div.message_list div.action_message button {
 section div#message_container div.message_list div.action_message button span {
   margin-right: 10px;
 }
-section div#message_container div.message_list div.action_message button.comments_list {
-  color: #2c6bff;
+section div#message_container div.message_list div.action_message button.has_comment {
+  color: #2c6bff !important;
 }
-section div#message_container div.message_list div.action_message button.comments_list span {
-  background: url('../images/Group 2020.png') no-repeat -3px -36px;
-  height: 18px;
-  width: 18px;
+section div#message_container div.message_list div.action_message button.has_comment span {
+  background: url('../images/Group 2020.png') no-repeat -3px -36px !important;
+  height: 18px !important;
+  width: 18px !important;
 }
 section div#message_container div.message_list div.action_message button.comment_button {
   color: #707070;
