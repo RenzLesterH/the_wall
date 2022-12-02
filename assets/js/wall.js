@@ -48,6 +48,16 @@ function containerTemplate(container_type, container_list, content, content_numb
     (container_list === "message_list") ? container.prepend(container_list_div) :  container.appendChild(container_list_div);
 }
 
+/* create action button for the content such as message or comment*/
+function createActionButtons(action_message, element, element_class, element_text, element_icon){
+    let buttons = document.createElement(element);
+    buttons.className = element_class;
+    buttons.textContent = element_text;
+    let icon = document.createElement(element_icon);
+    buttons.prepend(icon);
+    action_message.appendChild(buttons);
+} 
+
 /* add the new message in the lists */
 function createMessage(){
     document.getElementById("create_post_modal").style.display = "none";
@@ -81,16 +91,6 @@ function showDeleteModal(content_id) {
     document.getElementById("modal_body_title").innerHTML = "Confirm Delete "+modal_for;
     document.getElementById("modal_body_description").innerHTML = "Are you sure you want to remove this "+modal_for.toLowerCase()+" ? This action cannot be undone.";
     action_modal.style.display = "block";  
-}
-
-/* create action button for the content such as message or comment*/
-function createActionButtons(action_message, element, element_class, element_text, element_icon){
-    let buttons = document.createElement(element);
-    buttons.className = element_class;
-    buttons.textContent = element_text;
-    let icon = document.createElement(element_icon);
-    buttons.prepend(icon);
-    action_message.appendChild(buttons);
 }
 
 /* show edit form message. */
