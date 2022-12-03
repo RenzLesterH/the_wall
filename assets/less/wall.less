@@ -1,78 +1,60 @@
-header {
+header{
     background: #ffffff;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
     border-radius: 6px;
-
-    nav {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+    nav{
         color: #152c61;
-        padding: 38px 48px 40px 83px;
-
-        ul {
-            display: flex;
-
-            li {
-                align-self: center;
-                list-style: none;
-                text-align: right;
-            }
-
-            h1 {
-                font: normal 500 26px/39px Poppins_medium;
-            }
-
-            a {
-                color: #2c6bff;
-                font: normal 600 16px/24px Poppins_semiBold;
-                text-decoration: none;
-            }
-
-            li:nth-child(1) {
-                margin-right: auto;
-            }
-
-            li:nth-child(2) {
-                font: normal 300 16px/24px Poppins_light;
-                margin-right: 20px;
-            }
+        display: flex;
+        padding: 40px 79px;
+        h1{
+            align-self: center;
+            font: normal 500 26px/39px Poppins_medium;
+            margin-right: auto;
+        }
+        span{
+            align-self: center;
+            font: normal 300 16px/24px Poppins_light;
+            margin-right: 20px;
+        }
+        a{
+            align-self: center;
+            color: #2c6bff;
+            font: normal 600 16px/24px Poppins_semi_bold;
+            text-decoration: none;
         }
     }
 }
 
-section {
+section{
     background-color: #ffffff;
-    border-radius: 6px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
-    margin: 50px 79px;
+    border-radius: 6px;
+    margin: 50px 80px;
     padding: 70px;
-
-    h4 {
-        color: #707070;
+    h4{
         display: inline-block;
         font: normal 400 16px/24px Poppins;
-
-        span {
+        span{
             color: #2c6bff;
-            font: normal 600 16px/24px Poppins;
+            font: normal 600 16px/24px Poppins_semi_bold;
         }
     }
-
-    button {
-        background-color: #2c6bff;
+    button{
+        background: #2C6BFF;
         border-radius: 6px;
         border: none;
         color: #ffffff;
         cursor: pointer;
         float: right;
         font: normal 500 16px/24px Poppins_medium;
-        padding: 11px 26px;
+        padding: 7px 28px;
         text-align: center;
     }
-
-    textarea {
-        background-color: #f5f8ff;
+    textarea{
+        background: #f5f8ff;
         border-radius: 6px;
         border: 1px solid #dce6ff;
-        box-sizing: border-box;
+        box-sizing: border-box; 
         color: #152c61;
         padding: 6px 11px;
         resize: none;
@@ -81,237 +63,213 @@ section {
             outline: none;
         }
     }
-
-    div.modal {
+    div.modal{
         background-color: rgba(0, 0, 0, 0.411);
         display: none;
         height: 100%;
         left: 0;
-        overflow: auto;
+        overflow: hidden;
         padding-top: 100px;
         position: fixed;
         top: 0;
         width: 100%;
         z-index: 1;
-
-        div.modal_content {
+        div.modal_content{
             background-color: #ffffff;
             border-radius: 6px;
             border: 1px solid #888;
             display: flex;
             flex-direction: column;
             margin: auto;
-            padding: 8px 19px 8px 19px;
-            width: 897px; 
-
-            div.modal_header {
-                span.close_modal {
+            padding: 8px 19px;
+            width: 897px;
+            div.modal_header{
+                span.close_modal{
                     background: url('../images/Group 2020.png') no-repeat -93px -6px;
-                    width: 18px;
-                    height: 18px;
                     float: right;
+                    height: 18px;
                     margin: 10px 0px 3px 0px;
+                    width: 18px;
                 }
             }
-
-            div.modal_body {
+            div.modal_body{
                 padding: 0px 30px 40px 30px;
-
-                h5 {
-                    color: #152c61;
+                h5{
+                    color: #152C61;
                     font: normal 500 26px/39px Poppins_medium;
-                    margin: 0px 0px 40px 0px;
+                    margin-bottom: 40px;
                     text-align: center;
                 }
-
-                form {
-                    textarea {
+                form{
+                    textarea{
                         font: normal 300 16px/24px Poppins_light;
                         height: 185px;
-                        margin-bottom: 24px;
+                        margin-bottom: 27px;
                     }
-
-                    button#post_message_btn {
-                        margin: 1px;
-                        padding: 12px 40px;
+                    button{
+                        padding: 7px 39px;
                     }
-
-                    button#cancel_post_message_btn {
-                        background-color: transparent;
+                    button.create_disabled{
+                        background: rgba(44, 107, 255, 0.5) !important;
+                    } 
+                    button#cancel_post_message_btn{
+                        background: transparent;
                         color: rgba(0, 0, 0, 0.6);
                         font: normal 400 16px/24px Poppins;
-                        padding: 12px 20px;
+                        padding: 7px 23px;   
                     }
                 }
             }
         }
     }
 
-    div#empty_post {
-        margin: 52px 0px 709px 0px;
+    div#empty_post{
+        padding: 140px 0px 635px 0px; 
         text-align: center;
-
-        img {
-            margin: 94px 0px 17px 0px;
-        }
-
-        p {
+        p{
             color: #707070;
             font: normal 400 16px/24px Poppins;
+            margin-top: 17px;
             text-align: center;
         }
     }
-
-    div#message_container {
-        margin: 52px 0px 0px 0px;
-
-        div.message_list {
-            background-color: #ffffff;
+    div#message_container{
+        margin-top: 43px;
+        div.message_list{
+            background: #ffffff;
             border-radius: 6px;
             border: 1px solid #dce6ff;
-            margin-bottom: 18px;
-            padding: 23px 27px;
-
-            p {
-                color: #152c61;
+            margin-bottom: 20px;
+            padding: 24px 30px;
+            p{
+                color: #152C61;
                 font: normal 300 16px/24px Poppins_light;
             }
-            div.action_message {
+            div.action_message{
                 align-items: center;
                 display: flex;
-                margin-top: 18px;
-                button {
+                margin-top: 20px;
+                button{
                     align-items: center;
                     background-color: transparent;
+                    color: #707070;
                     display: flex;
                     font: normal 400 16px/24px Poppins;
-                    padding: 0px;
                     margin-right: 30px;
-                    span {
+                    padding: 0px;
+                    span{
                         margin-right: 10px;
                     }
                 }
-                button.has_comment {
+                button.has_comment{
                     color: #2c6bff !important;
-                    span {
+                    span{
                         background: url('../images/Group 2020.png') no-repeat -3px -36px !important;
-                        height: 18px !important;
-                        width: 18px !important;
-                    } 
+                        height: 18px;
+                        width: 18px; 
+                    }
                 }
-                button.comment_button {
-                    color: #707070;
-                    span {
+                button.comment_button{
+                    span{
                         background: url('../images/Group 2020.png') no-repeat -3px -6px;
                         height: 18px;
                         width: 18px;
                     }
                 }
-                button.edit_button {
+                button.edit_button{
                     color: #2c6bff;
-
-                    span {
+                    span{
                         background: url('../images/Group 2020.png') no-repeat -31px -4px;
                         height: 22px;
                         width: 22px;
                     }
                 }
-                button.delete_button {
-                    color: #707070;
-
-                    span {
+                button.delete_button{
+                    span{
                         background: url('../images/Group 2020.png') no-repeat -64px -5px;
                         height: 19px;
                         width: 16px;
                     }
                 }
-                span.user_profile {
-                    color: #707070;
+                span{
+                    color: rgba(0, 0, 0, 0.6);
                     font: normal 400 16px/24px Poppins;
-                    margin-right: 30px; 
-                    div {
+                    margin-right: 30px;
+                    div{
                         background: url('../images/User Placeholder.png') no-repeat;
-                        display: inline-block;
+                        display: inline-block; 
                         height: 24px;
+                        margin-right: 10px;
                         vertical-align: top;
                         width: 24px;
-                        margin-right: 10px;
                     }
                 }
             }
-
             form.edit_message_form,
-            form#edit_message_form {
+            form#edit_message_form{
                 overflow: auto;
-
-                textarea {
+                textarea{
                     font: normal 300 16px/24px Poppins_light;
                     height: 84px;
                     margin-bottom: 15px;
                 }
-
-                button#cancel_updating_button {
-                    background-color: transparent;
+                button#cancel_updating_button{
+                    background: transparent;
                     color: rgba(0, 0, 0, 0.6);
                     font: normal 400 16px/24px Poppins;
-                    padding: 12px 28px;
+                    padding: 7px 30px;   
                 }
             }
-
-            form#post_comment_form {
+            form#post_comment_form{
                 background-color: #ffffff;
                 border-radius: 6px;
                 border: 1px solid #dce6ff;
-                margin: 25px 0px 20px 0px;
+                margin: 30px 0px 20px 0px;
                 overflow: auto;
                 padding: 30px;
-
-                textarea {
+                textarea{
                     font: normal 300 16px/24px Poppins_light;
                     height: 84px;
                     margin-bottom: 15px;
                 }
             }
-
-            div.comment_list {
-                background-color: #ffffff;
+            div.comment_list{
+                background: #ffffff;
                 border-radius: 6px;
-                border: 1px solid #dce6ff;
-                margin-bottom: 18px;
+                border: 1px solid #DCE6FF;
+                margin-bottom: 20px;
                 overflow: auto;
-                padding: 30px;
+                padding: 28px 30px; 
             }
         }
 
-        div.modal {
-            div.modal_content {
-                width: 500px;
-
-                div.modal_body {
+        div.modal{
+            div.modal_content{
+                width: 540px;
+                div.modal_body{
                     padding: 0px 30px 50px 30px;
-
-                    h5 {
-                        color: #152c61;
+                    color: #152C61;
+                    h5{
                         font: normal 500 26px/39px Poppins_medium;
                         text-align: center;
-                        margin: 2px 0px 0px 0px;
+                        margin-top: 2px;
                     }
-
-                    p {
+                    p{
                         font: normal 400 16px/24px Poppins;
-                        margin: 30px 0px 30px 0px;
+                        margin: 30px 0px;
                         text-align: center;
                     }
-
-                    form {
+                    form{
                         display: flex;
                         justify-content: center;
-
-                        button#cancel_remove_btn {
+                        button#cancel_remove_btn{
                             background-color: transparent;
                             color: rgba(0, 0, 0, 0.6);
                             font: normal 400 16px/24px Poppins;
-                            padding: 12px 75px;
+                            padding: 11px 75px;
+                        }
+                        button#remove_btn{
+                            padding: 11px 45px; 
                         }
                     }
                 }

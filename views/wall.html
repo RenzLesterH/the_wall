@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico"/>
-    <meta name="description" content="Main page of the wall assignment">
+    <meta name="description" content="Main page of wall assignment">
     <meta name="author" content="Renz Lester J. Halagao">
     <title>The Wall</title>
     <link rel="stylesheet" href="../assets/css/global.css">
@@ -14,17 +14,13 @@
 <body>
     <header>
         <nav>
-            <ul>
-                <li>
-                    <h1>The Wall Assignment</h1>
-                </li>
-                <li>Welcome, Jerwin Fernandez</li>
-                <li><a href="index.html">Logout</a></li>
-            </ul>
+            <h1>The Wall Assignment</h1>
+            <span>Welcome, Jerwin Fernandez!</span>
+            <a href="index.html">Logout</a>
         </nav>
     </header>
     <section>
-        <h4><span id="total_messages">0</span> messages arranged by latest posted</h4> 
+        <h4><span id="total_messages">0</span> messages arranged by latest posted</h4>
         <button id="create_message_modal_button">Create Message</button>
         <div id="create_post_modal" class="modal">
             <div class="modal_content">
@@ -35,15 +31,15 @@
                     <h5>Create a Message</h5>
                     <form method="post" id="create_message_form">
                         <textarea id="create_post_textarea" placeholder="Type your message here."></textarea>
-                        <button type="submit" id="post_message_btn">Post Messages</button>
+                        <button type="submit" id="post_message_btn">Post Message</button>
                         <button type="button" id="cancel_post_message_btn">Cancel</button>
                     </form>
                 </div>
             </div>
         </div>
         <div id="empty_post">
-            <img src="../assets/images/empty_post.png" alt="empty_post">  
-            <p>No Posted Messages Yet.</p>
+            <img src="../assets/images/empty_post.png" alt="empty_post">
+            <p>No Posted Message Yet.</p>
         </div>
         <div id="message_container">
             <div id="action_modal" class="modal">
@@ -66,4 +62,4 @@
     </section>
     <script src="../assets/js/wall.js"></script>
 </body>
-</html> 
+</html>
