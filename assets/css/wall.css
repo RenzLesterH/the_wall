@@ -26,8 +26,8 @@ header nav a {
 }
 section {
   background-color: #ffffff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
   border-radius: 6px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
   margin: 50px 80px;
   padding: 70px;
 }
@@ -240,13 +240,13 @@ section div#message_container div.modal div.modal_content {
   width: 540px;
 }
 section div#message_container div.modal div.modal_content div.modal_body {
-  padding: 0px 30px 50px 30px;
   color: #152C61;
+  padding: 0px 30px 50px 30px;
 }
 section div#message_container div.modal div.modal_content div.modal_body h5 {
   font: normal 500 26px/39px Poppins_medium;
-  text-align: center;
   margin-top: 2px;
+  text-align: center;
 }
 section div#message_container div.modal div.modal_content div.modal_body p {
   font: normal 400 16px/24px Poppins;
@@ -265,4 +265,146 @@ section div#message_container div.modal div.modal_content div.modal_body form bu
 }
 section div#message_container div.modal div.modal_content div.modal_body form button#remove_btn {
   padding: 11px 45px;
+}
+@media (max-width: 480px) {
+  header nav {
+    padding: 15px;
+  }
+  header nav h1 {
+    font: normal 500 16px/39px Poppins_medium;
+  }
+  header nav span {
+    background: url('../images/User Placeholder.png') no-repeat;
+    height: 24px;
+    margin-right: 10px;
+    text-indent: -9999px;
+    width: 24px;
+  }
+  header nav a {
+    font: normal 600 12px/24px Poppins_semi_bold;
+  }
+  section {
+    margin: 30px 20px;
+    padding: 30px 20px;
+  }
+  section h4 {
+    display: flex;
+    font: normal 400 14px/24px Poppins;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  section h4 span {
+    font: normal 600 14px/24px Poppins_semi_bold;
+    margin-right: 5px;
+  }
+  section button {
+    float: none;
+    font: normal 500 14px/24px Poppins_medium;
+    padding: 7px 18px;
+    width: 100%;
+  }
+  section div.modal div.modal_content {
+    width: 410px;
+  }
+  section div.modal div.modal_content div.modal_body {
+    padding: 0px 15px 25px 15px;
+  }
+  section div.modal div.modal_content div.modal_body h5 {
+    font: normal 500 24px/39px Poppins_medium;
+  }
+  section div.modal div.modal_content div.modal_body form textarea {
+    font: normal 300 14px/24px Poppins_light;
+  }
+  section div.modal div.modal_content div.modal_body form button {
+    float: right;
+    width: 49%;
+  }
+  section div.modal div.modal_content div.modal_body form button#cancel_post_message_btn {
+    font: normal 400 14px/24px Poppins;
+  }
+  section div#empty_post {
+    padding: 150px 0px 635px 0px;
+  }
+  section div#empty_post img {
+    width: 35px;
+  }
+  section div#empty_post p {
+    font: normal 400 12px/24px Poppins;
+  }
+  section div#message_container div.message_list {
+    padding: 14px 20px;
+  }
+  section div#message_container div.message_list p {
+    font: normal 300 14px/24px Poppins_light;
+  }
+  section div#message_container div.message_list div.action_message button {
+    font: normal 400 14px/24px Poppins;
+    margin-right: 5px;
+  }
+  section div#message_container div.message_list div.action_message button span {
+    display: block;
+    visibility: visible;
+  }
+  section div#message_container div.message_list div.action_message button.has_comment,
+  section div#message_container div.message_list div.action_message button.comment_button {
+    width: 190px;
+  }
+  section div#message_container div.message_list div.action_message button.edit_button {
+    width: 100px;
+  }
+  section div#message_container div.message_list div.action_message button.delete_button {
+    width: 120px;
+  }
+  section div#message_container div.message_list div.action_message span {
+    font: normal 400 1px/24px Poppins;
+    visibility: hidden;
+    width: 90px;
+  }
+  section div#message_container div.message_list div.action_message span div {
+    margin-left: 5px;
+    vertical-align: middle;
+    visibility: visible;
+  }
+  section div#message_container div.message_list form#edit_message_form textarea {
+    font: normal 300 14px/24px Poppins_light;
+  }
+  section div#message_container div.message_list form#edit_message_form button {
+    float: right;
+    width: 50%;
+  }
+  section div#message_container div.message_list form#edit_message_form button#cancel_updating_button {
+    font: normal 400 14px/24px Poppins;
+  }
+  section div#message_container div.message_list form#post_comment_form {
+    padding: 15px;
+  }
+  section div#message_container div.message_list form#post_comment_form textarea {
+    font: normal 300 14px/24px Poppins_light;
+  }
+  section div#message_container div.message_list form#post_comment_form button {
+    float: right;
+    width: 50%;
+  }
+  section div#message_container div.message_list div.comment_list {
+    padding: 14px 20px;
+  }
+  section div#message_container div.modal div.modal_content {
+    width: 400px;
+  }
+  section div#message_container div.modal div.modal_content div.modal_body {
+    padding: 0px 15px 25px 15px;
+  }
+  section div#message_container div.modal div.modal_content div.modal_body h5 {
+    font: normal 500 24px/39px Poppins_medium;
+  }
+  section div#message_container div.modal div.modal_content div.modal_body p {
+    font: normal 400 14px/24px Poppins;
+  }
+  section div#message_container div.modal div.modal_content div.modal_body form button#cancel_remove_btn {
+    font: normal 400 14px/24px Poppins;
+    padding: 7px 75px;
+  }
+  section div#message_container div.modal div.modal_content div.modal_body form button#remove_btn {
+    padding: 7px 25px;
+  }
 }

@@ -97,3 +97,12 @@ body div#design_container img {
   top: 193px;
   width: 487.26px;
 }
+@media (max-width: 480px) {
+  body div.form {
+    margin: 117px 50px 50px 50px;
+  }
+  body div#design_container {
+    display: none;
+    visibility: hidden;
+  }
+}

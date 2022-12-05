@@ -276,4 +276,163 @@ section{
             }
         }
     }
-} 
+}
+
+@media (max-width: 480px) {
+    header{
+        nav{
+            padding: 15px;
+            h1{
+                font: normal 500 16px/39px Poppins_medium;
+            }
+            span{
+                background: url('../images/User Placeholder.png') no-repeat; 
+                height: 24px;
+                margin-right: 10px;
+                text-indent: -9999px;
+                width: 24px;
+            }
+            a{
+                font: normal 600 12px/24px Poppins_semi_bold;
+            }
+        }
+    }
+    section{
+        margin: 30px 20px;
+        padding: 30px 20px;
+        h4{
+            display: flex;
+            font: normal 400 14px/24px Poppins;
+            justify-content: center;
+            margin-bottom: 10px;
+            span{
+                font: normal 600 14px/24px Poppins_semi_bold;
+                margin-right: 5px;
+            }
+        }
+        button{
+            float: none; 
+            font: normal 500 14px/24px Poppins_medium;
+            padding: 7px 18px; 
+            width: 100%;
+        }
+        div.modal{
+            div.modal_content{
+                width: 410px;
+                div.modal_body{
+                    padding: 0px 15px 25px 15px;
+                    h5{
+                        font: normal 500 24px/39px Poppins_medium;
+                    }
+                    form{
+                        textarea{
+                            font: normal 300 14px/24px Poppins_light;
+                        }
+                        button{
+                            float: right; 
+                            width: 49%;
+                        }
+                        button#cancel_post_message_btn{
+                            font: normal 400 14px/24px Poppins;  
+                        }
+                    }
+                }
+            }
+        }
+        div#empty_post{
+            padding: 150px 0px 635px 0px;
+            img{
+                width: 35px;
+            }
+            p{
+                font: normal 400 12px/24px Poppins;
+            }
+        }
+        div#message_container{
+            div.message_list{
+                padding: 14px 20px;
+                p{
+                    font: normal 300 14px/24px Poppins_light;
+                }
+                div.action_message{ 
+                    button{
+                        font: normal 400 14px/24px Poppins;
+                        margin-right: 5px;
+                        span{
+                            display: block;
+                            visibility: visible;
+                        }
+                    }
+                    button.has_comment,
+                    button.comment_button{
+                        width: 190px;
+                    }
+                    button.edit_button{
+                        width: 100px;
+                    }
+                    button.delete_button{
+                        width: 120px;
+                    }
+                    span{
+                        font: normal 400 1px/24px Poppins;
+                        visibility: hidden;
+                        width: 90px;
+                        div{
+                            margin-left: 5px; 
+                            vertical-align: middle;
+                            visibility: visible;
+                        }
+                    }
+                }
+                form#edit_message_form{
+                    textarea{
+                        font: normal 300 14px/24px Poppins_light;
+                    }
+                    button{
+                        float: right; 
+                        width: 50%;
+                    }
+                    button#cancel_updating_button{
+                        font: normal 400 14px/24px Poppins; 
+                    }
+                }
+                form#post_comment_form{
+                    padding: 15px;
+                    textarea{
+                        font: normal 300 14px/24px Poppins_light;
+                    }
+                    button{
+                        float: right;
+                        width: 50%;
+                    }
+                }
+                div.comment_list{
+                    padding: 14px 20px; 
+                }
+            }
+            div.modal{
+                div.modal_content{
+                    width: 400px; 
+                    div.modal_body{
+                        padding: 0px 15px 25px 15px;
+                        h5{
+                            font: normal 500 24px/39px Poppins_medium;
+                        }
+                        p{
+                            font: normal 400 14px/24px Poppins;
+                        }
+                        form{
+                            button#cancel_remove_btn{
+                                font: normal 400 14px/24px Poppins;
+                                padding: 7px 75px;
+                            }
+                            button#remove_btn{
+                                padding: 7px 25px; 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
