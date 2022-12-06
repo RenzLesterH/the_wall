@@ -138,6 +138,9 @@ section{
     }
     div#message_container{
         margin-top: 43px;
+        div#sample_message{
+            display: none;
+        }
         div.message_list{
             background: #ffffff;
             border-radius: 6px;
@@ -208,8 +211,7 @@ section{
                     }
                 }
             }
-            form.edit_message_form,
-            form#edit_message_form{
+            form#edit_form{ 
                 overflow: auto;
                 textarea{
                     font: normal 300 16px/24px Poppins_light;
@@ -390,7 +392,7 @@ section{
                         }
                     }
                 }
-                form#edit_message_form{
+                form#edit_form{
                     textarea{
                         font: normal 300 14px/24px Poppins_light;
                     }

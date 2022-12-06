@@ -134,6 +134,9 @@ section div#empty_post p {
 section div#message_container {
   margin-top: 43px;
 }
+section div#message_container div#sample_message {
+  display: none;
+}
 section div#message_container div.message_list {
   background: #ffffff;
   border-radius: 6px;
@@ -201,18 +204,15 @@ section div#message_container div.message_list div.action_message span div {
   vertical-align: top;
   width: 24px;
 }
-section div#message_container div.message_list form.edit_message_form,
-section div#message_container div.message_list form#edit_message_form {
+section div#message_container div.message_list form#edit_form {
   overflow: auto;
 }
-section div#message_container div.message_list form.edit_message_form textarea,
-section div#message_container div.message_list form#edit_message_form textarea {
+section div#message_container div.message_list form#edit_form textarea {
   font: normal 300 16px/24px Poppins_light;
   height: 84px;
   margin-bottom: 15px;
 }
-section div#message_container div.message_list form.edit_message_form button#cancel_updating_button,
-section div#message_container div.message_list form#edit_message_form button#cancel_updating_button {
+section div#message_container div.message_list form#edit_form button#cancel_updating_button {
   background: transparent;
   color: rgba(0, 0, 0, 0.6);
   font: normal 400 16px/24px Poppins;
@@ -371,10 +371,10 @@ section div#message_container div.modal div.modal_content div.modal_body form bu
     vertical-align: middle;
     visibility: visible;
   }
-  section div#message_container div.message_list form#edit_message_form textarea {
+  section div#message_container div.message_list form#edit_form textarea {
     font: normal 300 14px/24px Poppins_light;
   }
-  section div#message_container div.message_list form#edit_message_form button {
+  section div#message_container div.message_list form#edit_form button {
     float: right;
     font: normal 400 14px/24px Poppins;
     padding: 7px 15px;

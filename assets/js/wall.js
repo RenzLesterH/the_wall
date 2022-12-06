@@ -22,7 +22,7 @@ function createMessage() {
     let textarea_value = create_post_textarea.value;
     document.getElementById("create_post_modal").style.display = "none";
     document.getElementById("empty_post").style.display = "none";
-    generateTemplate("message_container", "message_list", textarea_value, total_message_list_count);
+    createPost("message_container", "message_list", textarea_value, total_message_list_count);
     create_post_textarea.value = "";
     total_message_list_count++;
     document.getElementById("total_messages").innerHTML = total_message_list_count; 
@@ -31,62 +31,49 @@ function createMessage() {
 function createComment(message_id){
     updateTotalComments(message_id, "add");
     let comment_textarea = document.getElementById("comment_textarea");
-    generateTemplate(message_id, "comment_list", comment_textarea.value, comment_id_list_count);
+    createPost(message_id, "comment_list", comment_textarea.value, comment_id_list_count);
     comment_textarea.value = "";
     checkTextareaEmpty(comment_textarea, "post_comment_btn");
-    comment_id_list_count++; 
+    comment_id_list_count++;
 }
 
-function generateTemplate(container_type, container_list, content_value, content_number) {
+function createPost(container_type, container_list, content_value, content_number) {
+    let sample_message = document.getElementById("sample_message");
     let container = document.getElementById(container_type);
-    let div_container = document.createElement("div");
-    div_container.className = container_list;
-    div_container.id = container_list+content_number;
-    let content = document.createElement("p");
-    div_container.appendChild(content);
-    content.textContent = content_value;
-    let div_action = document.createElement("div");
-    div_action.className = "action_message";
-    div_container.appendChild(div_action);
-    if (container_list === "message_list") {
-        createActionButtons(div_action, "button", "comment_button", "0 comment", "span");
+    sample_message.style.display = "block";
+    let create_post = sample_message.cloneNode(true); 
+    create_post.id = container_list+content_number;
+    create_post.childNodes[1].textContent = content_value;
+    if (container_list === "comment_list") {
+        create_post.className = container_list;
+        let comment_button = create_post.childNodes[3].childNodes[1];
+        comment_button.remove();
+        container.insertBefore(create_post, container.children[3])
     }
-    createActionButtons(div_action, "button", "edit_button", "Edit", "span");
-    createActionButtons(div_action, "button", "delete_button", "Delete", "span");
-    createActionButtons(div_action, "span", "user_profile", "You - Few seconds ago", "div"); 
-    (container_list === "message_list") ? container.prepend(div_container) : container.insertBefore(div_container, container.children[3]);
-}
-
-function createActionButtons(action_message, element, element_class, element_text, element_icon){
-    let buttons = document.createElement(element);
-    buttons.className = element_class;
-    buttons.textContent = element_text;
-    let icon = document.createElement(element_icon); 
-    buttons.prepend(icon);
-    action_message.appendChild(buttons);  
+    else{
+        container.prepend(create_post);
+    }
+    sample_message.style.display = "none";
 }
 
 function toggleCommentForm(id_message){
-    let form_comment_visible = document.getElementById("post_comment_form");
-    if (form_comment_visible === null) {
+    let form_comment_exists = document.getElementById("post_comment_form");
+    if (form_comment_exists === null) {
         let message_list = document.getElementById(id_message);
-        let comment = document.createElement("form");
-        comment.id = "post_comment_form";
-        let textarea = document.createElement("textarea");
-        textarea.id = "comment_textarea";
-        comment.appendChild(textarea);
-        let button = document.createElement("button");
-        button.type = "submit";
-        button.id = "post_comment_btn";
-        button.textContent = "Post Comment";
-        comment.appendChild(button);
-        message_list.insertBefore(comment, message_list.children[2]);
+        let comment_form = document.getElementById("sample_comment_form");
+        comment_form.style.display = "block";
+        let create_comment_form = comment_form.cloneNode(true);
+        create_comment_form.id = "post_comment_form";
+        document.getElementById("message_container").prepend(create_comment_form);
+        comment_form.style.display = "none"; 
+        message_list.insertBefore(create_comment_form, message_list.children[2]);
         let comment_textarea = document.getElementById("comment_textarea");
         checkTextareaEmpty(comment_textarea,"post_comment_btn");
         toggleAllComments(id_message, "visible", "block");
+
     }
     else{
-        form_comment_visible.remove();
+        form_comment_exists.remove();
         toggleAllComments(id_message, "hidden", "none");
     }
 }
@@ -113,28 +100,20 @@ function toggleAllComments(id_message, visibility_type, display_type){
 
 function toggleEditForm(content_id){
     let content = document.getElementById(content_id);
-    let button_text = "Update Message";
     content.children[0].style.display = "none";
     content.children[1].style.display = "none";
-    let edit_form = document.createElement("form");
-    edit_form.id = "edit_message_form";
-    let textarea = document.createElement("textarea");
-    edit_form.appendChild(textarea);
+    let edit_form = document.getElementById("sample_edit_form");
+    edit_form.style.display = "block";
+    let create_edit_form = edit_form.cloneNode(true);
+    create_edit_form.id = "edit_form";
+    create_edit_form.childNodes[1].id = "textarea_edit";
+    create_edit_form.childNodes[3].textContent = "Update Message";
     if(content.className === "comment_list"){
-        button_text = "Update Comment";
+        create_edit_form.childNodes[3].textContent = "Update Comment";
     }
-    createEditFormButtons(edit_form, "submit", "post_updated_button", button_text);
-    createEditFormButtons(edit_form, "button", "cancel_updating_button", "Cancel");
-    content.prepend(edit_form);
-}
-
-function createEditFormButtons(edit_form, button_type, button_id, button_text){
-    let update_button = document.createElement("button");
-    update_button.type = button_type;
-    update_button.id = button_id;
-    update_button.textContent = button_text;
-    edit_form.appendChild(update_button);
-}
+    content.prepend(create_edit_form);
+    edit_form.style.display = "none";
+} 
 
 function closeEditForm(id_message, form_id){
     let message_list =document.getElementById(id_message);
@@ -158,26 +137,27 @@ function showDeleteModal(content_id){
 }
 
 function updateTotalComments(message_id, operation){
-    let total_comment = document.getElementById(message_id).childNodes[1];
-    let total_comment_text = total_comment.childNodes[0].textContent;
+    let total_comment = document.getElementById(message_id).childNodes[3];
+    let total_comment_text = total_comment.childNodes[1].textContent.replace(/\s/g, "");
     let total_comment_count = parseInt(total_comment_text.charAt(0));
     if (operation === "add") {
         total_comment_count++;
-        total_comment.childNodes[0].className = "has_comment comment_button";
+        total_comment.childNodes[1].className = "has_comment comment_button";
     } 
     else {
         total_comment_count--;
         if (total_comment_count === 0) {
-            total_comment.childNodes[0].className = "comment_button";
+            total_comment.childNodes[1].className = "comment_button";
         }    
     }
-    total_comment.childNodes[0].textContent = total_comment_count+" Comment";
+    total_comment.childNodes[1].textContent = total_comment_count+" Comment";
     let icon = document.createElement("span");
-    total_comment.childNodes[0].prepend(icon); 
+    total_comment.childNodes[1].prepend(icon); 
 }
 
 function updateContent(id_message, form_id, updated_content) {
     closeEditForm(id_message, form_id);
+    console.log(updated_content); 
     document.getElementById(id_message).children[0].textContent = updated_content; 
 }
 
@@ -243,13 +223,13 @@ document.addEventListener("submit", function (event) {
          let message = event.target.closest('div[id]').id;
          createComment(message);
     }
-    else if(form === "edit_message_form"){
+    else if(form === "edit_form"){ 
         let message = event.target.closest('div[id]').id;
-        let updated_content = document.getElementById(form).firstChild.value;
+        let updated_content = document.getElementById("textarea_edit").value;
         updateContent(message, form, updated_content); 
     }
     else if(form === "action_form"){
-        deleteContent(content, message_id);
+        deleteContent(content, message_id); 
     }
     event.preventDefault();
 });

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico" />
     <meta name="description" content="Main page of wall assignment">
     <meta name="author" content="Renz Lester J. Halagao">
     <title>The Wall</title>
@@ -42,6 +42,29 @@
             <p>No Posted Message Yet.</p>
         </div>
         <div id="message_container">
+            <div class="message_list" id="sample_message">
+                <p>Sample</p>
+                <div class="action_message">
+                    <button class="comment_button">
+                        <span></span>0 comment</button>
+                    <button class="edit_button">
+                        <span></span>Edit</button>
+                    <button class="delete_button">
+                        <span></span>Delete</button>
+                    <span class="user_profile">
+                        <div></div>You - Few seconds ago
+                    </span>
+                </div>
+            </div>
+            <form id="sample_comment_form" hidden>
+                <textarea id="comment_textarea"></textarea>
+                <button type="submit" id="post_comment_btn">Post Comment</button>
+            </form>
+            <form id="sample_edit_form" hidden>
+                <textarea></textarea>
+                <button type="submit" id="post_updated_button">Update Message</button>
+                <button type="button" id="cancel_updating_button">Cancel</button>
+            </form>
             <div id="action_modal" class="modal">
                 <div class="modal_content">
                     <div class="modal_header">
@@ -49,7 +72,8 @@
                     </div>
                     <div class="modal_body">
                         <h5 id="modal_body_title">Confirm Delete Message</h5>
-                        <p id="modal_body_description">Are you sure you want to remove this message? This action cannot be undone.</p>
+                        <p id="modal_body_description">Are you sure you want to remove this message? This action cannot
+                            be undone.</p>
                         <form method="post" id="action_form">
                             <input type="hidden" id="action_form_input">
                             <button type="button" id="cancel_remove_btn">Cancel</button>
