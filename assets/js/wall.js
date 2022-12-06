@@ -1,7 +1,6 @@
 
 let create_post_textarea = document.getElementById("create_post_textarea");
-let total_message_list = document.getElementById("total_messages").textContent;
-let total_message_list_count = parseInt(total_message_list);
+let total_message_list_count = 0;
 let comment_id_list_count = 0;
 let message_id = 0;
 let content = "";
@@ -17,6 +16,11 @@ function checkTextareaEmpty(textarea, button) {
         button_submit.classList.remove("disable_button");
     }
 }
+function countMessages(){
+    const messages_list = document.querySelectorAll(".message_list");
+    total_message_list_count = messages_list.length;
+    document.getElementById("total_messages").innerHTML = messages_list.length;
+}
 
 function createMessage() {
     let textarea_value = create_post_textarea.value;
@@ -24,8 +28,7 @@ function createMessage() {
     document.getElementById("empty_post").style.display = "none";
     createPost("message_container", "message_list", textarea_value, total_message_list_count);
     create_post_textarea.value = "";
-    total_message_list_count++;
-    document.getElementById("total_messages").innerHTML = total_message_list_count; 
+    countMessages();
 }
 
 function createComment(message_id){
@@ -41,7 +44,8 @@ function createPost(container_type, container_list, content_value, content_numbe
     let sample_message = document.getElementById("sample_message");
     let container = document.getElementById(container_type);
     sample_message.style.display = "block";
-    let create_post = sample_message.cloneNode(true); 
+    let create_post = sample_message.cloneNode(true);
+    create_post.className = container_list; 
     create_post.id = container_list+content_number;
     create_post.childNodes[1].textContent = content_value;
     if (container_list === "comment_list") {
@@ -170,12 +174,11 @@ function deleteContent(content, message) {
     document.getElementById("action_modal").style.display = "none";
     if (action_form_input === "Message") {
         document.getElementById(content).remove(); 
-        total_message_list_count--;
+        countMessages();
         if(total_message_list_count === 0){
             document.getElementById("empty_post").style.display = "block";
         }
-        document.getElementById("total_messages").innerHTML = total_message_list_count; 
-    }
+    } 
     else{
         updateTotalComments(message, "minus");
         document.getElementById(content).remove();
