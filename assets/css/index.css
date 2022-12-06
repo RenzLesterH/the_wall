@@ -11,7 +11,7 @@ body div.form {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
   margin: 117px 204px 291px 204px;
   padding: 32px 40px 40px 40px;
-  width: 924px;
+  width: 915px;
 }
 body div.form h2 {
   color: #2C6BFF;
@@ -66,7 +66,7 @@ body div.form form button[type=submit] {
   color: #ffffff;
   font: normal 600 16px/24px Poppins_semi_bold;
   margin: 35px auto 35px auto;
-  padding: 16px 45px;
+  padding: 15px 45px;
 }
 body div.form form span {
   color: rgba(0, 0, 0, 0.2);
@@ -86,11 +86,15 @@ body div.form form span.sign_up_error {
   font: normal 300 14px/21px Poppins_light;
   text-align: left;
 }
-body div.form form span#agreement_info {
+body div.form #form_sign_up button[type=submit] {
+  margin: 32px auto 35px auto;
+}
+body div.form #form_sign_up span#agreement_info {
   color: #152c61;
   font: normal 300 16px/24px Poppins_light;
   margin-top: 30px;
   text-align: center;
+  padding: 0px;
 }
 body div#design_container {
   background-color: rgba(44, 107, 255, 0.51);
@@ -108,6 +112,34 @@ body div#design_container img {
 @media (max-width: 480px) {
   body div.form {
     margin: 117px 50px 50px 50px;
+    padding: 22px 30px 30px 30px;
+  }
+  body div.form h2 {
+    font-size: 19px;
+  }
+  body div.form h3 {
+    font-size: 38px;
+  }
+  body div.form form {
+    font-size: 14px;
+  }
+  body div.form form a,
+  body div.form form input,
+  body div.form form button[type=submit],
+  body div.form form span {
+    font-size: 14px;
+  }
+  body div.form form a a,
+  body div.form form input a,
+  body div.form form button[type=submit] a,
+  body div.form form span a {
+    font-size: 14px;
+  }
+  body div.form form button[type=submit] {
+    padding: 10px 40px;
+  }
+  body div.form #form_sign_up span#agreement_info {
+    font-size: 14px;
   }
   body div#design_container {
     display: none;

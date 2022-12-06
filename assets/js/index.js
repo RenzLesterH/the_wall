@@ -15,9 +15,13 @@ sign_in.addEventListener("click", function () {
     return false;
 });
 
-function validateSignUp(sign_up_inputs){
-    if (sign_up_inputs[0].value !== "" && sign_up_inputs[1].value !== "" && sign_up_inputs[2].value !== "") {
+function validateSignUp(sign_up_inputs, sign_up_errors){
+    if (sign_up_inputs[0].value !== "" && sign_up_inputs[1].value === sign_up_inputs[2].value) {
         window.location.href = "../views/wall.html";
+    }else if(sign_up_inputs[1].value !== sign_up_inputs[2].value){
+        sign_up_inputs[2].classList.add("input_error");
+        sign_up_errors[2].style.display = "block";
+        sign_up_errors[2].textContent = "Password doesn't match";
     }
 }
 
@@ -57,7 +61,7 @@ form_sign_up.addEventListener("submit", function (event) {
         }else{
             sign_up_errors[i].style.display = "none";
             input_id.classList.remove("input_error");
-            validateSignUp(sign_up_inputs); 
+            validateSignUp(sign_up_inputs, sign_up_errors); 
         }
     }
     event.preventDefault();

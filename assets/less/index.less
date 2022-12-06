@@ -10,7 +10,7 @@ body{
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
         margin: 117px 204px 291px 204px;
         padding: 32px 40px 40px 40px;
-        width: 924px;
+        width: 915px; 
         h2{
             color: #2C6BFF;
             font: normal 600 22px/33px Poppins_semi_bold;
@@ -63,7 +63,7 @@ body{
                 color: #ffffff;
                 font: normal 600 16px/24px Poppins_semi_bold;
                 margin: 35px auto 35px auto;
-                padding: 16px 45px; 
+                padding: 15px 45px; 
             }
             span{
                 color: rgba(0, 0, 0, 0.2);
@@ -83,15 +83,20 @@ body{
                 font: normal 300 14px/21px Poppins_light;
                 text-align: left; 
             }
+        }
+        #form_sign_up{
+            button[type=submit]{
+                margin: 32px auto 35px auto;  
+            }
             span#agreement_info{
                 color: #152c61; 
                 font: normal 300 16px/24px Poppins_light; 
                 margin-top: 30px;  
                 text-align: center;
+                padding: 0px;
             }
         }
     }
-
     div#design_container{
         background-color: rgba(44, 107, 255, 0.51);
         min-height: auto;
@@ -111,6 +116,33 @@ body{
     body{
         div.form{
             margin: 117px 50px 50px 50px;
+            padding: 22px 30px 30px 30px;
+            h2{
+                font-size: 19px; 
+            }
+            h3{
+                font-size: 38px;
+            }
+            form{
+                font-size: 14px;
+                a,
+                input,
+                button[type=submit],
+                span{
+                    font-size: 14px;
+                    a{
+                        font-size: 14px;
+                    }
+                }
+                button[type=submit]{
+                    padding: 10px 40px; 
+                }
+            }
+            #form_sign_up{
+                span#agreement_info{
+                    font-size: 14px;
+                }
+            }
         }
         div#design_container{
             display: none;
