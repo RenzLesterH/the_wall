@@ -1,20 +1,20 @@
 
 let create_post_textarea = document.getElementById("create_post_textarea");
 let total_message_list = document.getElementById("total_messages").textContent;
-let total_message_list_int = parseInt(total_message_list);
-let comment_id_list_int = 0;
+let total_message_list_count = parseInt(total_message_list);
+let comment_id_list_count = 0;
 let message_id = 0;
 let content = "";
 
-function checkTextareaEmpty() {
-    let post_message_btn = document.getElementById("post_message_btn");
-    if(create_post_textarea.value === ""){
-        post_message_btn.setAttribute("disabled", true);
-        post_message_btn.classList.add("create_disabled");
+function checkTextareaEmpty(textarea, button) {
+    let button_submit = document.getElementById(button);
+    if(textarea.value === ""){
+        button_submit.setAttribute("disabled", true);
+        button_submit.classList.add("disable_button");
     }
     else{
-        post_message_btn.removeAttribute("disabled");
-        post_message_btn.classList.remove("create_disabled");
+        button_submit.removeAttribute("disabled");
+        button_submit.classList.remove("disable_button");
     }
 }
 
@@ -22,18 +22,19 @@ function createMessage() {
     let textarea_value = create_post_textarea.value;
     document.getElementById("create_post_modal").style.display = "none";
     document.getElementById("empty_post").style.display = "none";
-    generateTemplate("message_container", "message_list", textarea_value, total_message_list_int);
+    generateTemplate("message_container", "message_list", textarea_value, total_message_list_count);
     create_post_textarea.value = "";
-    total_message_list_int++;
-    document.getElementById("total_messages").innerHTML = total_message_list_int; 
+    total_message_list_count++;
+    document.getElementById("total_messages").innerHTML = total_message_list_count; 
 }
 
 function createComment(message_id){
     updateTotalComments(message_id, "add");
-    let comment_textarea = document.getElementById("comment_textarea").value;
-    generateTemplate(message_id, "comment_list", comment_textarea, comment_id_list_int);
-    document.getElementById("comment_textarea").value = "";
-    comment_id_list_int++;
+    let comment_textarea = document.getElementById("comment_textarea");
+    generateTemplate(message_id, "comment_list", comment_textarea.value, comment_id_list_count);
+    comment_textarea.value = "";
+    checkTextareaEmpty(comment_textarea, "post_comment_btn");
+    comment_id_list_count++; 
 }
 
 function generateTemplate(container_type, container_list, content_value, content_number) {
@@ -52,17 +53,17 @@ function generateTemplate(container_type, container_list, content_value, content
     }
     createActionButtons(div_action, "button", "edit_button", "Edit", "span");
     createActionButtons(div_action, "button", "delete_button", "Delete", "span");
-    createActionButtons(div_action, "span", "user_profile", "You - Few seconds ago", "div");
-    (container_list === "message_list") ? container.prepend(div_container) : container.appendChild(div_container);
+    createActionButtons(div_action, "span", "user_profile", "You - Few seconds ago", "div"); 
+    (container_list === "message_list") ? container.prepend(div_container) : container.insertBefore(div_container, container.children[3]);
 }
 
 function createActionButtons(action_message, element, element_class, element_text, element_icon){
     let buttons = document.createElement(element);
     buttons.className = element_class;
     buttons.textContent = element_text;
-    let icon = document.createElement(element_icon);
+    let icon = document.createElement(element_icon); 
     buttons.prepend(icon);
-    action_message.appendChild(buttons); 
+    action_message.appendChild(buttons);  
 }
 
 function toggleCommentForm(id_message){
@@ -80,6 +81,8 @@ function toggleCommentForm(id_message){
         button.textContent = "Post Comment";
         comment.appendChild(button);
         message_list.insertBefore(comment, message_list.children[2]);
+        let comment_textarea = document.getElementById("comment_textarea");
+        checkTextareaEmpty(comment_textarea,"post_comment_btn");
         toggleAllComments(id_message, "visible", "block");
     }
     else{
@@ -151,7 +154,7 @@ function showDeleteModal(content_id){
     document.getElementById("action_form_input").value = modal_for;
     document.getElementById("modal_body_title").innerHTML = "Confirm Delete "+modal_for;
     document.getElementById("modal_body_description").innerHTML = "Are you sure you want to remove this "+modal_for.toLowerCase()+" ? This action cannot be undone.";
-    action_modal.style.display = "block";
+    action_modal.style.display = "flex"; 
 }
 
 function updateTotalComments(message_id, operation){
@@ -182,9 +185,12 @@ function deleteContent(content, message) {
     let action_form_input = document.getElementById("action_form_input").value;
     document.getElementById("action_modal").style.display = "none";
     if (action_form_input === "Message") {
-        document.getElementById(content).remove();
-        total_message_list_int--;
-        document.getElementById("total_messages").innerHTML = total_message_list_int; 
+        document.getElementById(content).remove(); 
+        total_message_list_count--;
+        if(total_message_list_count === 0){
+            document.getElementById("empty_post").style.display = "block";
+        }
+        document.getElementById("total_messages").innerHTML = total_message_list_count; 
     }
     else{
         updateTotalComments(message, "minus");
@@ -193,8 +199,8 @@ function deleteContent(content, message) {
 }
 
 document.getElementById("create_message_modal_button").addEventListener("click", function () {
-    document.getElementById("create_post_modal").style.display = "block";
-    checkTextareaEmpty();
+    document.getElementById("create_post_modal").style.display = "flex"; 
+    checkTextareaEmpty(create_post_textarea,"post_message_btn");
 });
 
 document.getElementById("cancel_post_message_btn").addEventListener("click", function () {
@@ -206,10 +212,6 @@ document.getElementById("cancel_remove_btn").addEventListener("click", function 
     document.getElementById("action_modal").style.display = "none";
 });
 
-document.getElementById("create_post_textarea").addEventListener("keyup", function () {
-    checkTextareaEmpty();
-});
-
 window.addEventListener("click", function (event) {
     let create_post_modal = document.getElementById("create_post_modal");
     let action_modal = document.getElementById("action_modal");
@@ -218,6 +220,18 @@ window.addEventListener("click", function (event) {
     }else if(event.target === action_modal){
         action_modal.style.display = "none";
     }
+});
+
+document.addEventListener("keyup", function (event) {
+    let textarea = event.target.id;
+    if (textarea === "create_post_textarea") {
+        checkTextareaEmpty(create_post_textarea,"post_message_btn");
+    }
+    else if(textarea === "comment_textarea"){
+        let comment_textarea = document.getElementById("comment_textarea");
+        checkTextareaEmpty(comment_textarea, "post_comment_btn");
+    }
+    event.preventDefault();
 });
 
 document.addEventListener("submit", function (event) {

@@ -18,29 +18,33 @@ body{
         h3{
             color: #152C61;
             font: normal 600 40px/60px Poppins_semi_bold;
-            margin: 40px 0px 0px 0px;
+            margin-top: 40px;
         }
         form{
             color: #152C61;
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
             font: normal 300 16px/24px Poppins_light;
             label{
-                margin: 22px 0px 0px 0px;
+                width: 100%;
+                margin-top: 22px;
             }
             label:nth-child(1){
-                margin: 20px 0px 0px 0px;
+                margin-top: 20px;
             }
-            label:nth-child(4){ 
-                a{
-                    color: rgba(0, 0, 0, 0.5);
-                    float: right;
-                    font: normal 300 14px/21px Poppins_light;
-                    text-decoration: none;
-                    margin-top: 2px;
-                }
+            label:nth-child(4){
+                width: 50%;
             }
+            a{
+                color: rgba(0, 0, 0, 0.5);
+                width: 50%;
+                font: normal 300 14px/21px Poppins_light;
+                text-decoration: none;
+                text-align: right;
+                margin-top: 20px;
+            }  
             input{
+                width: 100%;
                 background: rgba(44, 107, 255, 0.08);
                 border-radius: 4px;
                 border: none;
@@ -63,10 +67,12 @@ body{
             }
             span{
                 color: rgba(0, 0, 0, 0.2);
-                font: normal 400 16px/22px Poppins;
-                text-align: center;
+                font: normal 400 16px/22px Poppins; 
+                text-align: center; 
+                width: 100%;
                 a{
                     color: #2c6bff;
+                    font: normal 400 16px/22px Poppins;
                     text-decoration: none;
                 }
             }
@@ -78,10 +84,10 @@ body{
                 text-align: left; 
             }
             span#agreement_info{
-                color: #152C61;
-                font: normal 300 16px/24px Poppins;
+                color: #152c61; 
+                font: normal 300 16px/24px Poppins_light; 
                 margin-top: 30px;  
-                text-align: center; 
+                text-align: center;
             }
         }
     }

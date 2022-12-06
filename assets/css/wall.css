@@ -69,10 +69,11 @@ section div.modal {
   height: 100%;
   left: 0;
   overflow: hidden;
-  padding-top: 100px;
   position: fixed;
   top: 0;
   width: 100%;
+  justify-content: center;
+  align-items: center;
   z-index: 1;
 }
 section div.modal div.modal_content {
@@ -85,12 +86,14 @@ section div.modal div.modal_content {
   padding: 8px 19px;
   width: 897px;
 }
-section div.modal div.modal_content div.modal_header span.close_modal {
+section div.modal div.modal_content div.modal_header button.close_modal {
   background: url('../images/Group 2020.png') no-repeat -93px -6px;
+  cursor: pointer;
   float: right;
   height: 18px;
   margin: 10px 0px 3px 0px;
   width: 18px;
+  padding: 0px;
 }
 section div.modal div.modal_content div.modal_body {
   padding: 0px 30px 40px 30px;
@@ -109,7 +112,7 @@ section div.modal div.modal_content div.modal_body form textarea {
 section div.modal div.modal_content div.modal_body form button {
   padding: 7px 39px;
 }
-section div.modal div.modal_content div.modal_body form button.create_disabled {
+section div.modal div.modal_content div.modal_body form button.disable_button {
   background: rgba(44, 107, 255, 0.5) !important;
 }
 section div.modal div.modal_content div.modal_body form button#cancel_post_message_btn {
@@ -227,6 +230,9 @@ section div#message_container div.message_list form#post_comment_form textarea {
   font: normal 300 16px/24px Poppins_light;
   height: 84px;
   margin-bottom: 15px;
+}
+section div#message_container div.message_list form#post_comment_form button.disable_button {
+  background: rgba(44, 107, 255, 0.5) !important;
 }
 section div#message_container div.message_list div.comment_list {
   background: #ffffff;
@@ -370,10 +376,9 @@ section div#message_container div.modal div.modal_content div.modal_body form bu
   }
   section div#message_container div.message_list form#edit_message_form button {
     float: right;
-    width: 50%;
-  }
-  section div#message_container div.message_list form#edit_message_form button#cancel_updating_button {
     font: normal 400 14px/24px Poppins;
+    padding: 7px 15px;
+    width: 50%;
   }
   section div#message_container div.message_list form#post_comment_form {
     padding: 15px;
@@ -397,11 +402,11 @@ section div#message_container div.modal div.modal_content div.modal_body form bu
   section div#message_container div.modal div.modal_content div.modal_body h5 {
     font: normal 500 24px/39px Poppins_medium;
   }
-  section div#message_container div.modal div.modal_content div.modal_body p {
+  section div#message_container div.modal div.modal_content div.modal_body p,
+  section div#message_container div.modal div.modal_content div.modal_body form {
     font: normal 400 14px/24px Poppins;
   }
   section div#message_container div.modal div.modal_content div.modal_body form button#cancel_remove_btn {
-    font: normal 400 14px/24px Poppins;
     padding: 7px 75px;
   }
   section div#message_container div.modal div.modal_content div.modal_body form button#remove_btn {

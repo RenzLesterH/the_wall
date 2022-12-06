@@ -69,10 +69,11 @@ section{
         height: 100%;
         left: 0;
         overflow: hidden;
-        padding-top: 100px;
         position: fixed;
         top: 0;
         width: 100%;
+        justify-content: center;
+        align-items: center; 
         z-index: 1;
         div.modal_content{
             background-color: #ffffff;
@@ -84,12 +85,14 @@ section{
             padding: 8px 19px;
             width: 897px;
             div.modal_header{
-                span.close_modal{
+                button.close_modal{
                     background: url('../images/Group 2020.png') no-repeat -93px -6px;
+                    cursor: pointer; 
                     float: right;
                     height: 18px;
                     margin: 10px 0px 3px 0px;
                     width: 18px;
+                    padding: 0px;
                 }
             }
             div.modal_body{
@@ -109,7 +112,7 @@ section{
                     button{
                         padding: 7px 39px;
                     }
-                    button.create_disabled{
+                    button.disable_button{
                         background: rgba(44, 107, 255, 0.5) !important;
                     } 
                     button#cancel_post_message_btn{
@@ -232,6 +235,9 @@ section{
                     height: 84px;
                     margin-bottom: 15px;
                 }
+                button.disable_button{
+                    background: rgba(44, 107, 255, 0.5) !important;
+                } 
             }
             div.comment_list{
                 background: #ffffff;
@@ -390,10 +396,9 @@ section{
                     }
                     button{
                         float: right; 
+                        font: normal 400 14px/24px Poppins;
+                        padding: 7px 15px; 
                         width: 50%;
-                    }
-                    button#cancel_updating_button{
-                        font: normal 400 14px/24px Poppins; 
                     }
                 }
                 form#post_comment_form{
@@ -418,12 +423,12 @@ section{
                         h5{
                             font: normal 500 24px/39px Poppins_medium;
                         }
-                        p{
+                        p,
+                        form{
                             font: normal 400 14px/24px Poppins;
                         }
                         form{
                             button#cancel_remove_btn{
-                                font: normal 400 14px/24px Poppins;
                                 padding: 7px 75px;
                             }
                             button#remove_btn{

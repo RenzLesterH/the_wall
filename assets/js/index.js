@@ -15,6 +15,12 @@ sign_in.addEventListener("click", function () {
     return false;
 });
 
+function validateSignUp(sign_up_inputs){
+    if (sign_up_inputs[0].value !== "" && sign_up_inputs[1].value !== "" && sign_up_inputs[2].value !== "") {
+        window.location.href = "../views/wall.html";
+    }
+}
+
 const form_sign_in =  document.getElementById("form_sign_in");
 form_sign_in.addEventListener("submit", function (event) {
     let email = document.getElementById("email");
@@ -22,7 +28,7 @@ form_sign_in.addEventListener("submit", function (event) {
     let email_error = document.getElementsByClassName("sign_in_error")[0];
     let password_error = document.getElementsByClassName("sign_in_error")[1];
     if(email.value === "test1@gmail.com" && password.value === "test1@gmail.com"){
-        window.location.href = "../views/wall.html"
+        window.location.href = "../views/wall.html";
     }else{
         if(email.value !== "test1@gmail.com"){
             email.classList.add("input_error");
@@ -51,6 +57,7 @@ form_sign_up.addEventListener("submit", function (event) {
         }else{
             sign_up_errors[i].style.display = "none";
             input_id.classList.remove("input_error");
+            validateSignUp(sign_up_inputs); 
         }
     }
     event.preventDefault();
