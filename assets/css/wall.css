@@ -87,7 +87,7 @@ section div.modal div.modal_content {
   width: 897px;
 }
 section div.modal div.modal_content div.modal_header button.close_modal {
-  background: url('../images/Group 2020.png') no-repeat -93px -6px;
+  background: url('../images/group_2020.png') no-repeat -93px -6px;
   cursor: pointer;
   float: right;
   height: 18px;
@@ -169,12 +169,12 @@ section div#message_container div.message_list div.action_message button.has_com
   color: #2c6bff !important;
 }
 section div#message_container div.message_list div.action_message button.has_comment span {
-  background: url('../images/Group 2020.png') no-repeat -3px -36px !important;
+  background: url('../images/group_2020.png') no-repeat -3px -36px !important;
   height: 18px;
   width: 18px;
 }
 section div#message_container div.message_list div.action_message button.comment_button span {
-  background: url('../images/Group 2020.png') no-repeat -3px -6px;
+  background: url('../images/group_2020.png') no-repeat -3px -6px;
   height: 18px;
   width: 18px;
 }
@@ -182,12 +182,12 @@ section div#message_container div.message_list div.action_message button.edit_bu
   color: #2c6bff;
 }
 section div#message_container div.message_list div.action_message button.edit_button span {
-  background: url('../images/Group 2020.png') no-repeat -31px -4px;
+  background: url('../images/group_2020.png') no-repeat -31px -4px;
   height: 22px;
   width: 22px;
 }
 section div#message_container div.message_list div.action_message button.delete_button span {
-  background: url('../images/Group 2020.png') no-repeat -64px -5px;
+  background: url('../images/group_2020.png') no-repeat -64px -5px;
   height: 19px;
   width: 16px;
 }
@@ -197,22 +197,22 @@ section div#message_container div.message_list div.action_message span {
   margin-right: 30px;
 }
 section div#message_container div.message_list div.action_message span div {
-  background: url('../images/User Placeholder.png') no-repeat;
+  background: url('../images/user_placeholder.png') no-repeat;
   display: inline-block;
   height: 24px;
   margin-right: 10px;
   vertical-align: top;
   width: 24px;
 }
-section div#message_container div.message_list form#edit_form {
+section div#message_container div.message_list form.edit_form {
   overflow: auto;
 }
-section div#message_container div.message_list form#edit_form textarea {
+section div#message_container div.message_list form.edit_form textarea {
   font: normal 300 16px/24px Poppins_light;
   height: 84px;
   margin-bottom: 15px;
 }
-section div#message_container div.message_list form#edit_form button#cancel_updating_button {
+section div#message_container div.message_list form.edit_form button#cancel_updating_button {
   background: transparent;
   color: rgba(0, 0, 0, 0.6);
   font: normal 400 16px/24px Poppins;
@@ -280,7 +280,7 @@ section div#message_container div.modal div.modal_content div.modal_body form bu
     font: normal 500 16px/39px Poppins_medium;
   }
   header nav span {
-    background: url('../images/User Placeholder.png') no-repeat;
+    background: url('../images/user_placeholder.png') no-repeat;
     height: 24px;
     margin-right: 10px;
     text-indent: -9999px;
@@ -371,10 +371,10 @@ section div#message_container div.modal div.modal_content div.modal_body form bu
     vertical-align: middle;
     visibility: visible;
   }
-  section div#message_container div.message_list form#edit_form textarea {
+  section div#message_container div.message_list form.edit_form textarea {
     font: normal 300 14px/24px Poppins_light;
   }
-  section div#message_container div.message_list form#edit_form button {
+  section div#message_container div.message_list form.edit_form button {
     float: right;
     font: normal 400 14px/24px Poppins;
     padding: 7px 15px;

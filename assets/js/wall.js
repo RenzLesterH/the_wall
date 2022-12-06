@@ -105,10 +105,13 @@ function toggleEditForm(content_id){
     let edit_form = document.getElementById("sample_edit_form");
     edit_form.style.display = "block";
     let create_edit_form = edit_form.cloneNode(true);
-    create_edit_form.id = "edit_form";
-    create_edit_form.childNodes[1].id = "textarea_edit";
+    create_edit_form.className = "edit_form";
+    create_edit_form.id = "edit_message_form";
+    create_edit_form.childNodes[1].id = "textarea_message_edit";
     create_edit_form.childNodes[3].textContent = "Update Message";
     if(content.className === "comment_list"){
+        create_edit_form.id = "edit_comment_form";
+        create_edit_form.childNodes[1].id = "textarea_comment_edit";
         create_edit_form.childNodes[3].textContent = "Update Comment";
     }
     content.prepend(create_edit_form);
@@ -155,10 +158,11 @@ function updateTotalComments(message_id, operation){
     total_comment.childNodes[1].prepend(icon); 
 }
 
-function updateContent(id_message, form_id, updated_content) {
+function updateContent(id_message, form_id) {
+    let textarea = document.getElementById(form_id).children[0].id;
+    let updated_content =  document.getElementById(textarea).value;
     closeEditForm(id_message, form_id);
-    console.log(updated_content); 
-    document.getElementById(id_message).children[0].textContent = updated_content; 
+    document.getElementById(id_message).children[0].textContent = updated_content;  
 }
 
 function deleteContent(content, message) {
@@ -215,20 +219,19 @@ document.addEventListener("keyup", function (event) {
 });
 
 document.addEventListener("submit", function (event) {
-    let form = event.target.id;
-    if (form === "create_message_form") {
+    let form = event.target;
+    if (form.id === "create_message_form") {
         createMessage();
     }
-    else if(form === "post_comment_form"){
+    else if(form.id === "post_comment_form"){
          let message = event.target.closest('div[id]').id;
          createComment(message);
     }
-    else if(form === "edit_form"){ 
+    else if(form.className === "edit_form"){
         let message = event.target.closest('div[id]').id;
-        let updated_content = document.getElementById("textarea_edit").value;
-        updateContent(message, form, updated_content); 
+        updateContent(message, form.id); 
     }
-    else if(form === "action_form"){
+    else if(form.id === "action_form"){
         deleteContent(content, message_id); 
     }
     event.preventDefault();
