@@ -138,8 +138,10 @@ section{
     }
     div#message_container{
         margin-top: 43px;
-        div#sample_message{
-            display: none;
+        div#sample_message,
+        form#sample_comment_form,
+        form#sample_edit_form{
+            display: none; 
         }
         div.message_list{
             background: #ffffff;
@@ -166,17 +168,20 @@ section{
                     span{
                         margin-right: 10px;
                     }
+                    span.comment_count{
+                        margin-right: 3px; 
+                    }
                 }
                 button.has_comment{
                     color: #2c6bff !important;
-                    span{
+                    span.action_icon{
                         background: url('../images/group_2020.png') no-repeat -3px -36px !important;
                         height: 18px;
-                        width: 18px; 
+                        width: 18px;
                     } 
                 }
                 button.comment_button{
-                    span{
+                    span.action_icon{
                         background: url('../images/group_2020.png') no-repeat -3px -6px;
                         height: 18px;
                         width: 18px;
@@ -184,24 +189,24 @@ section{
                 }
                 button.edit_button{
                     color: #2c6bff;
-                    span{
+                    span.action_icon{
                         background: url('../images/group_2020.png') no-repeat -31px -4px;
                         height: 22px;
                         width: 22px;
                     }
                 }
                 button.delete_button{
-                    span{
+                    span.action_icon{
                         background: url('../images/group_2020.png') no-repeat -64px -5px;
                         height: 19px;
                         width: 16px;
                     }
                 }
-                span{
+                div{
                     color: rgba(0, 0, 0, 0.6);
                     font: normal 400 16px/24px Poppins;
                     margin-right: 30px;
-                    div{
+                    span.action_icon{
                         background: url('../images/user_placeholder.png') no-repeat;
                         display: inline-block; 
                         height: 24px;
@@ -218,14 +223,14 @@ section{
                     height: 84px;
                     margin-bottom: 15px;
                 }
-                button#cancel_updating_button{
+                button.cancel_updating_button{
                     background: transparent;
                     color: rgba(0, 0, 0, 0.6);
                     font: normal 400 16px/24px Poppins;
                     padding: 7px 30px;   
                 }
             }
-            form#post_comment_form{
+            form.post_comment_form{
                 background-color: #ffffff;
                 border-radius: 6px;
                 border: 1px solid #dce6ff;
@@ -366,7 +371,7 @@ section{
                     button{
                         font: normal 400 14px/24px Poppins;
                         margin-right: 5px;
-                        span{
+                        span.action_icon{
                             display: block;
                             visibility: visible;
                         }
@@ -381,11 +386,11 @@ section{
                     button.delete_button{
                         width: 120px;
                     }
-                    span{
+                    div{
                         font: normal 400 1px/24px Poppins;
                         visibility: hidden;
                         width: 90px;
-                        div{
+                        span.action_icon{
                             margin-left: 5px; 
                             vertical-align: middle;
                             visibility: visible;
@@ -403,7 +408,7 @@ section{
                         width: 50%;
                     }
                 }
-                form#post_comment_form{
+                form.post_comment_form{
                     padding: 15px;
                     textarea{
                         font: normal 300 14px/24px Poppins_light;
