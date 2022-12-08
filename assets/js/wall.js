@@ -1,4 +1,3 @@
-
 let create_post_textarea = document.getElementById("create_post_textarea");
 let sample_message = document.getElementById("sample_message");
 let total_message_list_count = 0;
@@ -109,16 +108,19 @@ document.addEventListener("click", function (event) {
     } 
 });
 
+/** This function will dislay the selected element. */
 function showElement(element_to_show){
     element_to_show.classList.remove("hide_element");
     element_to_show.classList.add("show_element"); 
 }
 
+/** This function will hide the selected element. */
 function hideElement(element_to_hide){
     element_to_hide.classList.remove("show_element");
     element_to_hide.classList.add("hide_element"); 
 }
 
+/** This function will validate if textareas is empty. */
 function checkTextareaEmpty(textarea, button) {
     let form_textarea = document.querySelector(textarea);
     let form_submit_button = document.querySelector(button);
@@ -132,12 +134,14 @@ function checkTextareaEmpty(textarea, button) {
     }
 }
 
+/** This function will count the total list of messages and it's comments. */
 function countPostList(post_list, total_list){
     const messages_list = document.querySelectorAll(post_list);
     total_message_list_count = messages_list.length; 
     document.querySelector(total_list).innerHTML = messages_list.length; 
 }
 
+/** This funtion will create and prepend the newly created message. */
 function createMessage() {
     let textarea_value = create_post_textarea.value;
     let create_post_modal = document.getElementById("create_post_modal");
@@ -157,6 +161,7 @@ function createMessage() {
     countPostList(".message_list", "#total_messages");
 }
 
+/** This funtion will create and prepend the newly created comments of the messages. */
 function createComment(message_id){
     let form = "#"+message_id+" #"+message_id+"_comment";
     let comment_textarea = document.querySelector(form+" #comment_textarea");
@@ -177,6 +182,7 @@ function createComment(message_id){
     comment_id_list_count++; 
 }
 
+/** This funtion will toggle the comment form from message. */
 function toggleCommentForm(message_list_id){
     let form_comment_exists = document.getElementById(message_list_id+"_comment");
     if (form_comment_exists === null) {
@@ -196,6 +202,7 @@ function toggleCommentForm(message_list_id){
     }
 }
 
+/** This funtion will display the edit form in messages or comments. */
 function toggleEditForm(content_id, message_content){
     let edit_message_form = document.getElementById("edit_message_form");
     let edit_comment_form = document.getElementById("edit_comment_form");
@@ -223,6 +230,7 @@ function toggleEditForm(content_id, message_content){
     }
 } 
 
+/** This funtion will hide the edit form in messages or comments. */ 
 function closeEditForm(id_message, form_id){
     let form = document.querySelector("#"+id_message+" #"+form_id);
     const p = document.createElement("p");
@@ -232,6 +240,7 @@ function closeEditForm(id_message, form_id){
     action_button.classList.remove("hide_element");
 }
 
+/** This funtion will display the modal for deleting messages or comments. */
 function showDeleteModal(content_id){
     let post_type = document.getElementById(content_id); 
     content = post_type.id;
@@ -248,6 +257,7 @@ function showDeleteModal(content_id){
     action_modal.classList.add("show_element_flex");
 }
 
+/** This funtion will update the total list of comments on a message. */
 function updateTotalComments(message_id, operation){
     let total_comment = document.querySelector("#"+message_id+" .action_message .comment_button");
     let total = document.querySelectorAll("#"+message_id+" .comment_list"); 
@@ -262,6 +272,7 @@ function updateTotalComments(message_id, operation){
     countPostList("#"+message_id+" .comment_list", "#"+message_id+" .action_message .comment_button .comment_count");
 }
 
+/** This funtion will update the content of a message or comment. */
 function updateContent(id_message, form_id) {
     let textarea = document.getElementById(form_id).children[0].id;
     let updated_content =  document.getElementById(textarea).value;
@@ -269,6 +280,7 @@ function updateContent(id_message, form_id) {
     document.getElementById(id_message).children[0].textContent = updated_content;  
 }
 
+/** This funtion will delete a certain messages or comments. */ 
 function deleteContent(content, message) {
     let action_form_input = document.getElementById("action_form_input").value;
     let action_modal = document.getElementById("action_modal");
