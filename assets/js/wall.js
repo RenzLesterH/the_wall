@@ -154,8 +154,9 @@ function createMessage() {
     let create_post = sample_message.cloneNode(true);
     create_post.className = "message_list"; 
     create_post.id = "message_list"+total_message_list_count; 
-    create_post.childNodes[1].textContent = textarea_value;
     container.prepend(create_post);
+    let message_content = document.querySelector("#message_list"+total_message_list_count+" p");
+    message_content.textContent = textarea_value; 
     hideElement(sample_message);
     create_post_textarea.value = "";
     countPostList(".message_list", "#total_messages");
@@ -169,12 +170,13 @@ function createComment(message_id){
     showElement(sample_message);
     let create_post = sample_message.cloneNode(true);
     create_post.className = "comment_list"; 
-    create_post.id = "comment_list"+comment_id_list_count;
-    create_post.childNodes[1].textContent = comment_textarea.value;
-    create_post.className = "comment_list";
-    let comment_button = create_post.childNodes[3].childNodes[1];
-    comment_button.remove();
+    create_post.id = "comment_list"+comment_id_list_count; 
+    create_post.className = "comment_list"; 
     container.insertBefore(create_post, container.children[3]);
+    let comment_content = document.querySelector("#comment_list"+comment_id_list_count+" p");
+    comment_content.textContent = comment_textarea.value;
+    let comment_button = document.querySelector("#comment_list"+comment_id_list_count+" .action_message .comment_button");
+    comment_button.remove(); 
     updateTotalComments(message_id, "add");
     hideElement(sample_message);
     comment_textarea.value = "";
@@ -193,8 +195,9 @@ function toggleCommentForm(message_list_id){
         create_comment_form.className = "post_comment_form";
         create_comment_form.id = message_list_id+"_comment";
         document.getElementById("message_container").prepend(create_comment_form);
-        hideElement(comment_form); 
-        message_list.insertBefore(create_comment_form, message_list.children[2]);
+        hideElement(comment_form);
+        let prepend_to = document.querySelector("#"+message_list_id+" #sample_comment_form");
+        message_list.insertBefore(create_comment_form, prepend_to);   
         let form = "#"+message_list_id+" #"+message_list_id+"_comment";
         let comment_textarea = form+" #comment_textarea";
         let comment_submit_button = form+" .post_comment_btn"; 
@@ -214,9 +217,11 @@ function toggleEditForm(content_id, message_content){
         let edit_form = document.getElementById("sample_edit_form");
         showElement(edit_form);
         let create_edit_form = edit_form.cloneNode(true);
-        create_edit_form.id = "edit_message_form";
-        let textarea = create_edit_form.childNodes[1];
-        let submit_button = create_edit_form.childNodes[3];
+        text_content.replaceWith(create_edit_form);
+        hideElement(edit_form); 
+        create_edit_form.id = "edit_message_form"; 
+        let textarea = document.querySelector("#"+content_id+" .edit_form textarea");
+        let submit_button = document.querySelector("#"+content_id+" .edit_form post_updated_button");
         textarea.value = message_content;
         textarea.id = "textarea_message_edit"; 
         submit_button.textContent = "Update Message";
@@ -224,9 +229,7 @@ function toggleEditForm(content_id, message_content){
             create_edit_form.id = "edit_comment_form";
             textarea.id = "textarea_comment_edit";
             submit_button.textContent = "Update Comment"; 
-        }
-        text_content.replaceWith(create_edit_form);
-        hideElement(edit_form);
+        } 
     }
 } 
 
@@ -273,11 +276,11 @@ function updateTotalComments(message_id, operation){
 }
 
 /** This funtion will update the content of a message or comment. */
-function updateContent(id_message, form_id) {
-    let textarea = document.getElementById(form_id).children[0].id;
-    let updated_content =  document.getElementById(textarea).value;
-    closeEditForm(id_message, form_id);
-    document.getElementById(id_message).children[0].textContent = updated_content;  
+function updateContent(message_id, form_id) {
+    let updated_content = document.querySelector("#"+message_id+" #"+form_id+" textarea");
+    closeEditForm(message_id, form_id);
+    let content = document.querySelector("#"+message_id+" p");
+    content.textContent = updated_content.value;   
 }
 
 /** This funtion will delete a certain messages or comments. */ 

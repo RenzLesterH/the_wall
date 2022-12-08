@@ -148,6 +148,7 @@ section div#message_container div.message_list {
   border: 1px solid #dce6ff;
   margin-bottom: 20px;
   padding: 24px 30px;
+  overflow: auto;
 }
 section div#message_container div.message_list p {
   color: #152C61;
@@ -298,7 +299,7 @@ section div#message_container div.modal div.modal_content div.modal_body form bu
     font: normal 600 12px/24px Poppins_semi_bold;
   }
   section {
-    margin: 30px 20px;
+    margin: 30px 20px !important;
     padding: 30px 20px;
   }
   section h4 {
