@@ -6,24 +6,34 @@ let comment_id_list_count = 0;
 let message_id = 0;
 let content = "";
 
-document.getElementById("create_message_modal_button").addEventListener("click", function (event) {
+document.querySelector("#create_message_modal_button").addEventListener("click", function (event) {
     let create_message_modal = document.getElementById("create_post_modal");
     create_message_modal.classList.remove("hide_element");
     create_message_modal.classList.add("show_element_flex"); 
     checkTextareaEmpty("#create_post_textarea", "#create_message_form #post_message_btn");
-});
+}); 
 
-document.getElementById("cancel_post_message_btn").addEventListener("click", function () {
+document.querySelector("#cancel_post_message_btn").addEventListener("click", function () {
     create_post_textarea.value = "";
     let create_message_modal = document.getElementById("create_post_modal");
     create_message_modal.classList.remove("show_element_flex"); 
     hideElement(create_message_modal);
 });
 
-document.getElementById("cancel_remove_btn").addEventListener("click", function () {
+document.querySelector("#cancel_remove_btn").addEventListener("click", function () {
     let action_modal=  document.getElementById("action_modal");
     action_modal.classList.remove("show_element_flex"); 
     hideElement(action_modal); 
+});
+
+document.querySelectorAll('.close_modal').forEach((button) => {
+    button.addEventListener('click', (event) => {
+        create_post_textarea.value = "";
+        let modal_id = event.target.closest('div[id]').id;
+        let create_post_modal = document.getElementById(modal_id);
+        create_post_modal.classList.remove("show_element_flex");
+        hideElement(create_post_modal);
+    });
 });
 
 window.addEventListener("click", function (event) {
@@ -39,66 +49,106 @@ window.addEventListener("click", function (event) {
     }
 });
 
-document.addEventListener("keyup", function (event) {
-    let textarea = event.target.id;
-    if (textarea === "create_post_textarea") {
-        checkTextareaEmpty("#create_post_textarea", "#create_message_form #post_message_btn");
-    }
-    else if(textarea === "comment_textarea"){
+document.querySelector("#create_message_form").addEventListener("submit", function (event) {
+    createMessage();
+    enableActionButtons();
+    event.preventDefault();
+});
+
+document.querySelector("#create_post_textarea").addEventListener("keyup", function () {
+    checkTextareaEmpty("#create_post_textarea", "#create_message_form #post_message_btn");
+});
+
+// document.addEventListener("keyup", function (event) {
+//     let textarea = event.target.id;
+//     if(textarea === "comment_textarea"){
+//         let message_list_id = event.target.closest('div[id]').id;
+//         let form = "#"+message_list_id+" #"+message_list_id+"_comment";
+//         checkTextareaEmpty(form+" #comment_textarea", form+" .post_comment_btn"); 
+//     }
+//     event.preventDefault();
+// });
+
+// document.addEventListener("submit", function (event) {
+//     let form = event.target;
+//     if(form.className === "post_comment_form"){
+//          let message = event.target.closest('div[id]').id;
+//          createComment(message);
+//     }
+//     else if(form.className === "edit_form"){
+//         let message = event.target.closest('div[id]').id;
+//         updateContent(message, form.id); 
+//     }
+//     event.preventDefault();
+// });
+
+function enableActionButtons(){
+ 
+    document.querySelectorAll('.comment_button').forEach((comment_button) => {
+        comment_button.addEventListener("click", (event) => {
+            message_id = event.target.closest('div[id]').id;
+            toggleCommentForm(message_id);
+            triggerActionButton();
+        });
+    });
+
+    document.querySelectorAll('.edit_button').forEach((edit_button) => {
+        edit_button.addEventListener("click", (event) => {
+            let content_id = event.target.closest('div[id]').id;
+            let message_content = document.querySelector("#"+content_id+" p"); 
+            toggleEditForm(content_id, message_content.textContent);
+            triggerActionButton();
+        });
+    });
+
+    document.querySelectorAll('.delete_button').forEach((delete_button) => {
+        delete_button.addEventListener("click", (event) => {
+            let content_id = event.target.closest('div[id]').id;
+             showDeleteModal(content_id);
+        });
+    });
+
+    document.querySelector("#action_form").addEventListener("submit", function (event) {
+        deleteContent(content, message_id);
+        event.preventDefault(); 
+    });  
+}
+
+function triggerActionButton(){
+
+    document.querySelector("#comment_textarea").addEventListener("keyup", function (event) {
         let message_list_id = event.target.closest('div[id]').id;
         let form = "#"+message_list_id+" #"+message_list_id+"_comment";
-        checkTextareaEmpty(form+" #comment_textarea", form+" .post_comment_btn"); 
-    }
-    event.preventDefault();
-});
+        checkTextareaEmpty(form+" #comment_textarea", form+" .post_comment_btn");  
+    });
 
-document.addEventListener("submit", function (event) {
-    let form = event.target;
-    if (form.id === "create_message_form") {
-        createMessage();
-    }
-    else if(form.className === "post_comment_form"){
-         let message = event.target.closest('div[id]').id;
-         createComment(message);
-    }
-    else if(form.className === "edit_form"){
-        let message = event.target.closest('div[id]').id;
-        updateContent(message, form.id); 
-    }
-    else if(form.id === "action_form"){
-        deleteContent(content, message_id);
-    }
-    event.preventDefault();
-});
+    document.querySelectorAll('.post_comment_form').forEach((post_comment_form) => {
+        post_comment_form.addEventListener("submit", (event) => {
+            let message = event.target.closest('div[id]').id;
+            createComment(message);
+            // enableActionButtons();
+            event.preventDefault();
+        });
+    });
 
-document.addEventListener("click", function (event) {
-    let clicked_by = event.target;
-    if (clicked_by.className === "comment_button" || clicked_by.className === "has_comment comment_button") {
-        message_id = event.target.closest('div[id]').id;
-        toggleCommentForm(message_id);
-    }
-    else if(clicked_by.className === "edit_button"){
-        let content_id = event.target.closest('div[id]').id;
-        let message_content = document.querySelector("#"+content_id+" p"); 
-        toggleEditForm(content_id, message_content.textContent);
-    }
-    else if(clicked_by.className === "delete_button"){
-        let content_id = event.target.closest('div[id]').id;
-        showDeleteModal(content_id);
-    }
-    else if(clicked_by.className === "cancel_updating_button"){
-        message_id = event.target.closest('div[id]').id;
-        let form_id = event.target.closest('form[id]').id;
-        closeEditForm(message_id, form_id); 
-    }
-    else if(clicked_by.className === "close_modal"){
-        create_post_textarea.value = "";
-        let modal_id = event.target.closest('div[id]').id;
-        let create_post_modal = document.getElementById(modal_id);
-        create_post_modal.classList.remove("show_element_flex");
-        hideElement(create_post_modal); 
-    }
-});
+    document.querySelectorAll('.edit_form').forEach((edit_form) => {
+        edit_form.addEventListener("submit", (event) => {
+            let message = event.target.closest('div[id]').id;
+            updateContent(message, event.target.id);
+            // enableActionButtons(); 
+            event.preventDefault();
+        });
+    });
+
+    document.querySelectorAll('.cancel_updating_button').forEach((cancel_updating_button) => {
+        cancel_updating_button.addEventListener("click", (event) => {
+            message_id = event.target.closest('div[id]').id;
+            let form_id = event.target.closest('form[id]').id;
+            closeEditForm(message_id, form_id);
+            // enableActionButtons(); 
+        });
+    });
+}
 
 function showElement(element_to_show){
     element_to_show.classList.remove("hide_element");
