@@ -67,12 +67,24 @@ function toggleForm(form_to_show, form_to_hide){
 }
 
 function validateSignUp(sign_up_inputs, sign_up_errors){
-    if (sign_up_inputs[0].value !== "" && sign_up_inputs[1].value === sign_up_inputs[2].value) {
-        window.location.href = "../views/wall.html";
+    if (validateEmail(sign_up_inputs[0].value) && sign_up_inputs[0].value !== "" && sign_up_inputs[1].value !== "" && sign_up_inputs[2].value !== "" && sign_up_inputs[1].value === sign_up_inputs[2].value) {
+        window.location.href = "../views/wall.html"; 
     }
-    else if(sign_up_inputs[1].value !== sign_up_inputs[2].value){
-        sign_up_inputs[2].classList.add("input_error");
-        sign_up_errors[2].classList.add("show_element");
-        sign_up_errors[2].textContent = "Password doesn't match";
+    else{ 
+        if(sign_up_inputs[1].value !== sign_up_inputs[2].value){
+            sign_up_inputs[2].classList.add("input_error");
+            sign_up_errors[2].classList.add("show_element");
+            sign_up_errors[2].textContent = "Password doesn't match";
+        }
+        if (!validateEmail(sign_up_inputs[0].value)) {
+            sign_up_inputs[0].classList.add("input_error");
+            sign_up_errors[0].classList.add("show_element");
+            sign_up_errors[0].textContent = "Email is not valid";
+        }
     }
+} 
+
+function validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
 } 
