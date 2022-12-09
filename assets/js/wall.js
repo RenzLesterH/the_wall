@@ -221,7 +221,7 @@ function toggleEditForm(content_id, message_content){
         hideElement(edit_form); 
         create_edit_form.id = "edit_message_form"; 
         let textarea = document.querySelector("#"+content_id+" .edit_form textarea");
-        let submit_button = document.querySelector("#"+content_id+" .edit_form post_updated_button");
+        let submit_button = document.querySelector("#"+content_id+" .edit_form .post_updated_button"); 
         textarea.value = message_content;
         textarea.id = "textarea_message_edit"; 
         submit_button.textContent = "Update Message";
