@@ -1,17 +1,11 @@
-let sign_in_form_container = document.getElementById("sign_in_form_container");
-let sign_up_form_container = document.getElementById("sign_up_form_container");
+let sign_in_form = document.getElementById("form_sign_in"); 
+let sign_up_form = document.getElementById("form_sign_up"); 
 
 const sign_up =  document.getElementById("sign_up_link"); 
-sign_up.addEventListener("click", function () {
-    toggleForm(sign_up_form_container, sign_in_form_container);
-    return false;
-});
+sign_up.addEventListener("click", () => { toggleForm(sign_up_form, sign_in_form) }); 
 
 const sign_in =  document.getElementById("sign_in_link");
-sign_in.addEventListener("click", function () {
-    toggleForm(sign_in_form_container, sign_up_form_container);  
-    return false;
-});
+sign_in.addEventListener("click", () => { toggleForm(sign_in_form, sign_up_form) }); 
 
 const form_sign_in =  document.getElementById("form_sign_in");
 form_sign_in.addEventListener("submit", function (event) {
@@ -23,12 +17,12 @@ form_sign_in.addEventListener("submit", function (event) {
         window.location.href = "../views/wall.html";
     }
     else{
-        if(email.value !== "test1@gmail.com"){
+        if(email.value !== login_credentials.email){
             email.classList.add("input_error");
             email_error.classList.add("show_element"); 
             email_error.textContent = "Incorrect Email";
         }
-        if(password.value !== "test1@gmail.com"){
+        if(password.value !== login_credentials.password){
             password.classList.add("input_error");
             password_error.classList.add("show_element");  
             password_error.textContent = "Incorrect Password"; 
@@ -39,44 +33,51 @@ form_sign_in.addEventListener("submit", function (event) {
 
 const form_sign_up =  document.getElementById("form_sign_up");
 form_sign_up.addEventListener("submit", function (event) {
-    let sign_up_inputs = document.getElementsByClassName("sign_up_inputs");
+    let sign_up_inputs = document.getElementsByClassName("sign_up_inputs"); 
     let sign_up_errors = document.getElementsByClassName("sign_up_error");
-    for (let i = 0; i < sign_up_inputs.length; i++) { 
-        let input_id = document.getElementById(sign_up_inputs[i].id);
-        if (sign_up_inputs[i].value === "") {
+    let is_inputs_empty = true; 
+    /** This will check if all inputs in sign up is empty. */
+    for (let input_index = 0; input_index < sign_up_inputs.length; input_index++) { 
+        let input_id = document.getElementById(sign_up_inputs[input_index].id);
+        if (sign_up_inputs[input_index].value === "") {
             input_id.classList.add("input_error");
-            sign_up_errors[i].classList.remove("hide_element");
-            sign_up_errors[i].classList.add("show_element");
-            sign_up_errors[i].textContent = sign_up_inputs[i].name+" is required";
+            sign_up_errors[input_index].classList.remove("hide_element");
+            sign_up_errors[input_index].classList.add("show_element");
+            sign_up_errors[input_index].textContent = sign_up_inputs[input_index].name+" is required";
+            is_inputs_empty = false;
         }
         else{
-            sign_up_errors[i].classList.add("hide_element");
-            sign_up_errors[i].classList.remove("show_element");
+            sign_up_errors[input_index].classList.add("hide_element");
+            sign_up_errors[input_index].classList.remove("show_element");
             input_id.classList.remove("input_error");
-            validateSignUp(sign_up_inputs, sign_up_errors);
         }
     }
+    validateSignUp(is_inputs_empty, sign_up_inputs, sign_up_errors);
     event.preventDefault();   
 });
 
 function toggleForm(form_to_show, form_to_hide){
-    form_to_hide.classList.remove("show_element");
+    form_to_hide.classList.remove("show_element_flex");
     form_to_hide.classList.add("hide_element");
     form_to_show.classList.remove("hide_element");
-    form_to_show.classList.add("show_element"); 
+    form_to_show.classList.add("show_element_flex"); 
 }
 
-function validateSignUp(sign_up_inputs, sign_up_errors){
-    if (validateEmail(sign_up_inputs[0].value) && sign_up_inputs[0].value !== "" && sign_up_inputs[1].value !== "" && sign_up_inputs[2].value !== "" && sign_up_inputs[1].value === sign_up_inputs[2].value) {
+function validateSignUp(is_inputs_empty, sign_up_inputs, sign_up_errors){
+    let email = sign_up_inputs[0].value; 
+    let password = sign_up_inputs[1].value;
+    let confirm_password = sign_up_inputs[2].value; 
+    if (is_inputs_empty && isEmailValid(email) && password === confirm_password) {
         window.location.href = "../views/wall.html"; 
     }
-    else{ 
-        if(sign_up_inputs[1].value !== sign_up_inputs[2].value){
+    else{
+        /** Check if confirm password matches to the password. */
+        if(password !== confirm_password){ 
             sign_up_inputs[2].classList.add("input_error");
             sign_up_errors[2].classList.add("show_element");
             sign_up_errors[2].textContent = "Password doesn't match";
         }
-        if (!validateEmail(sign_up_inputs[0].value)) {
+        if (!isEmailValid(email)) {
             sign_up_inputs[0].classList.add("input_error");
             sign_up_errors[0].classList.add("show_element");
             sign_up_errors[0].textContent = "Email is not valid";
@@ -84,7 +85,6 @@ function validateSignUp(sign_up_inputs, sign_up_errors){
     }
 } 
 
-function validateEmail(email) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-} 
+function isEmailValid(email) {
+    return regex_email.test(String(email).toLowerCase());
+}
