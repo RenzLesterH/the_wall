@@ -187,8 +187,10 @@ function toggleCommentForm(event){
             comment_form.addEventListener('submit', createComment);   
         });
 
-        /** This will add event listener to comment form textarea. */ 
-        document.getElementById("comment_textarea").addEventListener("keyup", checkTextareaEmpty);
+        /** This will add event listener to comment form textarea. */
+        document.querySelectorAll('.comment_textarea').forEach((comment_textarea) => {
+            comment_textarea.addEventListener('keyup', checkTextareaEmpty);   
+        });
 
     }
 }
@@ -201,14 +203,15 @@ function toggleEditForm(event){
     let edit_comment_form = document.getElementById("edit_comment_form");
     let edit_form         = document.getElementById("sample_edit_form");
 
+    /** This will check if edit form has been already displayed in the message or comment. */ 
     if (edit_message_form === null && edit_comment_form === null) {
         showElement(edit_form);
         let clone_edit_form = edit_form.cloneNode(true);
         let form_id         = "edit_message_form";
         let textarea_id     = "textarea_message_edit";
-        let button_text     = "Update Message";
+        let button_text     = "Update Message";  
 
-         /** This variable will identify the type of the content by its data attribute value.*/
+        /** This variable will identify the type of the content by its data attribute value.*/
         let data_id         = "[data-id = "+content.dataset.id+"]";
 
         /** This will check if the content is a comment and if true it will change the edit form's id, textarea id, text content of submit button and change the data_id.*/
