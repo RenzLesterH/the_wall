@@ -145,8 +145,8 @@ section div#message_container form#sample_comment_form,
 section div#message_container form#sample_edit_form {
   display: none;
 }
-section div#message_container ul[data-message-id="sample_message"],
-section div#message_container ul[data-comment-id="sample_comment"] {
+section div#message_container ul[data-id="sample_message"],
+section div#message_container ul[data-id="sample_comment"] {
   display: none;
 }
 section div#message_container ul.message_list {
@@ -221,6 +221,7 @@ section div#message_container ul.message_list li span.action_icon {
   width: 24px;
 }
 section div#message_container ul.message_list form.edit_form {
+  width: 100%;
   overflow: auto;
 }
 section div#message_container ul.message_list form.edit_form textarea {

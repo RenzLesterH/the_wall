@@ -152,8 +152,8 @@ section{
         form#sample_edit_form{
             display: none; 
         }
-        ul[data-message-id="sample_message"],
-        ul[data-comment-id="sample_comment"]{
+        ul[data-id="sample_message"],
+        ul[data-id="sample_comment"]{
             display: none;
         }
         ul.message_list{
@@ -293,7 +293,8 @@ section{
             //         }
             //     }
             // }
-            form.edit_form{ 
+            form.edit_form{
+                width: 100%;  
                 overflow: auto;
                 textarea{
                     font: normal 300 16px/24px Poppins_light;
