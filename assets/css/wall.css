@@ -70,16 +70,16 @@ section textarea:focus {
   outline: none;
 }
 section div.modal {
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.411);
   display: none;
   height: 100%;
+  justify-content: center;
   left: 0;
   overflow: hidden;
   position: fixed;
   top: 0;
   width: 100%;
-  justify-content: center;
-  align-items: center;
   z-index: 1;
 }
 section div.modal div.modal_content {
@@ -98,8 +98,8 @@ section div.modal div.modal_content div.modal_header button.close_modal {
   float: right;
   height: 18px;
   margin: 10px 0px 3px 0px;
-  width: 18px;
   padding: 0px;
+  width: 18px;
 }
 section div.modal div.modal_content div.modal_body {
   padding: 0px 30px 40px 30px;
@@ -221,8 +221,8 @@ section div#message_container ul.message_list li span.action_icon {
   width: 24px;
 }
 section div#message_container ul.message_list form.edit_form {
-  width: 100%;
   overflow: auto;
+  width: 100%;
 }
 section div#message_container ul.message_list form.edit_form textarea {
   font: normal 300 16px/24px Poppins_light;
