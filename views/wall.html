@@ -14,7 +14,7 @@
 <body>
     <header>
         <nav>
-            <h1>The Wall Assignment</h1>
+            <a href="wall.html">The Wall Assignment</a>
             <span>Welcome, Renz Halagao!</span>
             <a href="index.html">Logout</a>
         </nav>
@@ -42,7 +42,7 @@
             <p>No Posted Message Yet.</p>
         </div>
         <div id="message_container">
-            <div id="sample_message"> 
+            <!-- <div id="sample_message"> 
                 <p>Sample</p>
                 <div class="action_message">
                     <button type="button" class="comment_button">
@@ -56,7 +56,23 @@
                         You - Few seconds ago
                     </div>
                 </div>
-            </div>
+            </div> -->
+
+            <ul data-message-id="sample_message"> 
+                <li class="content_message">Sample</li>
+                <li class="comment_button"><span class="action_icon"></span><span class="comment_count">0</span> Comment</li>
+                <li class="edit_button"><span class="action_icon"></span>Edit</li> 
+                <li class="delete_button"><span class="action_icon"></span>Delete</li>
+                <li class="user_profile"><span class="action_icon"></span>You - Few seconds ago</li>
+            </ul>
+
+            <ul data-comment-id="sample_comment"> 
+                <li class="content_comment">Sample</li>
+                <li class="edit_button"><span class="action_icon"></span>Edit</li> 
+                <li class="delete_button"><span class="action_icon"></span>Delete</li>
+                <li class="user_profile"><span class="action_icon"></span>You - Few seconds ago</li>
+            </ul>
+
             <form id="sample_comment_form">
                 <textarea id="comment_textarea"></textarea>
                 <button type="submit" class="post_comment_btn">Post Comment</button>

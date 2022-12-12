@@ -1,5 +1,4 @@
 let create_post_textarea = document.getElementById("create_post_textarea");
-let sample_message = document.getElementById("sample_message");
 let total_message_list_count = 0;
 let comment_id_list_count = 0;
 let message_id = 0;
@@ -9,7 +8,7 @@ let prev_content = "";
 document.getElementById("create_message_modal_button").addEventListener("click", function (event) {
     let create_message_modal = document.getElementById("create_post_modal");
     create_message_modal.classList.remove("hide_element");
-    create_message_modal.classList.add("show_element_flex"); 
+    create_message_modal.classList.add("show_element_flex");  
     checkTextareaEmpty("#create_post_textarea", "#create_message_form #post_message_btn");
 });
 
@@ -66,9 +65,10 @@ section_container.addEventListener("keyup", function (event) {
         checkTextareaEmpty("#create_post_textarea", "#create_message_form #post_message_btn");
     }
     else if(textarea === "comment_textarea"){
-        let message_list_id = event.target.closest('div[id]').id;
-        let form = "#"+message_list_id+" #"+message_list_id+"_comment";
-        checkTextareaEmpty(form+" #comment_textarea", form+" .post_comment_btn"); 
+        let form_id = event.target.closest('form').id;
+        let form_textarea = "#"+form_id+" #comment_textarea";
+        let form_button = "#"+form_id+" .post_comment_btn";
+        checkTextareaEmpty(form_textarea, form_button); 
     } 
 });
 
@@ -77,8 +77,8 @@ const message_container = document.querySelector("#message_container");
 message_container.addEventListener("submit", function (event) {
     let form_class_name = event.target.classList;
     if(form_class_name.contains("post_comment_form")){
-         let message = event.target.closest('div[id]').id;
-         createComment(message);
+        //  let message = event.target.closest('div[id]').id;
+         createComment(event);
     }
     else if(form_class_name.contains("edit_form")){ 
         let message = event.target.closest('div[id]').id;
@@ -91,8 +91,7 @@ message_container.addEventListener("submit", function (event) {
 message_container.addEventListener('click', function (event) {
     let class_name = event.target.classList;
     if (class_name.contains("comment_button")) {
-        message_id = event.target.closest('div[id]').id;
-        toggleCommentForm(message_id); 
+        toggleCommentForm(event); 
     }
     else if(class_name.contains("edit_button")){
         let content_id = event.target.closest('div[id]').id;
@@ -139,9 +138,7 @@ function checkTextareaEmpty(textarea, button) {
 
 /** This function will count the total list of messages and it's comments. */
 function countPostList(post_list, total_list){
-    const messages_list = document.querySelectorAll(post_list);
-    total_message_list_count = messages_list.length; 
-    document.querySelector(total_list).innerHTML = messages_list.length; 
+    document.querySelector(total_list).innerHTML = document.querySelectorAll(post_list).length; 
 }
 
 /** This funtion will create and prepend the newly created message. */
@@ -149,62 +146,75 @@ function createMessage() {
     let textarea_value = create_post_textarea.value;
     let create_post_modal = document.getElementById("create_post_modal");
     let empty_post = document.getElementById("empty_post");
+    let container = document.getElementById("message_container");
+    let sample_message = document.querySelector("[data-message-id ='sample_message']");
+    let create_post = sample_message.cloneNode(true);
+    let message_id = "message_list"+document.querySelectorAll(".message_list").length;
     create_post_modal.classList.remove("show_element_flex");
+    /** This functions will hide modal, empty post and temporary show the element to be cloned. */
     hideElement(create_post_modal);
     hideElement(empty_post); 
-    let container = document.getElementById("message_container");
     showElement(sample_message);
-    let create_post = sample_message.cloneNode(true);
-    create_post.className = "message_list"; 
-    create_post.id = "message_list"+total_message_list_count; 
+    /** This will add class name, data-attribite and message content on the cloned element. */
+    create_post.className = "message_list";
+    create_post.setAttribute('data-message-id', message_id);
     container.prepend(create_post);
-    let message_content = document.querySelector("#message_list"+total_message_list_count+" p");
-    message_content.textContent = textarea_value; 
-    hideElement(sample_message);
+    let message_content = document.querySelector("[data-message-id ="+message_id+"]"+" .content_message");
+    message_content.textContent = textarea_value;
+    /** This will hide the cloned element, reset the textarea for creating message and will count the total messages. */
+    hideElement(sample_message); 
     create_post_textarea.value = "";
-    countPostList(".message_list", "#total_messages");
+    document.querySelector("#total_messages").innerHTML = document.querySelectorAll(".message_list").length;
 }
 
 /** This funtion will create and prepend the newly created comments of the messages. */
-function createComment(message_id){
-    let form = "#"+message_id+" #"+message_id+"_comment";
-    let comment_textarea = document.querySelector(form+" #comment_textarea");
-    let container = document.getElementById(message_id);
-    showElement(sample_message);
-    let create_post = sample_message.cloneNode(true);
-    create_post.className = "comment_list"; 
-    create_post.id = "comment_list"+comment_id_list_count; 
-    create_post.className = "comment_list"; 
-    container.insertBefore(create_post, container.children[3]);
-    let comment_content = document.querySelector("#comment_list"+comment_id_list_count+" p");
+function createComment(event){
+    let message_id = event.target.closest('ul[data-message-id]').dataset.messageId;
+    let form_textarea = "#"+message_id+"_comment #comment_textarea";
+    let comment_submit_button = "#"+message_id+"_comment .post_comment_btn";
+    let comment_textarea = document.querySelector("[data-message-id ="+message_id+"]"+" "+form_textarea);
+    let container = document.querySelector("[data-message-id ="+message_id+"]");
+    let sample_comment = document.querySelector("[data-comment-id ='sample_comment']");
+    let create_post = sample_comment.cloneNode(true);
+    let comment_id = "comment_list"+document.querySelectorAll("[data-message-id = "+message_id+"]"+" .comment_list").length;
+    let comment_form = document.querySelector("[data-message-id = "+message_id+"]"+" #"+message_id+"_comment");
+    showElement(sample_comment);
+    /** This will add class name, data-attribite, comment content on the cloned element and insert it after the comment form. */
+    create_post.className = "comment_list";
+    create_post.setAttribute('data-comment-id', comment_id);
+    container.insertBefore(create_post, comment_form.nextSibling);
+    let comment_content = document.querySelector("[data-comment-id = "+comment_id+"]"+" .content_comment");
     comment_content.textContent = comment_textarea.value;
-    let comment_button = document.querySelector("#comment_list"+comment_id_list_count+" .action_message .comment_button");
-    comment_button.remove(); 
-    updateTotalComments(message_id, "add");
-    hideElement(sample_message);
-    comment_textarea.value = "";
-    checkTextareaEmpty(form+" #comment_textarea", form+" .post_comment_btn");  
-    comment_id_list_count++; 
+
+    /** This will reset the textarea for creating comment, hide the cloned element, update the total list of comments and add the class has_comment. */ 
+    comment_textarea.value = ""; 
+    checkTextareaEmpty(form_textarea, comment_submit_button); 
+    hideElement(sample_comment);
+    document.querySelector("[data-message-id = "+message_id+"]"+" .comment_button .comment_count").innerHTML = document.querySelectorAll("[data-message-id = "+message_id+"]"+" .comment_list").length;
+    checkIfHasComment(message_id);
 }
 
 /** This funtion will toggle the comment form from message. */
-function toggleCommentForm(message_list_id){
-    let form_comment_exists = document.getElementById(message_list_id+"_comment");
+function toggleCommentForm(event){
+    let message_id = event.target.closest('ul[data-message-id]').dataset.messageId;
+    let form_comment_exists = document.getElementById(message_id+"_comment");
+    console.log("🚀 ~ file: wall.js:202 ~ toggleCommentForm ~ form_comment_exists", form_comment_exists)
+    /** This will check if comment form has been already displayed in the message. */
     if (form_comment_exists === null) {
-        let message_list = document.getElementById(message_list_id);
+        let message_list = document.querySelector("[data-message-id ="+message_id+"]");
         let comment_form = document.getElementById("sample_comment_form");
-        showElement(comment_form);
         let create_comment_form = comment_form.cloneNode(true);
+        let prepend_to = document.querySelector("[data-message-id ="+message_id+"]"+" #sample_comment_form");
+        let comment_textarea = "#"+message_id+"_comment #comment_textarea";
+        let comment_submit_button = "#"+message_id+"_comment .post_comment_btn";
+        showElement(comment_form);
+        /** This will add class name and id to cloned comment form and prepend it below the message. */
         create_comment_form.className = "post_comment_form";
-        create_comment_form.id = message_list_id+"_comment";
-        document.getElementById("message_container").prepend(create_comment_form);
-        hideElement(comment_form);
-        let prepend_to = document.querySelector("#"+message_list_id+" #sample_comment_form");
-        message_list.insertBefore(create_comment_form, prepend_to);   
-        let form = "#"+message_list_id+" #"+message_list_id+"_comment";
-        let comment_textarea = form+" #comment_textarea";
-        let comment_submit_button = form+" .post_comment_btn"; 
+        create_comment_form.id = message_id+"_comment";        
+        message_list.insertBefore(create_comment_form, prepend_to);  
+        /** This will check if textaea in comment form has value. */
         checkTextareaEmpty(comment_textarea, comment_submit_button);
+        hideElement(comment_form);
     }
 }
 
@@ -264,18 +274,15 @@ function showDeleteModal(content_id){
 }
 
 /** This funtion will update the total list of comments on a message. */
-function updateTotalComments(message_id, operation){
-    let total_comment = document.querySelector("#"+message_id+" .action_message .comment_button");
-    let total = document.querySelectorAll("#"+message_id+" .comment_list"); 
-    if (operation === "add") {
+function checkIfHasComment(message_id){
+    let total_comment = document.querySelector("[data-message-id = "+message_id+"]"+" .comment_button");
+    let total = document.querySelectorAll("[data-message-id = "+message_id+"]"+" .comment_list"); 
+    if (total.length > 0) {
         total_comment.classList.add("has_comment");
     } 
-    else {
-        if (total.length === 0) {
-            total_comment.classList.remove("has_comment");  
-        }    
+    else if (total.length === 0) {
+            total_comment.classList.remove("has_comment");      
     }
-    countPostList("#"+message_id+" .comment_list", "#"+message_id+" .action_message .comment_button .comment_count");
 }
 
 /** This funtion will update the content of a message or comment. */
@@ -301,6 +308,6 @@ function deleteContent(content, message) {
     } 
     else{
         document.getElementById(content).remove();
-        updateTotalComments(message, "minus"); 
+        // checkIfHasComment(message, "minus"); 
     }
 }

@@ -1,3 +1,6 @@
+// *{
+//     outline: 1px solid #ddd;
+// }
 header{
     background: #ffffff;
     border-radius: 6px;
@@ -8,17 +11,19 @@ header{
         margin-inline: auto;
         max-width: 1440px;
         padding: 40px 79px;
-        h1{
-            align-self: center;
+        a:nth-child(1){
+            align-self: center; 
+            color: #152C61;
             font: normal 500 26px/39px Poppins_medium;
             margin-right: auto;
+            text-decoration: none;
         }
         span{
             align-self: center;
             font: normal 300 16px/24px Poppins_light;
             margin-right: 20px;
         }
-        a{
+        a:nth-child(3){
             align-self: center;
             color: #2c6bff;
             font: normal 600 16px/24px Poppins_semi_bold;
@@ -35,6 +40,7 @@ section{
     max-width: 1280px;
     padding: 70px;
     h4{
+        color: #707070; 
         display: inline-block;
         font: normal 400 16px/24px Poppins;
         span{
@@ -146,80 +152,147 @@ section{
         form#sample_edit_form{
             display: none; 
         }
-        div.message_list{
+        ul[data-message-id="sample_message"],
+        ul[data-comment-id="sample_comment"]{
+            display: none;
+        }
+        ul.message_list{
             background: #ffffff;
             border-radius: 6px;
             border: 1px solid #dce6ff;
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
             margin-bottom: 20px;
-            padding: 24px 30px; 
-            overflow: auto;
-            p{
+            padding: 24px 30px;
+            li.content_message{
                 color: #152C61;
                 font: normal 300 16px/24px Poppins_light;
+                margin-bottom: 20px;
+                width: 100%;
             }
-            div.action_message{
-                align-items: center;
-                display: flex;
-                margin-top: 20px;
-                button{
-                    align-items: center;
-                    background-color: transparent;
-                    color: #707070;
-                    display: flex;
-                    font: normal 400 16px/24px Poppins;
-                    margin-right: 30px;
-                    padding: 0px;
-                    span{
-                        margin-right: 10px;
-                    }
-                    span.comment_count{
-                        margin-right: 3px; 
-                    }
+            li:not(:first-child){
+                color: #707070; 
+                cursor: pointer;
+                font: normal 400 16px/24px Poppins;
+                margin-right: 30px;
+                span.action_icon{
+                    display: inline-block; 
+                    margin-right: 10px; 
                 }
-                button.has_comment{
-                    color: #2c6bff !important;
-                    span.action_icon{
-                        background: url('../images/group_2020.png') no-repeat -3px -36px !important;
-                        height: 18px;
-                        width: 18px;
-                    } 
-                }
-                button.comment_button{
-                    span.action_icon{
-                        background: url('../images/group_2020.png') no-repeat -3px -6px;
-                        height: 18px;
-                        width: 18px;
-                    }
-                }
-                button.edit_button{
-                    color: #2c6bff;
-                    span.action_icon{
-                        background: url('../images/group_2020.png') no-repeat -31px -4px;
-                        height: 22px;
-                        width: 22px;
-                    }
-                }
-                button.delete_button{
-                    span.action_icon{
-                        background: url('../images/group_2020.png') no-repeat -64px -5px;
-                        height: 19px;
-                        width: 16px;
-                    }
-                }
-                div{
-                    color: rgba(0, 0, 0, 0.6);
-                    font: normal 400 16px/24px Poppins;
-                    margin-right: 30px;
-                    span.action_icon{
-                        background: url('../images/user_placeholder.png') no-repeat;
-                        display: inline-block; 
-                        height: 24px;
-                        margin-right: 10px;
-                        vertical-align: top;
-                        width: 24px;
-                    }
+                span.comment_count{
+                    margin-right: 3px; 
                 }
             }
+            li.has_comment{
+                color: #2c6bff !important;
+                span.action_icon{
+                    background: url('../images/group_2020.png') no-repeat -3px -36px !important;
+                    height: 18px;
+                    vertical-align: middle;
+                    width: 18px;
+                }
+            }
+            li.comment_button{
+                span.action_icon{
+                    background: url('../images/group_2020.png') no-repeat -3px -6px;
+                    height: 18px;
+                    vertical-align: middle;
+                    width: 18px;
+                }
+            }
+            li.edit_button{
+                color: #2c6bff;
+                span.action_icon{
+                    background: url('../images/group_2020.png') no-repeat -31px -4px;
+                    height: 22px;
+                    width: 22px;
+                }
+            }
+            li.delete_button{
+                span.action_icon{ 
+                    background: url('../images/group_2020.png') no-repeat -64px -5px;
+                    height: 19px;
+                    vertical-align: middle;
+                    width: 16px;
+                }
+            }
+            li{
+                color: rgba(0, 0, 0, 0.6);
+                font: normal 400 16px/24px Poppins;
+                margin-right: 30px;
+                span.action_icon{
+                    background: url('../images/user_placeholder.png') no-repeat;
+                    display: inline-block; 
+                    height: 24px;
+                    margin-right: 10px;
+                    vertical-align: top;
+                    width: 24px;
+                }
+            } 
+            // div.action_message{
+            //     align-items: center;
+            //     display: flex;
+            //     margin-top: 20px;
+            //     button{
+            //         align-items: center;
+            //         background-color: transparent;
+            //         color: #707070;
+            //         display: flex;
+            //         font: normal 400 16px/24px Poppins;
+            //         margin-right: 30px;
+            //         padding: 0px;
+            //         span{
+            //             margin-right: 10px;
+            //         }
+            //         span.comment_count{
+            //             margin-right: 3px; 
+            //         }
+            //     }
+            //     button.has_comment{
+            //         color: #2c6bff !important;
+            //         span.action_icon{
+            //             background: url('../images/group_2020.png') no-repeat -3px -36px !important;
+            //             height: 18px;
+            //             width: 18px;
+            //         } 
+            //     }
+            //     button.comment_button{
+            //         span.action_icon{
+            //             background: url('../images/group_2020.png') no-repeat -3px -6px;
+            //             height: 18px;
+            //             width: 18px;
+            //         }
+            //     }
+            //     button.edit_button{
+            //         color: #2c6bff;
+            //         span.action_icon{
+            //             background: url('../images/group_2020.png') no-repeat -31px -4px;
+            //             height: 22px;
+            //             width: 22px;
+            //         }
+            //     }
+            //     button.delete_button{
+            //         span.action_icon{
+            //             background: url('../images/group_2020.png') no-repeat -64px -5px;
+            //             height: 19px;
+            //             width: 16px;
+            //         }
+            //     }
+            //     div{
+            //         color: rgba(0, 0, 0, 0.6);
+            //         font: normal 400 16px/24px Poppins;
+            //         margin-right: 30px;
+            //         span.action_icon{
+            //             background: url('../images/user_placeholder.png') no-repeat;
+            //             display: inline-block; 
+            //             height: 24px;
+            //             margin-right: 10px;
+            //             vertical-align: top;
+            //             width: 24px;
+            //         }
+            //     }
+            // }
             form.edit_form{ 
                 overflow: auto;
                 textarea{
@@ -241,6 +314,7 @@ section{
                 margin: 30px 0px 20px 0px;
                 overflow: auto;
                 padding: 30px;
+                width: 100%;
                 textarea{
                     font: normal 300 16px/24px Poppins_light;
                     height: 84px;
@@ -250,13 +324,26 @@ section{
                     background: rgba(44, 107, 255, 0.5) !important;
                 } 
             }
-            div.comment_list{
+            ul.comment_list{
+                // background: #ffffff;
+                // border-radius: 6px;
+                // border: 1px solid #DCE6FF;
+                // margin-bottom: 20px;
+                // overflow: auto;
+                // padding: 28px 30px;
                 background: #ffffff;
                 border-radius: 6px;
-                border: 1px solid #DCE6FF;
+                border: 1px solid #dce6ff;
+                display: flex;
+                flex-wrap: wrap;
+                list-style: none;
                 margin-bottom: 20px;
-                overflow: auto;
-                padding: 28px 30px; 
+                padding: 28px 30px;
+                width: 100%;
+                li:first-child{
+                    margin-bottom: 20px;
+                    width: 100%;
+                }
             }
         }
 
