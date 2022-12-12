@@ -2,13 +2,27 @@ let sign_in_form = document.getElementById("form_sign_in");
 let sign_up_form = document.getElementById("form_sign_up"); 
 
 const sign_up =  document.getElementById("sign_up_link"); 
-sign_up.addEventListener("click", () => { toggleForm(sign_up_form, sign_in_form) }); 
+sign_up.addEventListener("click", () => toggleForm(sign_up_form, sign_in_form));  
 
 const sign_in =  document.getElementById("sign_in_link");
-sign_in.addEventListener("click", () => { toggleForm(sign_in_form, sign_up_form) }); 
+sign_in.addEventListener("click", () => toggleForm(sign_in_form, sign_up_form)); 
 
 const form_sign_in =  document.getElementById("form_sign_in");
-form_sign_in.addEventListener("submit", function (event) {
+form_sign_in.addEventListener("submit", () => validateSignIn(event));
+
+const form_sign_up =  document.getElementById("form_sign_up");
+form_sign_up.addEventListener("submit", () => validateSignUpEmpty(event)); 
+
+/** This function will show and hide sign up and sign in form.*/ 
+function toggleForm(form_to_show, form_to_hide){
+    form_to_hide.classList.remove("show_element_flex");
+    form_to_hide.classList.add("hide_element");
+    form_to_show.classList.remove("hide_element");
+    form_to_show.classList.add("show_element_flex"); 
+}
+
+/** This function will check if sign in valid. */
+function validateSignIn(event){
     let email = document.getElementById("email");
     let password = document.getElementById("password");
     let email_error = document.getElementsByClassName("sign_in_error")[0];
@@ -29,10 +43,10 @@ form_sign_in.addEventListener("submit", function (event) {
         }
     }
     event.preventDefault();
-});
+}
 
-const form_sign_up =  document.getElementById("form_sign_up");
-form_sign_up.addEventListener("submit", function (event) {
+/** This function will check if sign up input is empty and if true it will show error. */
+function validateSignUpEmpty(event){
     let sign_up_inputs = document.getElementsByClassName("sign_up_inputs"); 
     let sign_up_errors = document.getElementsByClassName("sign_up_error");
     let is_inputs_empty = true; 
@@ -53,16 +67,10 @@ form_sign_up.addEventListener("submit", function (event) {
         }
     }
     validateSignUp(is_inputs_empty, sign_up_inputs, sign_up_errors);
-    event.preventDefault();   
-});
-
-function toggleForm(form_to_show, form_to_hide){
-    form_to_hide.classList.remove("show_element_flex");
-    form_to_hide.classList.add("hide_element");
-    form_to_show.classList.remove("hide_element");
-    form_to_show.classList.add("show_element_flex"); 
+    event.preventDefault();
 }
 
+/** This function will check if email input is valid and confirm password matches with password. If error less it will redirect to the wall.html. */
 function validateSignUp(is_inputs_empty, sign_up_inputs, sign_up_errors){
     let email = sign_up_inputs[0].value; 
     let password = sign_up_inputs[1].value;
@@ -85,6 +93,7 @@ function validateSignUp(is_inputs_empty, sign_up_inputs, sign_up_errors){
     }
 } 
 
+/** This function will check if email input is valid and it will return boolean value. */ 
 function isEmailValid(email) {
     return regex_email.test(String(email).toLowerCase());
 }
