@@ -13,6 +13,7 @@
 </head>
 <body>
     <header>
+        <!-- Remove nav -->
         <nav>
             <a href="wall.html">The Wall Assignment</a>
             <span>Welcome, Renz Halagao!</span>
@@ -22,6 +23,8 @@
     <section>
         <h4><span id="total_messages">0 </span> messages arranged by latest posted</h4>
         <button id="create_message_modal_button">Create Message</button>
+
+        <!-- Move to bottom part same with delete -->
         <div id="create_post_modal" class="modal">
             <div class="modal_content">
                 <div class="modal_header">
@@ -37,27 +40,13 @@
                 </div>
             </div>
         </div>
+        
         <div id="empty_post">
             <img src="../assets/images/empty_post.png" alt="Empty Post">
             <p>No Posted Message Yet.</p>
         </div>
         <div id="message_container">
-            <!-- <div id="sample_message"> 
-                <p>Sample</p>
-                <div class="action_message">
-                    <button type="button" class="comment_button">
-                        <span class="action_icon"></span><span class="comment_count">0</span> Comment</button>
-                    <button type="button" class="edit_button">
-                        <span class="action_icon"></span>Edit</button>
-                    <button type="button" class="delete_button">
-                        <span class="action_icon"></span>Delete</button>
-                    <div class="user_profile">
-                        <span class="action_icon"></span>
-                        You - Few seconds ago
-                    </div>
-                </div>
-            </div> -->
-
+            
             <ul data-id="sample_message"> 
                 <li class="content content_message">Sample</li>
                 <li class="comment_button"><span class="action_icon"></span><span class="comment_count">0</span> Comment</li>
@@ -82,6 +71,8 @@
                 <button type="submit" class="post_updated_button">Update Message</button>
                 <button type="button" class="cancel_updating_button">Cancel</button>
             </form>
+            
+            <!-- Delete modal. change name to delete_message_modal -->
             <div id="action_modal" class="modal">
                 <div class="modal_content">
                     <div class="modal_header">
@@ -101,6 +92,9 @@
             </div>
         </div>
     </section>
+    <div class="clone_container">
+
+    </div>
     <script src="../assets/js/wall.js"></script>
 </body>
 </html>
