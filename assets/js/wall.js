@@ -1,21 +1,19 @@
-let create_post_textarea = document.getElementById("create_post_textarea"); 
-let message_id = 0;
-let content = "";
+let create_post_textarea = document.getElementById("create_post_textarea");
 let prev_content = "";
 
 document.getElementById("create_message_modal_button").addEventListener("click", showCreateMessageModal); 
 
 document.getElementById("cancel_post_message_btn").addEventListener("click", hideModal);
 
-document.getElementById("cancel_remove_btn").addEventListener("click", hideModal);
+document.querySelectorAll('.cancel_remove_btn').forEach((button) => { button.addEventListener('click', hideModal); });
 
-document.querySelectorAll('.close_modal').forEach((button) => {
-    button.addEventListener('click', hideModal);  
-});
+document.querySelectorAll('.close_modal').forEach((button) => { button.addEventListener('click', hideModal); });
 
 document.getElementById("create_message_form").addEventListener("submit", createMessage);
  
-document.getElementById("action_form").addEventListener("submit", deleteContent); 
+document.getElementById("delete_message_form").addEventListener("submit", deleteMessage);
+
+document.getElementById("delete_comment_modal").addEventListener("submit", deleteComment);
 
 document.getElementById("create_post_textarea").addEventListener("keyup", checkTextareaEmpty);
 
@@ -69,226 +67,203 @@ function checkTextareaEmpty() {
 /** This funtion will create and prepend the newly created message. */
 function createMessage(event) {
     event.preventDefault(); 
-    let textarea_value    = create_post_textarea.value;
-    let create_post_modal = document.getElementById("create_post_modal");
-    let empty_post        = document.getElementById("empty_post");
-    let container         = document.getElementById("message_container");
-    let clone_message     = document.querySelector("#sample_message");
-    let create_post       = clone_message.cloneNode(true); 
-    let message_id        = "message_list"+document.querySelectorAll(".message_list").length;
-
-    create_post_modal.classList.remove("show_element_flex");
+    let create_post_modal      = document.getElementById("create_post_modal");
+    let clone_message          = document.querySelector("#sample_message");
+    let cloned_message         = clone_message.cloneNode(true); 
+    let message_id             = "message_item"+document.querySelectorAll(".message_item").length;
 
     /** This functions will hide modal, empty post and temporary show the element to be cloned. */
+    create_post_modal.classList.remove("show_element_flex");
     hideElement(create_post_modal);
-    hideElement(empty_post); 
-    showElement(clone_message);
+    hideElement(document.getElementById("empty_post")); 
+    showElement(clone_message); 
 
     /** This will remove id, add class name, data-attribite and message content on the cloned element. */
-    create_post.removeAttribute('id');
-    create_post.className = "message_list";
-    create_post.setAttribute('data-id', message_id);
-    container.prepend(create_post);
-    let message_content = document.querySelector("[data-id ="+message_id+"]"+" .content_message");
-    message_content.textContent = textarea_value;
+    cloned_message.removeAttribute('id');
+    cloned_message.className = "message_item"; 
+    cloned_message.setAttribute('data-id', message_id);
+    document.getElementById("message_container_list").prepend(cloned_message);
+    document.querySelector("[data-id ="+message_id+"]"+" .content_message").textContent = create_post_textarea.value; 
 
-    /** This will hide the cloned element, reset the textarea for creating message and will count the total messages. */
-    hideElement(clone_message); 
+    /** This will hide the cloned element, reset the textarea for creating message and will count the total message items. */
+    hideElement(clone_message);
     create_post_textarea.value = "";
-    document.querySelector("#total_messages").innerHTML = document.querySelectorAll(".message_list").length;
+    document.querySelector("#total_messages").innerHTML = document.querySelectorAll(".message_item").length;
 
     /** This will add event listener to class comment_button on the message list. */ 
-    create_post.querySelectorAll('.comment_button').forEach((comment) => {
-        comment.addEventListener('click', toggleCommentForm); 
-    });
+    cloned_message.getElementsByClassName("comment_button")[0].addEventListener("click", toggleCommentForm);
     
-    /** This will add event listener to class edit_button on the message list. */ 
-    create_post.querySelectorAll('.edit_button').forEach((edit_content) => {
-        edit_content.addEventListener('click', toggleEditForm);  
-    });
+    /** This will add event listener to class edit_button on the message list. */  
+    cloned_message.getElementsByClassName("edit_button")[0].addEventListener("click", toggleEditMessageForm);
 
-    /** This will add event listener to class delete_button on the message list. */ 
-    create_post.querySelectorAll('.delete_button').forEach((delete_content) => {
-        delete_content.addEventListener('click', showDeleteModal);  
-    });
-
+    /** This will add event listener to class delete_button on the message list. */
+    cloned_message.getElementsByClassName("delete_button")[0].addEventListener("click", showDeleteMessageModal); 
 }
 
 /** This funtion will create and prepend the newly created comments of the messages. */
 function createComment(event){
     event.preventDefault();
-    let message_id            = event.target.closest('ul').dataset.id; 
-    let form_textarea         = "#"+message_id+"_comment textarea"; 
-    let comment_textarea      = document.querySelector("[data-id ="+message_id+"]"+" "+form_textarea); 
-    let container             = document.querySelector("[data-id ="+message_id+"]");
-    let clone_comment         = document.querySelector("#sample_comment");
-    showElement(clone_comment);
-    let create_clone_comment  = clone_comment.cloneNode(true);
-    let comment_id            = "comment_list"+document.querySelectorAll("[data-id = "+message_id+"]"+" .comment_list").length;
-    let comment_form          = document.querySelector("[data-id = "+message_id+"]"+" #"+message_id+"_comment");
+    showElement(document.querySelector("#sample_comment"));
+    let message_id             = event.target.closest('li[class=message_item]').dataset.id;
+    let comment_textarea       = document.querySelector("[data-id ="+message_id+"]"+" textarea");
+    let comment_container_list = document.querySelector("[data-id ="+message_id+"] .comment_container_list");
+    let cloned_comment         = document.querySelector("#sample_coment_item").cloneNode(true);
+    let comment_item_count     = "comment_item"+document.querySelector("[data-id ="+message_id+"] .comment_count").textContent;
 
-    /** This will remove id, add class name, data-attribite, comment content on the cloned element and insert it after the comment form. */
-    create_clone_comment.removeAttribute("id");
-    create_clone_comment.className = "comment_list";
-    create_clone_comment.setAttribute('data-id', comment_id);
-    container.insertBefore(create_clone_comment, comment_form.nextSibling);  
-    let comment_content = document.querySelector("[data-id = "+message_id+"]"+" [data-id = "+comment_id+"]"+" .content_comment"); 
-    comment_content.innerHTML = comment_textarea.value; 
+    /** This will remove id, add class name, data-attribite, comment content on the cloned element and prepend it in the comment_container_list. */
+    cloned_comment.removeAttribute("id");
+    cloned_comment.className = "comment_item";
+    cloned_comment.setAttribute('data-comment-id', comment_item_count);
+    comment_container_list.prepend(cloned_comment);
+    let content_comment = document.querySelector("[data-id = "+message_id+"]"+" [data-comment-id = "+comment_item_count+"]  p");
+    content_comment.innerHTML = comment_textarea.value; 
     
-    /** This will reset the textarea for creating comment, hide the cloned element, update the total list of comments and add the class has_comment. */ 
+    /** This will reset the textarea for creating comment, update the total list of comments and add the class has_comment. */ 
     comment_textarea.value = ""; 
-    checkTextareaEmpty(); 
-    hideElement(clone_comment);
-    let total_comment_list = document.querySelectorAll("[data-id = "+message_id+"]"+" .comment_list").length;
-    document.querySelector("[data-id = "+message_id+"]"+" .comment_button .comment_count").innerHTML = total_comment_list;
+    checkTextareaEmpty();
+    let updated_total_comment_item = document.querySelectorAll("[data-id = "+message_id+"]"+" .comment_item").length;
+    document.querySelector("[data-id ="+message_id+"] .comment_count").innerHTML = updated_total_comment_item;
     checkIfHasComment(message_id);
-
-    /** This will add event listener to class comment_button on the comment_list. */ 
-    create_clone_comment.querySelectorAll('.comment_button').forEach((comment) => {
-        comment.addEventListener('click', toggleCommentForm); 
-    });
+    hideElement(document.querySelector("#sample_comment")); 
 
     /** This will add event listener to class edit_button on the comment_list. */ 
-    create_clone_comment.querySelectorAll('.edit_button').forEach((edit_content) => {
-        edit_content.addEventListener('click', toggleEditForm);  
-    });
+    document.getElementsByClassName("edit_comment")[0].addEventListener("click", toggleEditCommentForm); 
 
-    /** This will add event listener to class delete_button on the comment_list. */  
-    create_clone_comment.querySelectorAll('.delete_button').forEach((delete_content) => {
-        delete_content.addEventListener('click', showDeleteModal);  
-    });
-
+    /** This will add event listener to class delete_button on the comment_list. */
+    document.getElementsByClassName("delete_comment")[0].addEventListener("click", showDeleteCommentModal); 
 }
 
 /** This funtion will toggle the comment form from message. */
 function toggleCommentForm(event){
-    let message_id          = event.target.closest('ul').dataset.id; 
+    let message_id          = event.target.closest('li[class=message_item]').dataset.id;
     let form_comment_exists = document.getElementById(message_id+"_comment");
 
     /** This will check if comment form has been already displayed in the message. */
     if (form_comment_exists === null) {
-        let message_list          = document.querySelector("[data-id ="+message_id+"]");
+        let message_item          = document.querySelector("[data-id ="+message_id+"]");
         let comment_form          = document.getElementById("sample_comment_form");
         let create_comment_form   = comment_form.cloneNode(true);
-        let prepend_to            = document.querySelector("[data-id ="+message_id+"]"+" #sample_comment_form");
-        showElement(comment_form);
+        let prepend_to            = document.querySelector("[data-id ="+message_id+"]"+" .comment_container_list");
+        showElement(comment_form);  
 
         /** This will add class name and id to cloned comment form and prepend it below the message. */
         create_comment_form.className = "post_comment_form"; 
         create_comment_form.id        = message_id+"_comment";        
-        message_list.insertBefore(create_comment_form, prepend_to);
+        message_item.insertBefore(create_comment_form, prepend_to);
 
         /** This will disable the submit button in comment form. */
         document.querySelector("#"+message_id+"_comment button[type=submit]").setAttribute("disabled", true);
         document.querySelector("#"+message_id+"_comment button[type=submit]").classList.add("disable_button");
         hideElement(comment_form);
 
-        /** This will add event listener to class post_comment_form on the submitting the comment form. */ 
-        document.querySelectorAll('.post_comment_form').forEach((comment_form) => {
-            comment_form.addEventListener('submit', createComment);   
-        });
+        /** This will add event listener to class post_comment_form on the submitting the comment form. */
+        document.getElementsByClassName("post_comment_form")[0].addEventListener("submit", createComment);
 
         /** This will add event listener to comment form textarea. */
-        document.querySelectorAll('.comment_textarea').forEach((comment_textarea) => {
-            comment_textarea.addEventListener('keyup', checkTextareaEmpty);   
-        });
-
+        document.getElementsByClassName("comment_textarea")[0].addEventListener("keyup", checkTextareaEmpty);
     }
 }
 
-/** This funtion will display the edit form in messages or comments. */
-function toggleEditForm(event){
-    let content           = event.target.closest('ul');
-    let main_content      = content.closest('ul[class="message_list"]');
-    let edit_message_form = document.getElementById("edit_message_form");
-    let edit_comment_form = document.getElementById("edit_comment_form");
-    let edit_form         = document.getElementById("sample_edit_form");
+/** This funtion will display the edit form in messages. */
+function toggleEditMessageForm(event){
+    let messade_id               = event.target.closest('li[class=message_item]').dataset.id;
+    let edit_message_form        = document.getElementById("edit_message_form");
+    let sample_edit_message_form = document.getElementById("sample_edit_message_form");
 
-    /** This will check if edit form has been already displayed in the message or comment. */ 
-    if (edit_message_form === null && edit_comment_form === null) {
-        showElement(edit_form);
-        let clone_edit_form = edit_form.cloneNode(true);
-        let form_id         = "edit_message_form";
-        let textarea_id     = "textarea_message_edit";
-        let button_text     = "Update Message";  
+    /** This will check if edit form has been already displayed in the message.*/ 
+    if (edit_message_form === null) {
+        showElement(sample_edit_message_form);
+        let cloned_edit_message_form = sample_edit_message_form.cloneNode(true);
+        let message_content          = document.querySelector("[data-id = "+messade_id+"]"+" .content_message");
+        prev_content                 = message_content.textContent;
 
-        /** This variable will identify the type of the content by its data attribute value.*/
-        let data_id         = "[data-id = "+content.dataset.id+"]";
-
-        /** This will check if the content is a comment and if true it will change the edit form's id, textarea id, text content of submit button and change the data_id.*/
-        if (content.className === "comment_list") {
-            form_id     = "edit_comment_form";
-            textarea_id = "textarea_comment_edit";
-            button_text = "Update Comment";
-            data_id     = "[data-id = "+main_content.dataset.id+"] [data-id = "+content.dataset.id+"]";
-        }
-        let text_content = document.querySelector(data_id+" .content");
-
-        /** This will hide the comment, edit, delete and user profile on the message or comment. */ 
-        document.querySelectorAll(data_id+" > li:not(:first-child)").forEach((action) => hideElement(action));
-
-        /** This will preserve the previous content of message or comment if editting is canceled. */ 
-        prev_content = text_content.textContent;
-
-        /** This will replace message or comment content and it will be replaced by a cloned form for editing messages or comment. */ 
-        text_content.replaceWith(clone_edit_form);
-        clone_edit_form.id = form_id;
-        let textarea       = document.querySelector(data_id+" .edit_form textarea");
-        textarea.value     = text_content.textContent;
-        textarea.id        = textarea_id;
-        document.querySelector(data_id+" .edit_form .post_updated_button").textContent = button_text;
-        hideElement(edit_form); 
+        /** This will hide action list, add ID for the form, add text content on textarea and replace message content with a cloned form for editing a message.*/   
+        message_content.replaceWith(cloned_edit_message_form);
+        hideElement(document.querySelector("[data-id = "+messade_id+"]"+" .action_list"));
+        cloned_edit_message_form.id = "edit_message_form";
+        let textarea                = document.querySelector("[data-id = "+messade_id+"]"+" textarea");
+        textarea.value              = message_content.textContent;
+        hideElement(sample_edit_message_form);
         
-        /** This will add event listener to class cancel_updating_button. */ 
-        document.querySelectorAll('.cancel_updating_button').forEach((cancel_update) => {
-            cancel_update.addEventListener('click', closeEditForm);  
-        });
-
-        /** This will add event listener to class edit_form on submitting the edit form. */  
-        document.querySelectorAll('.edit_form').forEach((edit_form) => {
-            edit_form.addEventListener('submit', updateContent);  
-        });
+        /** This will add event listener to class cancel_updating_button. */
+        document.getElementsByClassName("cancel_updating_button")[0].addEventListener("click", closeEditMessageForm);  
         
+        /** This will add event listener to class edit_form on submitting the edit form. */ 
+        document.getElementById("edit_message_form").addEventListener("submit", updateMessage);  
     }
 }
 
-/** This funtion will hide the edit form in messages or comments. */ 
-function closeEditForm(event){
-    let data_id         = event.target.closest('ul').dataset.id;
-    let form_id         = event.target.closest('form[id]').id;
-    let form            = document.querySelector("#"+form_id);
-    const content       = document.createElement("li");
-    content.className   = "content content_message";
-    content.textContent = prev_content;
-    form.replaceWith(content); 
-    document.querySelectorAll("[data-id = "+data_id+"]"+" li:not(:first-child)").forEach((action) => action.classList.remove("hide_element")); 
+/** This funtion will display the edit form in comment. */
+function toggleEditCommentForm(event){
+    let comment_id               = event.target.closest('li[class=comment_item]');
+    let messade_id               = comment_id.closest('li[class=message_item]').dataset.id;
+    let edit_comment_form        = document.getElementById("edit_comment_form");
+    let sample_edit_comment_form = document.getElementById("sample_edit_comment_form"); 
+
+    /** This will check if edit form has been already displayed in the comment.*/ 
+    if (edit_comment_form === null) {
+        showElement(sample_edit_comment_form);
+        let cloned_edit_comment_form = sample_edit_comment_form.cloneNode(true);
+        let comment_content          = document.querySelector("[data-id = "+messade_id+"] [data-comment-id = "+comment_id.dataset.commentId+"] .content_comment");
+        prev_content                 = comment_content.textContent;
+
+        /** This will hide action list, add ID for the form, add text content on textarea and replace comment content with a cloned form for editing the comment.*/  
+        comment_content.replaceWith(cloned_edit_comment_form);
+        hideElement(document.querySelector("[data-id = "+messade_id+"] [data-comment-id = "+comment_id.dataset.commentId+"] .action_list")); 
+        cloned_edit_comment_form.id = "edit_comment_form";
+        let textarea                = document.querySelector("[data-id = "+messade_id+"] [data-comment-id = "+comment_id.dataset.commentId+"] textarea");
+        textarea.value              = comment_content.textContent;
+        hideElement(sample_edit_comment_form);
+        
+        /** This will add event listener to class cancel_updating_button. */
+        document.getElementsByClassName("cancel_updating_button")[0].addEventListener("click", closeEditCommentForm);  
+        
+        /** This will add event listener to class edit_comment_form on submitting the edit form. */ 
+        document.getElementById("edit_comment_form").addEventListener("submit", updateComment);  
+    }
 }
 
-/** This funtion will display the modal for deleting messages or comments. */
-function showDeleteModal(event){
-    let content   = event.target.closest('ul');
-    let data_id   = "[data-id = "+content.dataset.id+"]";
-    let modal_for = "Message";
+/** This funtion will hide the edit form in messages. */ 
+function closeEditMessageForm(event){
+    let message_id              = event.target.closest('li').dataset.id;
+    let edit_message_form       = document.querySelector("#"+event.target.closest('form[id]').id);
+    const content_message       = document.createElement("p");
+    content_message.className   = "content content_message";
+    content_message.textContent = prev_content;
+    edit_message_form.replaceWith(content_message);
+    document.querySelector("[data-id = "+message_id+"]"+" .action_list").classList.remove("hide_element");  
+}
 
-    /** This will check if the content to be deleted is a comment. */
-    if (content.className === "comment_list") {
-        modal_for        = "Comment";
-        let main_content = content.closest('ul[class="message_list"]');
-        data_id          = "[data-id = "+main_content.dataset.id+"] [data-id = "+content.dataset.id+"]";
-    }
+/** This funtion will hide the edit form in comment. */ 
+function closeEditCommentForm(event){
+    let comment_id              = event.target.closest('li[class=comment_item]');
+    let message_id              = comment_id.closest('li[class=message_item]').dataset.id;
+    let edit_comment_form       = document.querySelector("#"+event.target.closest('form[id]').id);
+    const content_comment       = document.createElement("p");
+    content_comment.className   = "content content_comment";
+    content_comment.textContent = prev_content;
+    edit_comment_form.replaceWith(content_comment);
+    document.querySelector("[data-id = "+message_id+"] [data-comment-id = "+comment_id.dataset.commentId+"] .action_list").classList.remove("hide_element");  
+}
 
-    /** This will set the UI and value of the content to be deleted. */
-    let delete_modal = document.getElementById("delete_modal");
-    document.getElementById("action_form_input").value = data_id;
-    document.getElementById("modal_body_title").innerHTML = "Confirm Delete "+modal_for;
-    document.getElementById("modal_body_description").innerHTML = "Are you sure you want to remove this "+modal_for.toLowerCase()+" ? This action cannot be undone."; 
-    delete_modal.classList.add("show_element_flex");
+/** This funtion will display the modal for deleting messages */
+function showDeleteMessageModal(event){
+    let message_id = event.target.closest('li[class=message_item]').dataset.id;
+    document.getElementById("delete_message_input").value = message_id;
+    document.getElementById("delete_message_modal").classList.add("show_element_flex");
+}
+
+/** This funtion will display the modal for deleting comments. */
+function showDeleteCommentModal(event){
+    let comment_id = event.target.closest('li[class=comment_item]').dataset.commentId;
+    document.getElementById("delete_comment_input").value = comment_id; 
+    document.getElementById("delete_comment_modal").classList.add("show_element_flex"); 
 }
 
 /** This funtion will update the total list of comments on a message. */
 function checkIfHasComment(message_id){
     let total_comment = document.querySelector("[data-id = "+message_id+"]"+" .comment_button");
-    let total         = document.querySelectorAll("[data-id = "+message_id+"]"+" .comment_list");
+    let total         = document.querySelectorAll("[data-id = "+message_id+"]"+" .comment_item");
     
     /** This will check if the total comment list of a message is zero or not and it will add or remove class base on condition. */ 
     if (total.length > 0) {
@@ -299,46 +274,65 @@ function checkIfHasComment(message_id){
     }
 }
 
-/** This funtion will update the content of a message or comment. */
-function updateContent(event) {
-    let content  = event.target.closest('ul');
-    let data_id  = "[data-id = "+content.dataset.id+"]";
-
-    /** This will check if the content to be updated is a comment. */
-    if (content.className === "comment_list") {
-        let message_id = content.closest('ul[class="message_list"]');
-        data_id  = "[data-id = "+message_id.dataset.id+"] [data-id = "+content.dataset.id+"]"; 
-    }
-    let form_id = event.target.closest('form').id;
-    let updated_content = document.querySelector(data_id+" #"+form_id+" textarea");
-    closeEditForm(event);
-    document.querySelector(data_id+" .content").textContent = updated_content.value;
-    event.preventDefault();   
+/** This funtion will update the content of a certain message. */
+function updateMessage(event) {
+    event.preventDefault();  
+    let message_id      = event.target.closest('li').dataset.id;
+    let updated_message = document.querySelector("[data-id = "+message_id+"]"+" #edit_message_form textarea"); 
+    closeEditMessageForm(event);
+    document.querySelector("[data-id = "+message_id+"]"+" .content_message").textContent = updated_message.value;
 }
 
-/** This funtion will delete a certain messages or comments. */ 
-function deleteContent(event) {
+/** This funtion will update the content of a certain comment. */ 
+function updateComment(event) {
     event.preventDefault();
-    /** This variables will identify which contemt will be deleted (Message or Comment). */
-    let action_form_input = document.getElementById("action_form_input").value;
-    let content           = document.querySelector(action_form_input);
-    let message_id        = content.closest('ul[class="message_list"]');
-    content.remove();
+    let comment_id      = event.target.closest('li[class=comment_item]');
+    let message_id      = comment_id.closest('li[class=message_item]').dataset.id;
+    let updated_comment = document.querySelector("[data-id = "+message_id+"]"+" #edit_comment_form textarea");
+    closeEditCommentForm(event);
+    document.querySelector("[data-id = "+message_id+"] [data-comment-id = "+comment_id.dataset.commentId+"] .content_comment").textContent = updated_comment.value;
+}
 
-    /** This will check if the content to be deleted is a message or comment and execute its condition. */
-    if (content.className === "message_list") {
-        let updated_message_list = document.querySelectorAll(".message_list").length;
-        document.querySelector("#total_messages").innerHTML = updated_message_list;
-        if(updated_message_list === 0){
-            showElement(empty_post);
-        }
-    } 
-    else{
-        let updated_comment_list = document.querySelectorAll("[data-id = "+message_id.dataset.id+"]"+" .comment_list").length;
-        document.querySelector("[data-id = "+message_id.dataset.id+"]"+" .comment_button .comment_count").innerHTML = updated_comment_list;
-        checkIfHasComment(message_id.dataset.id);
+/** This funtion will delete a certain messages. */ 
+function deleteMessage(event) {
+    event.preventDefault();
+
+    /** This variables will identify which message item will be deleted */
+    let delete_message_input = document.getElementById("delete_message_input").value;
+    document.querySelector("[data-id = "+delete_message_input+"]").remove();
+
+    /** This will count the updated total list of message items. */
+    let updated_total_message_item = document.querySelectorAll(".message_item").length;
+    document.querySelector("#total_messages").innerHTML = updated_total_message_item;
+
+    /** This will check if total message item is zero and if true it wil show the empty post container. */
+    if(updated_total_message_item === 0){ 
+        showElement(empty_post); 
     }
-    let delete_modal = document.getElementById("delete_modal");
-    delete_modal.classList.remove('show_element_flex'); 
-    hideElement(delete_modal);
+
+    /** This will hide the delete message modal. */ 
+    let delete_message_modal = document.getElementById("delete_message_modal");
+    delete_message_modal.classList.remove('show_element_flex'); 
+    hideElement(delete_message_modal);
+}
+
+/** This funtion will delete a certain comment of a message. */ 
+function deleteComment(event) {
+    event.preventDefault();
+
+    /** This variables will identify which comment item of message will be deleted */
+    let delete_comment_input = document.getElementById("delete_comment_input").value;
+    let comment_id           = document.querySelector("[data-comment-id = "+delete_comment_input+"]");
+    let message_id           = comment_id.closest('li[class=message_item]').dataset.id;
+    document.querySelector("[data-id = "+message_id+"] [data-comment-id = "+delete_comment_input+"]").remove();
+
+    /** This will count the updated total list of comment items in a message. */
+    let updated_comment_list = document.querySelectorAll("[data-id = "+message_id+"]"+" .comment_item").length;
+    document.querySelector("[data-id = "+message_id+"]"+" .comment_count").innerHTML = updated_comment_list;
+    checkIfHasComment(message_id);
+    
+    /** This will hide the delete comment modal. */ 
+    let delete_comment_modal = document.getElementById("delete_comment_modal");
+    delete_comment_modal.classList.remove('show_element_flex'); 
+    hideElement(delete_comment_modal); 
 }

@@ -82,11 +82,158 @@ section div#empty_post p {
   margin-top: 17px;
   text-align: center;
 }
-section div#message_container {
+section ul#message_container_list {
   margin-top: 43px;
   width: 100%;
 }
-section div#message_container div.modal {
+section ul#message_container_list ul#sample_comment,
+section ul#message_container_list li#sample_message,
+section ul#message_container_list form#sample_comment_form,
+section ul#message_container_list form.edit_form {
+  display: none;
+}
+section ul#message_container_list li.message_item {
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #dce6ff;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-bottom: 20px;
+  padding: 24px 30px;
+}
+section ul#message_container_list li.message_item p.content_message {
+  color: #152C61;
+  font: normal 300 16px/24px Poppins_light;
+  margin-bottom: 20px;
+  width: 100%;
+}
+section ul#message_container_list li.message_item ul.action_list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+section ul#message_container_list li.message_item ul.action_list li {
+  list-style: none;
+  margin-right: 30px;
+}
+section ul#message_container_list li.message_item ul.action_list li button {
+  background-color: transparent;
+  border-radius: 0px;
+  border: none;
+  color: #707070;
+  font: normal 400 16px/24px Poppins;
+  margin: 0px;
+  padding: 0px;
+  text-align: left;
+}
+section ul#message_container_list li.message_item ul.action_list li button span.action_icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+section ul#message_container_list li.message_item ul.action_list li button.has_comment {
+  color: #2c6bff !important;
+}
+section ul#message_container_list li.message_item ul.action_list li button.has_comment span.action_icon {
+  background: url('../images/group_2020.png') no-repeat -3px -36px !important;
+  height: 18px;
+  width: 18px;
+}
+section ul#message_container_list li.message_item ul.action_list li button.comment_button span.action_icon {
+  background: url('../images/group_2020.png') no-repeat -3px -6px;
+  height: 18px;
+  width: 18px;
+}
+section ul#message_container_list li.message_item ul.action_list li button.edit_button {
+  color: #2c6bff;
+}
+section ul#message_container_list li.message_item ul.action_list li button.edit_button span.action_icon {
+  background: url('../images/group_2020.png') no-repeat -31px -4px;
+  height: 22px;
+  vertical-align: top;
+  width: 22px;
+}
+section ul#message_container_list li.message_item ul.action_list li button.delete_button span.action_icon {
+  background: url('../images/group_2020.png') no-repeat -64px -5px;
+  height: 19px;
+  width: 16px;
+}
+section ul#message_container_list li.message_item ul.action_list li:last-child {
+  color: rgba(0, 0, 0, 0.6);
+  font: normal 400 16px/24px Poppins;
+  margin-right: 30px;
+}
+section ul#message_container_list li.message_item ul.action_list li:last-child span.user {
+  font: normal 500 16px/24px Poppins_medium;
+}
+section ul#message_container_list li.message_item ul.action_list li:last-child span.action_icon {
+  background: url('../images/user_placeholder.png') no-repeat;
+  display: inline-block;
+  height: 24px;
+  margin-right: 10px;
+  vertical-align: top;
+  width: 24px;
+}
+section ul#message_container_list li.message_item form.edit_form {
+  display: flex !important;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  overflow: auto;
+  width: 100%;
+}
+section ul#message_container_list li.message_item form.edit_form textarea {
+  font: normal 300 16px/24px Poppins_light;
+  height: 84px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+section ul#message_container_list li.message_item form.edit_form button.cancel_updating_button {
+  background: transparent;
+  color: rgba(0, 0, 0, 0.6);
+  font: normal 400 16px/24px Poppins;
+  padding: 7px 30px;
+}
+section ul#message_container_list li.message_item form.post_comment_form {
+  background-color: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #dce6ff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin: 30px 0px 20px 0px;
+  overflow: auto;
+  padding: 30px;
+  width: 100%;
+}
+section ul#message_container_list li.message_item form.post_comment_form textarea {
+  font: normal 300 16px/24px Poppins_light;
+  height: 84px;
+  margin-bottom: 15px;
+}
+section ul#message_container_list li.message_item form.post_comment_form button.disable_button {
+  background: rgba(44, 107, 255, 0.5) !important;
+}
+section ul#message_container_list li.message_item ul.comment_container_list {
+  width: 100%;
+}
+section ul#message_container_list li.message_item ul.comment_container_list li.comment_item {
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #dce6ff;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-bottom: 20px;
+  padding: 24px 30px;
+}
+section ul#message_container_list li.message_item ul.comment_container_list li.comment_item p.content_comment {
+  color: #152C61;
+  font: normal 300 16px/24px Poppins_light;
+  margin-bottom: 20px;
+  width: 100%;
+}
+section ul#message_container_list div.modal {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.411);
   display: none;
@@ -99,7 +246,7 @@ section div#message_container div.modal {
   width: 100%;
   z-index: 1;
 }
-section div#message_container div.modal div.modal_content {
+section ul#message_container_list div.modal div.modal_content {
   background-color: #ffffff;
   border-radius: 6px;
   border: 1px solid #888;
@@ -109,7 +256,7 @@ section div#message_container div.modal div.modal_content {
   padding: 8px 19px;
   width: 897px;
 }
-section div#message_container div.modal div.modal_content div.modal_header button.close_modal {
+section ul#message_container_list div.modal div.modal_content div.modal_header button.close_modal {
   background: url('../images/group_2020.png') no-repeat -93px -6px;
   cursor: pointer;
   float: right;
@@ -118,200 +265,66 @@ section div#message_container div.modal div.modal_content div.modal_header butto
   padding: 0px;
   width: 18px;
 }
-section div#message_container div.modal div.modal_content div.modal_body {
+section ul#message_container_list div.modal div.modal_content div.modal_body {
   padding: 0px 30px 40px 30px;
 }
-section div#message_container div.modal div.modal_content div.modal_body h5 {
+section ul#message_container_list div.modal div.modal_content div.modal_body h5 {
   color: #152C61;
   font: normal 500 26px/39px Poppins_medium;
   margin-bottom: 40px;
   text-align: center;
 }
-section div#message_container div.modal div.modal_content div.modal_body form {
+section ul#message_container_list div.modal div.modal_content div.modal_body form {
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: wrap;
 }
-section div#message_container div.modal div.modal_content div.modal_body form textarea {
+section ul#message_container_list div.modal div.modal_content div.modal_body form textarea {
   font: normal 300 16px/24px Poppins_light;
   height: 185px;
   margin-bottom: 27px;
   width: 100%;
 }
-section div#message_container div.modal div.modal_content div.modal_body form button {
+section ul#message_container_list div.modal div.modal_content div.modal_body form button {
   padding: 7px 39px;
 }
-section div#message_container div.modal div.modal_content div.modal_body form button.disable_button {
+section ul#message_container_list div.modal div.modal_content div.modal_body form button.disable_button {
   background: rgba(44, 107, 255, 0.5) !important;
 }
-section div#message_container div.modal div.modal_content div.modal_body form button#cancel_post_message_btn {
+section ul#message_container_list div.modal div.modal_content div.modal_body form button#cancel_post_message_btn {
   background: transparent;
   color: rgba(0, 0, 0, 0.6);
   font: normal 400 16px/24px Poppins;
   padding: 7px 23px;
 }
-section div#message_container div#sample_message,
-section div#message_container form#sample_comment_form,
-section div#message_container form#sample_edit_form {
-  display: none;
-}
-section div#message_container ul#sample_message,
-section div#message_container ul#sample_comment {
-  display: none;
-}
-section div#message_container ul.message_list {
-  background: #ffffff;
-  border-radius: 6px;
-  border: 1px solid #dce6ff;
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin-bottom: 20px;
-  padding: 24px 30px;
-}
-section div#message_container ul.message_list li.content_message {
-  color: #152C61;
-  font: normal 300 16px/24px Poppins_light;
-  margin-bottom: 20px;
-  width: 100%;
-}
-section div#message_container ul.message_list li:not(:first-child) {
-  color: #707070;
-  cursor: pointer;
-  font: normal 400 16px/24px Poppins;
-  margin-right: 30px;
-}
-section div#message_container ul.message_list li:not(:first-child) span.action_icon {
-  display: inline-block;
-  margin-right: 10px;
-}
-section div#message_container ul.message_list li:not(:first-child) span.comment_count {
-  margin-right: 3px;
-}
-section div#message_container ul.message_list li.has_comment {
-  color: #2c6bff !important;
-}
-section div#message_container ul.message_list li.has_comment span.action_icon {
-  background: url('../images/group_2020.png') no-repeat -3px -36px !important;
-  height: 18px;
-  vertical-align: middle;
-  width: 18px;
-}
-section div#message_container ul.message_list li.comment_button span.action_icon {
-  background: url('../images/group_2020.png') no-repeat -3px -6px;
-  height: 18px;
-  vertical-align: middle;
-  width: 18px;
-}
-section div#message_container ul.message_list li.edit_button {
-  color: #2c6bff;
-}
-section div#message_container ul.message_list li.edit_button span.action_icon {
-  background: url('../images/group_2020.png') no-repeat -31px -4px;
-  height: 22px;
-  width: 22px;
-}
-section div#message_container ul.message_list li.delete_button span.action_icon {
-  background: url('../images/group_2020.png') no-repeat -64px -5px;
-  height: 19px;
-  vertical-align: middle;
-  width: 16px;
-}
-section div#message_container ul.message_list li {
-  color: rgba(0, 0, 0, 0.6);
-  font: normal 400 16px/24px Poppins;
-  margin-right: 30px;
-}
-section div#message_container ul.message_list li span.action_icon {
-  background: url('../images/user_placeholder.png') no-repeat;
-  display: inline-block;
-  height: 24px;
-  margin-right: 10px;
-  vertical-align: top;
-  width: 24px;
-}
-section div#message_container ul.message_list form.edit_form {
-  display: flex !important;
-  flex-direction: row-reverse;
-  flex-wrap: wrap;
-  overflow: auto;
-  width: 100%;
-}
-section div#message_container ul.message_list form.edit_form textarea {
-  font: normal 300 16px/24px Poppins_light;
-  height: 84px;
-  margin-bottom: 15px;
-  width: 100%;
-}
-section div#message_container ul.message_list form.edit_form button.cancel_updating_button {
-  background: transparent;
-  color: rgba(0, 0, 0, 0.6);
-  font: normal 400 16px/24px Poppins;
-  padding: 7px 30px;
-}
-section div#message_container ul.message_list form.post_comment_form {
-  background-color: #ffffff;
-  border-radius: 6px;
-  border: 1px solid #dce6ff;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  margin: 30px 0px 20px 0px;
-  overflow: auto;
-  padding: 30px;
-  width: 100%;
-}
-section div#message_container ul.message_list form.post_comment_form textarea {
-  font: normal 300 16px/24px Poppins_light;
-  height: 84px;
-  margin-bottom: 15px;
-}
-section div#message_container ul.message_list form.post_comment_form button.disable_button {
-  background: rgba(44, 107, 255, 0.5) !important;
-}
-section div#message_container ul.message_list ul.comment_list {
-  background: #ffffff;
-  border-radius: 6px;
-  border: 1px solid #dce6ff;
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin-bottom: 20px;
-  padding: 28px 30px;
-  width: 100%;
-}
-section div#message_container ul.message_list ul.comment_list li:first-child {
-  margin-bottom: 20px;
-  width: 100%;
-}
-section div#message_container div#delete_modal div.modal_content {
+section ul#message_container_list div.delete_modal div.modal_content {
   width: 540px;
 }
-section div#message_container div#delete_modal div.modal_content div.modal_body {
+section ul#message_container_list div.delete_modal div.modal_content div.modal_body {
   color: #152C61;
   padding: 0px 30px 50px 30px;
 }
-section div#message_container div#delete_modal div.modal_content div.modal_body h5 {
+section ul#message_container_list div.delete_modal div.modal_content div.modal_body h5 {
   font: normal 500 26px/39px Poppins_medium;
   margin-top: 2px;
   text-align: center;
 }
-section div#message_container div#delete_modal div.modal_content div.modal_body p {
+section ul#message_container_list div.delete_modal div.modal_content div.modal_body p {
   font: normal 400 16px/24px Poppins;
   margin: 30px 0px;
   text-align: center;
 }
-section div#message_container div#delete_modal div.modal_content div.modal_body form {
+section ul#message_container_list div.delete_modal div.modal_content div.modal_body form {
   display: flex;
   justify-content: center;
 }
-section div#message_container div#delete_modal div.modal_content div.modal_body form button#cancel_remove_btn {
+section ul#message_container_list div.delete_modal div.modal_content div.modal_body form button.cancel_remove_btn {
   background-color: transparent;
   color: rgba(0, 0, 0, 0.6);
   font: normal 400 16px/24px Poppins;
   padding: 11px 75px;
 }
-section div#message_container div#delete_modal div.modal_content div.modal_body form button#remove_btn {
+section ul#message_container_list div.delete_modal div.modal_content div.modal_body form button.remove_btn {
   padding: 11px 45px;
 }
 @media only screen and (max-width: 480px) {

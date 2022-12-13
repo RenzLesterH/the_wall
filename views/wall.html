@@ -9,7 +9,7 @@
     <meta name="author" content="Renz Lester J. Halagao">
     <title>The Wall</title>
     <link rel="stylesheet" href="../assets/css/global.css">
-    <link rel="stylesheet" href="../assets/css/wall.css">
+    <link rel="stylesheet" href="../assets/css/wall2.css">
 </head>
 <body>
     <header>
@@ -27,31 +27,79 @@
             <img src="../assets/images/empty_post.png" alt="Empty Post">
             <p>No Posted Message Yet.</p>
         </div>
-        <div id="message_container">
+
+        <ul id="message_container_list">
             
-            <ul id="sample_message"> 
-                <li class="content content_message"></li>
-                <li class="comment_button"><span class="action_icon"></span><span class="comment_count">0</span> Comment</li>
-                <li class="edit_button"><span class="action_icon"></span>Edit</li> 
-                <li class="delete_button"><span class="action_icon"></span>Delete</li>
-                <li class="user_profile"><span class="action_icon"></span>You - Few seconds ago</li>
-            </ul>
+            <li id="sample_message">
+                <p class="content content_message">Sample Message</p>
+                <ul class="action_list">
+                    <li>
+                        <button class="comment_button" type="button">
+                            <span class="action_icon"></span>
+                            <span class="comment_count">0</span>
+                            Comment
+                        </button>
+                    </li>
+                    <li>
+                        <button class="edit_button" type="button">
+                            <span class="action_icon"></span>
+                            Edit
+                        </button>
+                    </li>
+                    <li>
+                        <button class="delete_button" type="button">
+                            <span class="action_icon"></span> 
+                            Delete
+                        </button>
+                    </li>
+                    <li>
+                        <span class="action_icon"></span>
+                        <span class="user">You</span> - Few seconds ago
+                    </li>
+                </ul>
+                <ul class="comment_container_list">
+                     
+                </ul>
+            </li>
 
-            <ul id="sample_comment"> 
-                <li class="content content_comment"></li>
-                <li class="edit_button"><span class="action_icon"></span>Edit</li> 
-                <li class="delete_button"><span class="action_icon"></span>Delete</li>
-                <li class="user_profile"><span class="action_icon"></span>You - Few seconds ago</li>
+            <ul class="comment_container_list" id="sample_comment">
+                <li id="sample_coment_item">
+                    <p class="content content_comment">Sample Comment</p>
+                    <ul class="action_list">
+                        <li>
+                            <button class="edit_button edit_comment" type="button">
+                                <span class="action_icon"></span>
+                                Edit
+                            </button>
+                        </li>
+                        <li>
+                            <button class="delete_button delete_comment" type="button">
+                                <span class="action_icon"></span>
+                                Delete
+                            </button>
+                        </li>
+                        <li>
+                            <span class="action_icon"></span>
+                            You - Few seconds ago
+                        </li>
+                    </ul>
+                </li>
             </ul>
-
+            
             <form id="sample_comment_form">
-                <textarea class = "comment_textarea"></textarea>
+                <textarea class="comment_textarea"></textarea>
                 <button type="submit" class="post_comment_btn">Post Comment</button>
             </form>
 
-            <form id="sample_edit_form" class="edit_form">
+            <form id="sample_edit_message_form" class="edit_form">
                 <textarea></textarea>
                 <button type="submit" class="post_updated_button">Update Message</button>
+                <button type="button" class="cancel_updating_button">Cancel</button>
+            </form>
+
+            <form id="sample_edit_comment_form" class="edit_form">
+                <textarea></textarea> 
+                <button type="submit" class="post_updated_button">Update Comment</button>
                 <button type="button" class="cancel_updating_button">Cancel</button>
             </form>
             
@@ -71,7 +119,7 @@
                 </div>
             </div>
 
-            <div id="delete_modal" class="modal"> 
+            <div id="delete_message_modal" class="modal delete_modal"> 
                 <div class="modal_content">
                     <div class="modal_header">
                         <button class="close_modal"></button>
@@ -79,20 +127,34 @@
                     <div class="modal_body">
                         <h5 id="modal_body_title">Confirm Delete Message</h5>
                         <p id="modal_body_description">Are you sure you want to remove this message? This action cannot be undone.</p>
-                        <form method="post" id="action_form">
-                            <input type="hidden" id="action_form_input">
-                            <button type="submit" id="remove_btn">Yes, Remove it.</button>
-                            <button type="button" id="cancel_remove_btn">Cancel</button> 
+                        <form method="post" id="delete_message_form">
+                            <input type="hidden" id="delete_message_input" name="message_item">
+                            <button type="submit" class="remove_btn">Yes, Remove it.</button>
+                            <button type="button" class="cancel_remove_btn">Cancel</button> 
                         </form>
                     </div>
                 </div>
             </div>
 
-        </div>
-    </section>
-    <div class="clone_container">
+            <div id="delete_comment_modal" class="modal delete_modal"> 
+                <div class="modal_content">
+                    <div class="modal_header">
+                        <button class="close_modal"></button>
+                    </div>
+                    <div class="modal_body">
+                        <h5 id="modal_body_title">Confirm Delete Comment</h5>
+                        <p id="modal_body_description">Are you sure you want to remove this comment? This action cannot be undone.</p>
+                        <form method="post" id="delete_comment_form">
+                            <input type="hidden" id="delete_comment_input" name="comment_item">
+                            <button type="submit" class="remove_btn">Yes, Remove it.</button>
+                            <button type="button" class="cancel_remove_btn">Cancel</button> 
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-    </div>
+        </ul>
+    </section>
     <script src="../assets/js/wall.js"></script>
 </body>
 </html>
