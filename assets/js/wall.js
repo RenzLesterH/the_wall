@@ -17,7 +17,6 @@ document.getElementById("create_message_form").addEventListener("submit", create
  
 document.getElementById("action_form").addEventListener("submit", deleteContent); 
 
-/** This will add event listener to creating of message form textarea. */ 
 document.getElementById("create_post_textarea").addEventListener("keyup", checkTextareaEmpty);
 
 /** This function will dislay the selected element. */
