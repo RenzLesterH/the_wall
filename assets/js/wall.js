@@ -277,11 +277,11 @@ function showDeleteModal(event){
     }
 
     /** This will set the UI and value of the content to be deleted. */
-    let action_modal = document.getElementById("action_modal");
+    let delete_modal = document.getElementById("delete_modal");
     document.getElementById("action_form_input").value = data_id;
     document.getElementById("modal_body_title").innerHTML = "Confirm Delete "+modal_for;
     document.getElementById("modal_body_description").innerHTML = "Are you sure you want to remove this "+modal_for.toLowerCase()+" ? This action cannot be undone."; 
-    action_modal.classList.add("show_element_flex");
+    delete_modal.classList.add("show_element_flex");
 }
 
 /** This funtion will update the total list of comments on a message. */
@@ -337,7 +337,7 @@ function deleteContent(event) {
         document.querySelector("[data-id = "+message_id.dataset.id+"]"+" .comment_button .comment_count").innerHTML = updated_comment_list;
         checkIfHasComment(message_id.dataset.id);
     }
-    let action_modal = document.getElementById("action_modal");
-    action_modal.classList.remove('show_element_flex');
-    hideElement(action_modal);
+    let delete_modal = document.getElementById("delete_modal");
+    delete_modal.classList.remove('show_element_flex'); 
+    hideElement(delete_modal);
 }

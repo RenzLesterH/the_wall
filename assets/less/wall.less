@@ -71,73 +71,6 @@ section{
             outline: none;
         }
     }
-    div.modal{
-        align-items: center; 
-        background-color: rgba(0, 0, 0, 0.411);
-        display: none;
-        height: 100%;
-        justify-content: center;
-        left: 0;
-        overflow: hidden;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1;
-        div.modal_content{
-            background-color: #ffffff;
-            border-radius: 6px;
-            border: 1px solid #888;
-            display: flex;
-            flex-direction: column;
-            margin: auto;
-            padding: 8px 19px;
-            width: 897px;
-            div.modal_header{ 
-                button.close_modal{
-                    background: url('../images/group_2020.png') no-repeat -93px -6px;
-                    cursor: pointer; 
-                    float: right;
-                    height: 18px;
-                    margin: 10px 0px 3px 0px;
-                    padding: 0px;
-                    width: 18px;
-                }
-            }
-            div.modal_body{
-                padding: 0px 30px 40px 30px;
-                h5{
-                    color: #152C61;
-                    font: normal 500 26px/39px Poppins_medium;
-                    margin-bottom: 40px;
-                    text-align: center;
-                }
-                form{
-                    display: flex;
-                    flex-direction: row-reverse; 
-                    flex-wrap: wrap;
-                    textarea{
-                        font: normal 300 16px/24px Poppins_light;
-                        height: 185px;
-                        margin-bottom: 27px;
-                        width: 100%;
-                    }
-                    button{
-                        padding: 7px 39px;
-                    }
-                    button.disable_button{
-                        background: rgba(44, 107, 255, 0.5) !important;
-                    } 
-                    button#cancel_post_message_btn{
-                        background: transparent;
-                        color: rgba(0, 0, 0, 0.6);
-                        font: normal 400 16px/24px Poppins;
-                        padding: 7px 23px;   
-                    }
-                }
-            }
-        }
-    }
-
     div#empty_post{
         padding: 140px 0px 635px 0px; 
         text-align: center;
@@ -152,6 +85,73 @@ section{
     div#message_container{
         margin-top: 43px;
         width: 100%;
+        div.modal{
+            align-items: center; 
+            background-color: rgba(0, 0, 0, 0.411);
+            display: none;
+            height: 100%;
+            justify-content: center;
+            left: 0;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1;
+            div.modal_content{
+                background-color: #ffffff;
+                border-radius: 6px;
+                border: 1px solid #888;
+                display: flex;
+                flex-direction: column;
+                margin: auto;
+                padding: 8px 19px;
+                width: 897px;
+                div.modal_header{ 
+                    button.close_modal{
+                        background: url('../images/group_2020.png') no-repeat -93px -6px;
+                        cursor: pointer; 
+                        float: right;
+                        height: 18px;
+                        margin: 10px 0px 3px 0px;
+                        padding: 0px;
+                        width: 18px;
+                    }
+                }
+                div.modal_body{
+                    padding: 0px 30px 40px 30px;
+                    h5{
+                        color: #152C61;
+                        font: normal 500 26px/39px Poppins_medium;
+                        margin-bottom: 40px;
+                        text-align: center;
+                    }
+                    form{
+                        display: flex;
+                        flex-direction: row-reverse; 
+                        flex-wrap: wrap;
+                        textarea{
+                            font: normal 300 16px/24px Poppins_light;
+                            height: 185px;
+                            margin-bottom: 27px;
+                            width: 100%;
+                        }
+                        button{
+                            padding: 7px 39px;
+                        }
+                        button.disable_button{
+                            background: rgba(44, 107, 255, 0.5) !important;
+                        } 
+                        button#cancel_post_message_btn{
+                            background: transparent;
+                            color: rgba(0, 0, 0, 0.6);
+                            font: normal 400 16px/24px Poppins;
+                            padding: 7px 23px;   
+                        }
+                    }
+                }
+            }
+        }
+
         div#sample_message,
         form#sample_comment_form,
         form#sample_edit_form{
@@ -291,7 +291,7 @@ section{
             }
         }
 
-        div.modal{
+        div#delete_modal{ 
             div.modal_content{
                 width: 540px;
                 div.modal_body{

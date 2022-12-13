@@ -13,7 +13,6 @@
 </head>
 <body>
     <header>
-        <!-- Remove nav -->
         <nav>
             <a href="wall.html">The Wall Assignment</a>
             <span>Welcome, Renz Halagao!</span>
@@ -24,23 +23,6 @@
         <h4><span id="total_messages">0 </span> messages arranged by latest posted</h4>
         <button id="create_message_modal_button">Create Message</button>
 
-        <!-- Move to bottom part same with delete -->
-        <div id="create_post_modal" class="modal">
-            <div class="modal_content">
-                <div class="modal_header">
-                    <button class="close_modal"></button>
-                </div>
-                <div class="modal_body">
-                    <h5>Create a Message</h5>
-                    <form method="post" id="create_message_form">
-                        <textarea id="create_post_textarea" placeholder="Type your message here."></textarea>
-                        <button type="submit" id="post_message_btn">Post Message</button>
-                        <button type="button" id="cancel_post_message_btn">Cancel</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        
         <div id="empty_post">
             <img src="../assets/images/empty_post.png" alt="Empty Post">
             <p>No Posted Message Yet.</p>
@@ -72,8 +54,24 @@
                 <button type="button" class="cancel_updating_button">Cancel</button>
             </form>
             
+            <div id="create_post_modal" class="modal">
+                <div class="modal_content">
+                    <div class="modal_header">
+                        <button class="close_modal"></button>
+                    </div>
+                    <div class="modal_body">
+                        <h5>Create a Message</h5>
+                        <form method="post" id="create_message_form">
+                            <textarea id="create_post_textarea" placeholder="Type your message here."></textarea>
+                            <button type="submit" id="post_message_btn">Post Message</button>
+                            <button type="button" id="cancel_post_message_btn">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <!-- Delete modal. change name to delete_message_modal -->
-            <div id="action_modal" class="modal">
+            <div id="delete_modal" class="modal"> 
                 <div class="modal_content">
                     <div class="modal_header">
                         <button class="close_modal"></button>
@@ -89,6 +87,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
     <div class="clone_container">
