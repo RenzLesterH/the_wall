@@ -74,7 +74,7 @@ function createMessage(event) {
     let create_post_modal = document.getElementById("create_post_modal");
     let empty_post        = document.getElementById("empty_post");
     let container         = document.getElementById("message_container");
-    let clone_message     = document.querySelector("[data-id ='sample_message']");
+    let clone_message     = document.querySelector("#sample_message");
     let create_post       = clone_message.cloneNode(true); 
     let message_id        = "message_list"+document.querySelectorAll(".message_list").length;
 
@@ -85,7 +85,8 @@ function createMessage(event) {
     hideElement(empty_post); 
     showElement(clone_message);
 
-    /** This will add class name, data-attribite and message content on the cloned element. */
+    /** This will remove id, add class name, data-attribite and message content on the cloned element. */
+    create_post.removeAttribute('id');
     create_post.className = "message_list";
     create_post.setAttribute('data-id', message_id);
     container.prepend(create_post);
@@ -121,16 +122,17 @@ function createComment(event){
     let form_textarea         = "#"+message_id+"_comment textarea"; 
     let comment_textarea      = document.querySelector("[data-id ="+message_id+"]"+" "+form_textarea); 
     let container             = document.querySelector("[data-id ="+message_id+"]");
-    let clone_comment         = document.querySelector("[data-id ='sample_comment']");
+    let clone_comment         = document.querySelector("#sample_comment");
     showElement(clone_comment);
     let create_clone_comment  = clone_comment.cloneNode(true);
     let comment_id            = "comment_list"+document.querySelectorAll("[data-id = "+message_id+"]"+" .comment_list").length;
     let comment_form          = document.querySelector("[data-id = "+message_id+"]"+" #"+message_id+"_comment");
 
-    /** This will add class name, data-attribite, comment content on the cloned element and insert it after the comment form. */
+    /** This will remove id, add class name, data-attribite, comment content on the cloned element and insert it after the comment form. */
+    create_clone_comment.removeAttribute("id");
     create_clone_comment.className = "comment_list";
     create_clone_comment.setAttribute('data-id', comment_id);
-    container.insertBefore(create_clone_comment, comment_form.nextSibling); 
+    container.insertBefore(create_clone_comment, comment_form.nextSibling);  
     let comment_content = document.querySelector("[data-id = "+message_id+"]"+" [data-id = "+comment_id+"]"+" .content_comment"); 
     comment_content.innerHTML = comment_textarea.value; 
     

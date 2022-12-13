@@ -155,8 +155,8 @@ section div#message_container form#sample_comment_form,
 section div#message_container form#sample_edit_form {
   display: none;
 }
-section div#message_container ul[data-id="sample_message"],
-section div#message_container ul[data-id="sample_comment"] {
+section div#message_container ul#sample_message,
+section div#message_container ul#sample_comment {
   display: none;
 }
 section div#message_container ul.message_list {

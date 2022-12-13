@@ -29,7 +29,7 @@
         </div>
         <div id="message_container">
             
-            <ul data-id="sample_message"> 
+            <ul id="sample_message"> 
                 <li class="content content_message"></li>
                 <li class="comment_button"><span class="action_icon"></span><span class="comment_count">0</span> Comment</li>
                 <li class="edit_button"><span class="action_icon"></span>Edit</li> 
@@ -37,7 +37,7 @@
                 <li class="user_profile"><span class="action_icon"></span>You - Few seconds ago</li>
             </ul>
 
-            <ul data-id="sample_comment"> 
+            <ul id="sample_comment"> 
                 <li class="content content_comment"></li>
                 <li class="edit_button"><span class="action_icon"></span>Edit</li> 
                 <li class="delete_button"><span class="action_icon"></span>Delete</li>
@@ -48,6 +48,7 @@
                 <textarea class = "comment_textarea"></textarea>
                 <button type="submit" class="post_comment_btn">Post Comment</button>
             </form>
+
             <form id="sample_edit_form" class="edit_form">
                 <textarea></textarea>
                 <button type="submit" class="post_updated_button">Update Message</button>
@@ -70,7 +71,6 @@
                 </div>
             </div>
 
-            <!-- Delete modal. change name to delete_message_modal -->
             <div id="delete_modal" class="modal"> 
                 <div class="modal_content">
                     <div class="modal_header">
