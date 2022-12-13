@@ -105,17 +105,16 @@ function createComment(event){
     event.preventDefault();
     showElement(document.querySelector("#sample_comment"));
     let message_id             = event.target.closest('li[class=message_item]').dataset.id;
-    let comment_textarea       = document.querySelector("[data-id ="+message_id+"]"+" textarea");
-    let comment_container_list = document.querySelector("[data-id ="+message_id+"] .comment_container_list");
+    let comment_textarea       = document.querySelector("[data-id ="+message_id+"]"+" textarea"); 
     let cloned_comment         = document.querySelector("#sample_coment_item").cloneNode(true);
-    let comment_item_count     = "comment_item"+document.querySelector("[data-id ="+message_id+"] .comment_count").textContent;
+    let total_comment_item     = "comment_item"+document.querySelector("[data-id ="+message_id+"] .comment_count").textContent;
 
     /** This will remove id, add class name, data-attribite, comment content on the cloned element and prepend it in the comment_container_list. */
     cloned_comment.removeAttribute("id");
     cloned_comment.className = "comment_item";
-    cloned_comment.setAttribute('data-comment-id', comment_item_count);
-    comment_container_list.prepend(cloned_comment);
-    let content_comment = document.querySelector("[data-id = "+message_id+"]"+" [data-comment-id = "+comment_item_count+"]  p");
+    cloned_comment.setAttribute('data-comment-id', total_comment_item);
+    document.querySelector("[data-id ="+message_id+"] .comment_container_list").prepend(cloned_comment);
+    let content_comment = document.querySelector("[data-id = "+message_id+"]"+" [data-comment-id = "+total_comment_item+"]  p");
     content_comment.innerHTML = comment_textarea.value; 
     
     /** This will reset the textarea for creating comment, update the total list of comments and add the class has_comment. */ 

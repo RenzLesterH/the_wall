@@ -130,7 +130,7 @@ section ul#message_container_list li.message_item ul.action_list li button {
 section ul#message_container_list li.message_item ul.action_list li button span.action_icon {
   display: inline-block;
   vertical-align: middle;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 section ul#message_container_list li.message_item ul.action_list li button.has_comment {
   color: #2c6bff !important;
@@ -171,7 +171,7 @@ section ul#message_container_list li.message_item ul.action_list li:last-child s
   background: url('../images/user_placeholder.png') no-repeat;
   display: inline-block;
   height: 24px;
-  margin-right: 10px;
+  margin-right: 5px;
   vertical-align: top;
   width: 24px;
 }
