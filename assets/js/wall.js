@@ -91,16 +91,16 @@ function createMessage(event) {
     document.querySelector("#total_messages").innerHTML = document.querySelectorAll(".message_item").length;
 
     /** This will add event listener to class comment_button on the message list. */ 
-    cloned_message.getElementsByClassName("comment_button")[0].addEventListener("click", toggleCommentForm);
+    document.getElementsByClassName("comment_button")[0].addEventListener("click", toggleCommentForm);
     
     /** This will add event listener to class edit_button on the message list. */  
-    cloned_message.getElementsByClassName("edit_button")[0].addEventListener("click", toggleEditMessageForm);
+    document.getElementsByClassName("edit_button")[0].addEventListener("click", toggleEditMessageForm);
 
     /** This will add event listener to class delete_button on the message list. */
-    cloned_message.getElementsByClassName("delete_button")[0].addEventListener("click", showDeleteMessageModal); 
+    document.getElementsByClassName("delete_button")[0].addEventListener("click", showDeleteMessageModal); 
 }
 
-/** This funtion will create and prepend the newly created comments of the messages. */
+/** This funtion will create and prepend the newly created comments of the messages. */ 
 function createComment(event){
     event.preventDefault();
     showElement(document.querySelector("#sample_comment"));
@@ -109,7 +109,7 @@ function createComment(event){
     let cloned_comment         = document.querySelector("#sample_coment_item").cloneNode(true);
     let total_comment_item     = "comment_item"+document.querySelector("[data-id ="+message_id+"] .comment_count").textContent;
 
-    /** This will remove id, add class name, data-attribite, comment content on the cloned element and prepend it in the comment_container_list. */
+    /** This will remove id, add class name, add data-attribite, add comment content on the cloned element and prepend it in the comment_container_list. */
     cloned_comment.removeAttribute("id");
     cloned_comment.className = "comment_item";
     cloned_comment.setAttribute('data-comment-id', total_comment_item);
@@ -117,7 +117,7 @@ function createComment(event){
     let content_comment = document.querySelector("[data-id = "+message_id+"]"+" [data-comment-id = "+total_comment_item+"]  p");
     content_comment.innerHTML = comment_textarea.value; 
     
-    /** This will reset the textarea for creating comment, update the total list of comments and add the class has_comment. */ 
+    /** This will reset the textarea for creating comment, update the total list of comments and conditionally add the class has_comment. */  
     comment_textarea.value = ""; 
     checkTextareaEmpty();
     let updated_total_comment_item = document.querySelectorAll("[data-id = "+message_id+"]"+" .comment_item").length;
@@ -125,10 +125,10 @@ function createComment(event){
     checkIfHasComment(message_id);
     hideElement(document.querySelector("#sample_comment")); 
 
-    /** This will add event listener to class edit_button on the comment_list. */ 
+    /** This will add event listener to class edit_button on the comment item. */  
     document.getElementsByClassName("edit_comment")[0].addEventListener("click", toggleEditCommentForm); 
 
-    /** This will add event listener to class delete_button on the comment_list. */
+    /** This will add event listener to class delete_button on the comment item. */
     document.getElementsByClassName("delete_comment")[0].addEventListener("click", showDeleteCommentModal); 
 }
 
