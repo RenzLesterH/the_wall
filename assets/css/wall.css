@@ -32,6 +32,9 @@ section {
   background-color: #ffffff;
   border-radius: 6px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   margin: 50px auto;
   max-width: 1280px;
   padding: 70px;
@@ -51,7 +54,6 @@ section button {
   border: none;
   color: #ffffff;
   cursor: pointer;
-  float: right;
   font: normal 500 16px/24px Poppins_medium;
   padding: 7px 28px;
   text-align: center;
@@ -110,10 +112,16 @@ section div.modal div.modal_content div.modal_body h5 {
   margin-bottom: 40px;
   text-align: center;
 }
+section div.modal div.modal_content div.modal_body form {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+}
 section div.modal div.modal_content div.modal_body form textarea {
   font: normal 300 16px/24px Poppins_light;
   height: 185px;
   margin-bottom: 27px;
+  width: 100%;
 }
 section div.modal div.modal_content div.modal_body form button {
   padding: 7px 39px;
@@ -130,6 +138,7 @@ section div.modal div.modal_content div.modal_body form button#cancel_post_messa
 section div#empty_post {
   padding: 140px 0px 635px 0px;
   text-align: center;
+  width: 100%;
 }
 section div#empty_post p {
   color: #707070;
@@ -139,6 +148,7 @@ section div#empty_post p {
 }
 section div#message_container {
   margin-top: 43px;
+  width: 100%;
 }
 section div#message_container div#sample_message,
 section div#message_container form#sample_comment_form,
@@ -221,6 +231,9 @@ section div#message_container ul.message_list li span.action_icon {
   width: 24px;
 }
 section div#message_container ul.message_list form.edit_form {
+  display: flex !important;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
   overflow: auto;
   width: 100%;
 }
@@ -228,6 +241,7 @@ section div#message_container ul.message_list form.edit_form textarea {
   font: normal 300 16px/24px Poppins_light;
   height: 84px;
   margin-bottom: 15px;
+  width: 100%;
 }
 section div#message_container ul.message_list form.edit_form button.cancel_updating_button {
   background: transparent;
@@ -239,6 +253,9 @@ section div#message_container ul.message_list form.post_comment_form {
   background-color: #ffffff;
   border-radius: 6px;
   border: 1px solid #dce6ff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   margin: 30px 0px 20px 0px;
   overflow: auto;
   padding: 30px;

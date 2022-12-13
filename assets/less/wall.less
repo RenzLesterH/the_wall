@@ -33,13 +33,16 @@ section{
     background-color: #ffffff;
     border-radius: 6px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; 
     margin: 50px auto;
     max-width: 1280px;
     padding: 70px;
     h4{
         color: #707070; 
         display: inline-block;
-        font: normal 400 16px/24px Poppins;
+        font: normal 400 16px/24px Poppins; 
         span{
             color: #2c6bff;
             font: normal 600 16px/24px Poppins_semi_bold;
@@ -51,7 +54,6 @@ section{
         border: none;
         color: #ffffff;
         cursor: pointer;
-        float: right;
         font: normal 500 16px/24px Poppins_medium;
         padding: 7px 28px;
         text-align: center;
@@ -110,10 +112,14 @@ section{
                     text-align: center;
                 }
                 form{
+                    display: flex;
+                    flex-direction: row-reverse; 
+                    flex-wrap: wrap;
                     textarea{
                         font: normal 300 16px/24px Poppins_light;
                         height: 185px;
                         margin-bottom: 27px;
+                        width: 100%;
                     }
                     button{
                         padding: 7px 39px;
@@ -135,6 +141,7 @@ section{
     div#empty_post{
         padding: 140px 0px 635px 0px; 
         text-align: center;
+        width: 100%;
         p{
             color: #707070;
             font: normal 400 16px/24px Poppins;
@@ -144,6 +151,7 @@ section{
     }
     div#message_container{
         margin-top: 43px;
+        width: 100%;
         div#sample_message,
         form#sample_comment_form,
         form#sample_edit_form{
@@ -228,12 +236,16 @@ section{
                 }
             } 
             form.edit_form{
+                display: flex !important; 
+                flex-direction: row-reverse;
+                flex-wrap: wrap;
                 overflow: auto;
-                width: 100%;  
+                width: 100%;
                 textarea{
                     font: normal 300 16px/24px Poppins_light;
                     height: 84px;
                     margin-bottom: 15px;
+                    width: 100%;
                 }
                 button.cancel_updating_button{
                     background: transparent;
@@ -246,6 +258,9 @@ section{
                 background-color: #ffffff;
                 border-radius: 6px;
                 border: 1px solid #dce6ff;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-end;
                 margin: 30px 0px 20px 0px;
                 overflow: auto;
                 padding: 30px;
@@ -448,11 +463,11 @@ section{
                     div.modal_body{
                         padding: 0px 15px 25px 15px;
                         h5{
-                            font: normal 500 24px/39px Poppins_medium;
+                            font: normal 500 24px/39px Poppins_medium; 
                         }
                         p,
                         form{
-                            font: normal 400 14px/24px Poppins;
+                            font: normal 400 14px/24px Poppins;  
                         }
                         form{
                             button#cancel_remove_btn{

@@ -119,7 +119,7 @@ function createComment(event){
     event.preventDefault();
     let message_id            = event.target.closest('ul').dataset.id; 
     let form_textarea         = "#"+message_id+"_comment textarea"; 
-    let comment_textarea      = document.querySelector("[data-id ="+message_id+"]"+" "+form_textarea);
+    let comment_textarea      = document.querySelector("[data-id ="+message_id+"]"+" "+form_textarea); 
     let container             = document.querySelector("[data-id ="+message_id+"]");
     let clone_comment         = document.querySelector("[data-id ='sample_comment']");
     showElement(clone_comment);
@@ -130,9 +130,9 @@ function createComment(event){
     /** This will add class name, data-attribite, comment content on the cloned element and insert it after the comment form. */
     create_clone_comment.className = "comment_list";
     create_clone_comment.setAttribute('data-id', comment_id);
-    container.insertBefore(create_clone_comment, comment_form.nextSibling);
-    let comment_content = document.querySelector("[data-id = "+comment_id+"]"+" .content_comment");
-    comment_content.textContent = comment_textarea.value;
+    container.insertBefore(create_clone_comment, comment_form.nextSibling); 
+    let comment_content = document.querySelector("[data-id = "+message_id+"]"+" [data-id = "+comment_id+"]"+" .content_comment"); 
+    comment_content.innerHTML = comment_textarea.value; 
     
     /** This will reset the textarea for creating comment, hide the cloned element, update the total list of comments and add the class has_comment. */ 
     comment_textarea.value = ""; 

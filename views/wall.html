@@ -48,7 +48,7 @@
         <div id="message_container">
             
             <ul data-id="sample_message"> 
-                <li class="content content_message">Sample</li>
+                <li class="content content_message"></li>
                 <li class="comment_button"><span class="action_icon"></span><span class="comment_count">0</span> Comment</li>
                 <li class="edit_button"><span class="action_icon"></span>Edit</li> 
                 <li class="delete_button"><span class="action_icon"></span>Delete</li>
@@ -56,7 +56,7 @@
             </ul>
 
             <ul data-id="sample_comment"> 
-                <li class="content content_comment">Sample</li>
+                <li class="content content_comment"></li>
                 <li class="edit_button"><span class="action_icon"></span>Edit</li> 
                 <li class="delete_button"><span class="action_icon"></span>Delete</li>
                 <li class="user_profile"><span class="action_icon"></span>You - Few seconds ago</li>
@@ -80,12 +80,11 @@
                     </div>
                     <div class="modal_body">
                         <h5 id="modal_body_title">Confirm Delete Message</h5>
-                        <p id="modal_body_description">Are you sure you want to remove this message? This action cannot
-                            be undone.</p>
+                        <p id="modal_body_description">Are you sure you want to remove this message? This action cannot be undone.</p>
                         <form method="post" id="action_form">
                             <input type="hidden" id="action_form_input">
-                            <button type="button" id="cancel_remove_btn">Cancel</button>
                             <button type="submit" id="remove_btn">Yes, Remove it.</button>
+                            <button type="button" id="cancel_remove_btn">Cancel</button> 
                         </form>
                     </div>
                 </div>
