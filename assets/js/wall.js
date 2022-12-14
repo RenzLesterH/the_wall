@@ -77,7 +77,7 @@ function createMessage(event) {
     hideElement(create_post_modal);
     showElement(clone_message);
     
-    /** This will check if there is no message item and if true it will hide the empty post. */
+    /** This will prevent the hideElement function to execute repeatedly if message item is not zero. */
     if(document.querySelectorAll(".message_item").length === 0){
         hideElement(document.getElementById("empty_post"));
     }
