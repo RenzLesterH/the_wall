@@ -48,7 +48,7 @@ function hideModal(event){
 }
 
 /** This function will validate if textareas is empty. */
-function checkTextareaEmpty() {
+function checkTextareaEmpty(event) {
     let form_id            = event.target.closest('form').id;
     let form_textarea      = document.querySelector("#"+form_id+" textarea");
     let form_submit_button = document.querySelector("#"+form_id+" button[type=submit]");    
@@ -72,19 +72,23 @@ function createMessage(event) {
     let cloned_message         = clone_message.cloneNode(true); 
     let message_id             = "message_item"+document.querySelectorAll(".message_item").length;
 
-    /** This functions will hide modal, empty post and temporary show the element to be cloned. */
+    /** This functions will hide modal temporary show the element to be cloned. */
     create_post_modal.classList.remove("show_element_flex");
     hideElement(create_post_modal);
-    hideElement(document.getElementById("empty_post")); 
-    showElement(clone_message); 
+    showElement(clone_message);
+    
+    /** This will check if there is no message item and if true it will hide the empty post. */
+    if(document.querySelectorAll(".message_item").length === 0){
+        hideElement(document.getElementById("empty_post"));
+    }
 
     /** This will remove id, add class name, data-attribite and message content on the cloned element. */
     cloned_message.removeAttribute('id');
     cloned_message.className = "message_item"; 
     cloned_message.setAttribute('data-id', message_id);
+    cloned_message.querySelector("[data-id ="+message_id+"]"+" .content_message").textContent = create_post_textarea.value;
     document.getElementById("message_container_list").prepend(cloned_message);
-    document.querySelector("[data-id ="+message_id+"]"+" .content_message").textContent = create_post_textarea.value; 
-
+    
     /** This will hide the cloned element, reset the textarea for creating message and will count the total message items. */
     hideElement(clone_message);
     create_post_textarea.value = "";
@@ -105,21 +109,22 @@ function createComment(event){
     event.preventDefault();
     showElement(document.querySelector("#sample_comment"));
     let message_id             = event.target.closest('li[class=message_item]').dataset.id;
-    let comment_textarea       = document.querySelector("[data-id ="+message_id+"]"+" textarea"); 
-    let cloned_comment         = document.querySelector("#sample_coment_item").cloneNode(true);
+    let comment_textarea       = document.querySelector("[data-id ="+message_id+"]"+" textarea");
     let total_comment_item     = "comment_item"+document.querySelector("[data-id ="+message_id+"] .comment_count").textContent;
 
-    /** This will remove id, add class name, add data-attribite, add comment content on the cloned element and prepend it in the comment_container_list. */
+    /** This will change the content of comment that will be cloned, the content will base on the value of the comment_textarea variable. */
+    document.querySelector("#sample_comment li .content_comment").textContent = comment_textarea.value; 
+    let cloned_comment = document.querySelector("#sample_coment_item").cloneNode(true);
+    
+    /** This will remove id, add class name and add data-attribite on the cloned element and prepend it in the comment_container_list. */
     cloned_comment.removeAttribute("id");
     cloned_comment.className = "comment_item";
-    cloned_comment.setAttribute('data-comment-id', total_comment_item);
+    cloned_comment.setAttribute('data-comment-id', total_comment_item); 
     document.querySelector("[data-id ="+message_id+"] .comment_container_list").prepend(cloned_comment);
-    let content_comment = document.querySelector("[data-id = "+message_id+"]"+" [data-comment-id = "+total_comment_item+"]  p");
-    content_comment.innerHTML = comment_textarea.value; 
     
     /** This will reset the textarea for creating comment, update the total list of comments and conditionally add the class has_comment. */  
     comment_textarea.value = ""; 
-    checkTextareaEmpty();
+    checkTextareaEmpty(event);
     let updated_total_comment_item = document.querySelectorAll("[data-id = "+message_id+"]"+" .comment_item").length;
     document.querySelector("[data-id ="+message_id+"] .comment_count").innerHTML = updated_total_comment_item;
     checkIfHasComment(message_id);
